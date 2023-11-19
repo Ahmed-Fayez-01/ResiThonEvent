@@ -25,6 +25,7 @@ class _ChewieListItemState extends State<ChewieListItem> {
         videoPlayerController: widget.videoPlayerController,
         aspectRatio: 16 / 9,
         autoInitialize: true,
+        autoPlay: true,
         looping: widget.looping,
         errorBuilder: (context, errorMessage) {
           return Center(
@@ -49,7 +50,13 @@ class _ChewieListItemState extends State<ChewieListItem> {
   Widget build(BuildContext context) {
     return  Padding(
       padding: EdgeInsets.all(AppConstants.sp20(context)),
-      child: Chewie(controller: _chewieController),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
+        child: Container(
+          color: Colors.grey,
+          child: Chewie(controller: _chewieController),
+        ),
+      ),
     );
   }
 }

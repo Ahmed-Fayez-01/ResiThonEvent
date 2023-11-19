@@ -204,12 +204,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       context.read<EventCubit>().eventDetails();
                       context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
                       context.read<AllProjectsCubit>().allProjectsDetails();
-                      context.read<DatedAllSessionsCubit>().datedAllSessionsDetails(query: {
-                        "date":DateFormat('yyyy-MM-dd').format(DateTime.now()),
-                      });
-                      context.read<DatedSubscribedSessionsCubit>().datedSubscribedSessionsDetails(query: {
-                        "date":DateFormat('yyyy-MM-dd').format(DateTime.now()),
-                      });
                      if(CacheHelper.getData(key: "role")=="1")
                        {
                          GoRouter.of(context).go("/organizerHomeView");

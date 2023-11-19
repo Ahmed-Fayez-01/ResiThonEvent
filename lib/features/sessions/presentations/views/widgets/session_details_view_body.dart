@@ -395,26 +395,6 @@ class _UserSessionDetailsViewBodyState
                                                 context
                                                     .read<AllSessionsCubit>()
                                                     .sessionsDetails();
-                                                context
-                                                    .read<
-                                                        DatedSubscribedSessionsCubit>()
-                                                    .datedSubscribedSessionsDetails(
-                                                        query: {
-                                                      "date": DateFormat(
-                                                              'yyyy-MM-dd')
-                                                          .format(
-                                                              DateTime.now()),
-                                                    });
-                                                context
-                                                    .read<
-                                                        DatedAllSessionsCubit>()
-                                                    .datedAllSessionsDetails(
-                                                        query: {
-                                                      "date": DateFormat(
-                                                              'yyyy-MM-dd')
-                                                          .format(
-                                                              DateTime.now()),
-                                                    });
                                                 Navigator.pop(context);
                                                 customPopUpDialog(
                                                   context: context,

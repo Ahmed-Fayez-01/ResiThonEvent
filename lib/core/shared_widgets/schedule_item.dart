@@ -81,7 +81,7 @@ class ScheduleItem extends StatelessWidget {
                   SizedBox(
                     height: AppConstants.height10(context),
                   ),
-                  UserImageAndName(image: instance!.image!, name: instance!.speaker!,),
+                  UserImageAndName(image: instance!.speaker_image!, name: instance!.speaker!,),
                   SizedBox(
                     height: AppConstants.height10(context),
                   ),

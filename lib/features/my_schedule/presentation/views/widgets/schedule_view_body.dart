@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resithon_event/core/shared_widgets/error_widget.dart';
@@ -8,10 +9,38 @@ import '../../../../../../core/shared_widgets/event_time_line.dart';
 import '../../../../../../core/shared_widgets/schedule_item.dart';
 import '../../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/assets/assets.dart';
+import '../../../../../core/utils/services/local_services/cache_helper.dart';
 
-class ScheduleViewBody extends StatelessWidget {
+class ScheduleViewBody extends StatefulWidget {
   const ScheduleViewBody({super.key});
 
+  @override
+  State<ScheduleViewBody> createState() => _ScheduleViewBodyState();
+}
+
+class _ScheduleViewBodyState extends State<ScheduleViewBody> {
+
+  @override
+  void initState() {
+    var date;
+    DateTime.now().isBefore(DateTime(
+        int.parse(CacheHelper.getData(key:"event_start_day").split(
+            "-")[0]),
+        int.parse(CacheHelper.getData(key:"event_start_day").split(
+            "-")[1]),
+        int.parse(CacheHelper.getData(key:"event_start_day").split(
+            "-")[2])),) ?date= DateTime(
+        int.parse(CacheHelper.getData(key:"event_start_day").split(
+            "-")[0]),
+        int.parse(CacheHelper.getData(key:"event_start_day").split(
+            "-")[1]),
+        int.parse(CacheHelper.getData(key:"event_start_day").split(
+            "-")[2])):DateTime.now();
+    context.read<DatedSubscribedSessionsCubit>().datedSubscribedSessionsDetails(query: {
+      "date":DateFormat('yyyy-MM-dd').format(date),
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(

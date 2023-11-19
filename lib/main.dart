@@ -110,15 +110,11 @@ class ResiThon extends StatelessWidget {
         BlocProvider(
             create: (context) => DatedAllSessionsCubit(
               getIt.get<SessionsRepoImpl>(),
-            )..datedAllSessionsDetails(query: {
-              "date":DateFormat('yyyy-MM-dd').format(DateTime.now()),
-            })),
+            )),
         BlocProvider(
             create: (context) => DatedSubscribedSessionsCubit(
               getIt.get<SessionsRepoImpl>(),
-            )..datedSubscribedSessionsDetails(query: {
-              "date":DateFormat('yyyy-MM-dd').format(DateTime.now()),
-            })),
+            )),
         BlocProvider(
             create: (context) => SpecificSessionsCubit(
               getIt.get<SessionsRepoImpl>(),

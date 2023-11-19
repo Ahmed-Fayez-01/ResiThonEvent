@@ -107,7 +107,7 @@ class SessionItem extends StatelessWidget {
                         ),
                         CircleAvatar(
                           radius: MediaQuery.of(context).size.height * .015,
-                          backgroundColor: instance!.status == "available"
+                          backgroundColor: instance!.count! < int.parse(instance!.totalCount!)
                               ? Colors.green
                               : AppColors.greyColor,
                           child: Text(
