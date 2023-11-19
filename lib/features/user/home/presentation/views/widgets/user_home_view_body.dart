@@ -59,7 +59,7 @@ class UserHomeViewBody extends StatelessWidget {
               onPress: () {
                 showMyTicket(
                   context: context,
-                  ticketImagePath: CacheHelper.getData(key: "QR"),
+                  code: CacheHelper.getData(key: "code"),
                   button: DefaultButton(
                       onPress: () {
                         Navigator.pop(context);

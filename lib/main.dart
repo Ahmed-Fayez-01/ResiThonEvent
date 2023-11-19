@@ -7,6 +7,8 @@ import 'package:resithon_event/features/profile/data/repos/edit_profile_repo_imp
 import 'package:resithon_event/features/profile/presentation/view_model/edit_profile/edit_profile_cubit.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/book_session_cubit/book_sessions_cubit.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/cancel_session_cubit/cancel_sessions_cubit.dart';
+import 'package:resithon_event/features/sessions/presentations/view_models/get_session_evaluation_cubit/get_session_evaluation_cubit.dart';
+import 'package:resithon_event/features/sessions/presentations/view_models/post_session_evaluation_cubit/post_session_evaluation_cubit.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/specific_session_cubit/specific_sessions_cubit.dart';
 import 'package:resithon_event/features/user/home/presentation/view_models/event_cubit/event_cubit.dart';
 import 'package:resithon_event/features/user/projects/data/repos/project_reop/projects_repo_impl.dart';
@@ -132,6 +134,14 @@ class ResiThon extends StatelessWidget {
             )),
         BlocProvider(
             create: (context) => CancelSessionsCubit(
+              getIt.get<SessionsRepoImpl>(),
+            )),
+        BlocProvider(
+            create: (context) => GetSessionEvaluationCubit(
+              getIt.get<SessionsRepoImpl>(),
+            )),
+        BlocProvider(
+            create: (context) => PostSessionEvaluationCubit(
               getIt.get<SessionsRepoImpl>(),
             )),
 

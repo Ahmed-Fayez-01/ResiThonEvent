@@ -18,12 +18,12 @@ import '../utils/constants.dart';
 class SessionHeader extends StatelessWidget {
   const SessionHeader(
       {super.key,
-      required this.avalability,
+      required this.count,
       required this.totalCount,
       required this.totalParticipant,
       required this.imagPath,});
 
-  final String avalability;
+  final int count;
   final String imagPath;
   final String totalCount;
   final int totalParticipant;
@@ -66,14 +66,14 @@ class SessionHeader extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(AppConstants.sp10(context)),
                     decoration: BoxDecoration(
-                      color: avalability == "available"
+                      color: count< int.parse(totalCount)
                           ? const Color(0xff27AE60)
                           : AppColors.greyColor,
                       borderRadius:
                       BorderRadius.circular(AppConstants.sp10(context)),
                     ),
                     child: Text(
-                      avalability == "available" ? "Available" : "Completed",
+                      count< int.parse(totalCount) ? "Available" : "Completed",
                       style:  TextStyle(
                         color: Colors.white,
                         fontFamily: "Poppins",

@@ -7,7 +7,9 @@ class EndPoints {
   static const allSessions = '/session-details';
   static const allProjects = '/all-projects';
   static const getProjectEvaluations = '/get-project-question';
+  static const getSessionEvaluations = '/get-session-question';
   static const postProjectEvaluations = '/send-project-evaluate';
+  static const postSessionEvaluations = '/send-session-evaluate';
   static const subscribedSessions = '/subscriped-session';
   static const bookSession = '/attach-session';
   static const cancelSession = '/dettach-session';

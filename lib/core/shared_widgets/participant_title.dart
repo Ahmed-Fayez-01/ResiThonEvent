@@ -16,15 +16,6 @@ class ParticipantTitle extends StatelessWidget {
               fontFamily: "Poppins",
               color: const Color(0xCC323232)),
         ),
-        const Spacer(),
-        Text(
-          "all".tr(),
-          style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height*.012,
-              fontWeight: FontWeight.w500,
-              fontFamily: "Poppins",
-              color: const Color(0xFF323232)),
-        ),
       ],
     );
   }

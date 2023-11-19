@@ -63,28 +63,33 @@ class _ProjectsListState extends State<ProjectsList> {
                       color: const Color(0xffC8C8C8))),
             ),
             SizedBox(height: AppConstants.height10(context),),
-            ListView.separated(
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) =>
-                            ProjectsDetailsView(
-                              instance: AppConstants.foundedProjects[index],)));
-                  },
-                  child: ProjectItem(
-                    title: AppConstants.foundedProjects[index].name!,
-                    imgPath:  AppConstants.foundedProjects[index].image!,
-                  ),
-                );
-              },
-              itemCount: AppConstants.foundedProjects.length,
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: AppConstants.height10(context),
-                );
-              },
+            SizedBox(
+              height: MediaQuery.of(context).size.height*.75,
+              child: ListView.separated(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      AppConstants.evaluationSubmit.clear();
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) =>
+                              ProjectsDetailsView(
+                                instance: AppConstants.foundedProjects[index],)));
+                    },
+                    child: ProjectItem(
+                      title: AppConstants.foundedProjects[index].name!,
+                      imgPath:  AppConstants.foundedProjects[index].image!,
+                    ),
+                  );
+                },
+                itemCount: AppConstants.foundedProjects.length,
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: AppConstants.height10(context),
+                  );
+                },
+              ),
             ),
           ],
         );

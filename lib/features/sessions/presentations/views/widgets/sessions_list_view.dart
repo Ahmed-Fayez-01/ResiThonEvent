@@ -27,6 +27,7 @@ class SessionsListView extends StatelessWidget {
                   ),
                   GestureDetector(
                       onTap: () {
+                        AppConstants.evaluationSubmit.clear();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -40,6 +41,7 @@ class SessionsListView extends StatelessWidget {
               )
             : GestureDetector(
                 onTap: () {
+                  AppConstants.evaluationSubmit.clear();
                   Navigator.push(
                       context,
                       MaterialPageRoute(

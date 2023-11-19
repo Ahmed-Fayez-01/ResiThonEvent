@@ -29,6 +29,8 @@ class Data {
   bool? reservation_expire;
   bool? session_expire;
   bool? chat_expire;
+  bool? has_rate;
+  bool? is_arrived;
   bool? session_started;
   String? description;
   String? speaker;
@@ -56,6 +58,8 @@ class Data {
     session_started = json['session_started'];
     chat_expire = json['chat_expire'];
     description = json['description'];
+    has_rate = json['has_rate'];
+    is_arrived = json['is_arrived'];
     speaker = json['speaker'];
     date = json['date'];
     startTime = json['start_time'];

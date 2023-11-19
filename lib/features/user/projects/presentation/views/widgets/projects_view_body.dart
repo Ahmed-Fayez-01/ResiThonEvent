@@ -15,7 +15,7 @@ class ProjectsViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       child: Column(
         children: [
           Padding(

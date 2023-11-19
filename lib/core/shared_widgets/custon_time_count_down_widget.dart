@@ -70,7 +70,7 @@ final int id;
                                   .018),
                         )
                             : Text(
-                          "${time.toInt() ~/ (24 * 60 * 60) % 24} ${'days'.tr()}",
+                          "${(time.toInt() ~/ (24 * 60 * 60))} ${'days'.tr()}",
                           style: TextStyle(
                               color: Colors.white,
                               fontFamily: "Poppins",

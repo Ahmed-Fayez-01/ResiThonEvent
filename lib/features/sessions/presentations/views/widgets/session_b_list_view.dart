@@ -83,6 +83,7 @@ class _SessionsBListViewState extends State<SessionsBListView> {
                 ),
                 GestureDetector(
                     onTap: () {
+                      AppConstants.evaluationSubmit.clear();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -98,6 +99,7 @@ class _SessionsBListViewState extends State<SessionsBListView> {
             )
                 : GestureDetector(
                 onTap: () {
+                  AppConstants.evaluationSubmit.clear();
                   Navigator.push(
                       context,
                       MaterialPageRoute(

@@ -72,16 +72,19 @@ class SessionItem extends StatelessWidget {
                         topLeft: Radius.circular(AppConstants.sp10(context)),
                         bottomLeft:
                             Radius.circular(AppConstants.sp10(context))),
-                child: CachedNetworkImage(
-                  imageUrl: instance!.image!,
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width * .3,
-                  height: MediaQuery.of(context).size.height * .15,
-                  placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(
-                    color: AppColors.greyColor,
-                  )),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                child: Container(
+                  color: Colors.grey,
+                  child: CachedNetworkImage(
+                    imageUrl: instance!.image!,
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width * .3,
+                    height: MediaQuery.of(context).size.height * .15,
+                    placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(
+                      color: AppColors.greyColor,
+                    )),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                  ),
                 )),
             Expanded(
               child: Padding(
