@@ -36,9 +36,11 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
             "-")[1]),
         int.parse(CacheHelper.getData(key:"event_start_day").split(
             "-")[2])):DateTime.now();
+
     context.read<DatedSubscribedSessionsCubit>().datedSubscribedSessionsDetails(query: {
-      "date":DateFormat('yyyy-MM-dd').format(date),
+      "date":DateFormat('yyyy-MM-dd',"en").format(date),
     });
+
     super.initState();
   }
   @override
@@ -66,6 +68,7 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
         BlocBuilder<DatedSubscribedSessionsCubit, DatedSubscribedSessionsState>(
           builder: (context, state) {
             if (state is UserDatedSubscribedSessionsSuccessState) {
+              print("Abo Sayed:${state.model.data!}");
               return state.model.data!.isNotEmpty
                   ? Expanded(
                       child: ListView.separated(

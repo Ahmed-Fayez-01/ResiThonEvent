@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/utils/services/local_services/cache_helper.dart';
+import '../../../../user/home/presentation/view_models/event_cubit/event_cubit.dart';
 import '../../../data/repos/auth_repo.dart';
 
 

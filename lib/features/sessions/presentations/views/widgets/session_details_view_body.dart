@@ -22,8 +22,6 @@ import '../../../../../core/utils/assets/assets.dart';
 import '../../../../../core/utils/colors/colors.dart';
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/text_styles/styles.dart';
-import '../../../../agenda/presentation/view_models/dated_all_sessions_cubit/dated_all_sessions_cubit.dart';
-import '../../../../my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
 import '../../../../user/home/presentation/views/widgets/show_my_ticket.dart';
 import '../session_evaluation_view.dart';
 
@@ -49,6 +47,7 @@ class _UserSessionDetailsViewBodyState
 
   @override
   Widget build(BuildContext context) {
+    print("Expired : ${CacheHelper.getData(key: "session_expired")}");
     return BlocBuilder<SpecificSessionsCubit, SpecificSessionsState>(
       builder: (BuildContext context, state) {
         if (state is UserSpecificSessionsSuccessState) {

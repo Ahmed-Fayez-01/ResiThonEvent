@@ -11,13 +11,14 @@ class ChewieListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return  ListView.separated(
       shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
-          SizedBox(
+         return SizedBox(
               height: 240,
               child: ChewieListItem(
                   videoPlayerController: VideoPlayerController.networkUrl(
                       Uri.parse(
-                          "http://resithon.site/upload/videos/65596dd21a043.mp4")),
+                          "http://resithon.site/upload/videos/6559db58606b5.mp4")),
                   looping: true));
         },
         separatorBuilder: (context, int index) {

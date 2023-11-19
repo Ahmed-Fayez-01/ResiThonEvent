@@ -77,6 +77,8 @@ class _SpeakerSideMenuState extends State<SpeakerSideMenu> {
                   CacheHelper.removeData(key: "QR",);
                   CacheHelper.removeData(key: "bio",);
                   CacheHelper.removeData(key: "code",);
+                  CacheHelper.removeData(key: "can_rate",);
+
                   GoRouter.of(context).go("/loginView");
                 },
                 text: "signOut".tr(),

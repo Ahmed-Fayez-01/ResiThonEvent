@@ -166,7 +166,7 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                                 type: widget.chatType,
                                 message: SpeakerChatCubit.get(context).messageController.text,
                               );
-                              Future.delayed(const Duration(seconds: 3)).then((value) {
+                              Future.delayed(const Duration(seconds: 2)).then((value) {
                                 FocusManager.instance.primaryFocus?.unfocus();
                                 scrollController.jumpTo(
                                   scrollController.position.maxScrollExtent,

@@ -73,7 +73,8 @@ Future main() async {
   //   print("token is $token");
   // });
   runApp(EasyLocalization(
-      supportedLocales: const [Locale("en"), Locale("ar")],
+      supportedLocales: const [Locale("en")],
+      startLocale: const Locale("en"),
       path: "lib/core/language", // <-- change the path of the translation files
       child: const ResiThon()
   ),);
@@ -119,7 +120,6 @@ class ResiThon extends StatelessWidget {
             create: (context) => SpecificSessionsCubit(
               getIt.get<SessionsRepoImpl>(),
             )),
-
         BlocProvider(
             create: (context) => SubscribedSessionsCubit(
               getIt.get<SessionsRepoImpl>(),
@@ -140,7 +140,6 @@ class ResiThon extends StatelessWidget {
             create: (context) => PostSessionEvaluationCubit(
               getIt.get<SessionsRepoImpl>(),
             )),
-
         BlocProvider(
             create: (context) => AllProjectsCubit(
               getIt.get<ProjectsRepoImpl>(),

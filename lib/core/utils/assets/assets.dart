@@ -56,7 +56,7 @@ class AssetData {
 
   //speakers
   static const clock="assets/images/clock.svg";
-  static const sendMsg="assets/images/Frame 5848.svg";
+  static const sendMsg="assets/images/sendMsg.svg";
   static const sessionClock="assets/images/clock.svg";
   static const edit="assets/images/edit.svg";
   static const evaluationBanner="assets/images/evaluation_banner.svg";

@@ -38,7 +38,7 @@ class _AgendaViewBodyState extends State<AgendaViewBody> {
         int.parse(CacheHelper.getData(key:"event_start_day").split(
             "-")[2])):DateTime.now();
     context.read<DatedAllSessionsCubit>().datedAllSessionsDetails(query: {
-      "date":DateFormat('yyyy-MM-dd').format(date),
+      "date":DateFormat('yyyy-MM-dd',"en").format(date),
     });
     super.initState();
   }

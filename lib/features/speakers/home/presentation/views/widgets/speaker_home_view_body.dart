@@ -30,12 +30,6 @@ class SpeakerHomeViewBody extends StatelessWidget {
         context.read<AllSessionsCubit>().sessionsDetails();
         context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
         context.read<AllProjectsCubit>().allProjectsDetails();
-        context.read<DatedAllSessionsCubit>().datedAllSessionsDetails(query: {
-          "date":DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        });
-        context.read<DatedSubscribedSessionsCubit>().datedSubscribedSessionsDetails(query: {
-          "date":DateFormat('yyyy-MM-dd').format(DateTime.now()),
-        });
       },
       child: SingleChildScrollView(
         child: Column(

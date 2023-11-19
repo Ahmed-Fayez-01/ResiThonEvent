@@ -38,81 +38,81 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     return Column(
       children: [
         SizedBox(height: AppConstants.height20(context),),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppConstants.sp20(context)),
-          child: SizedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                TapRegion(
-                  child: SimpleAccountMenu(
-                    borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
-                    backgroundColor: const Color(0xffF3F5FA),
-                    iconsText:  [
-                      Padding(
-                        padding: EdgeInsets.all(AppConstants.height5(context)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: CountryFlag.fromCountryCode(
-                                'US',
-                                height: AppConstants.width30(context),
-                                width: AppConstants.height20(context),
-                                borderRadius: AppConstants.sp10(context),
-                              ),
-                            ),
-                            // const SizedBox(width: 10,),
-                            // const Text("English",style: TextStyle(
-                            //     color: Colors.white
-                            // ),),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(AppConstants.height5(context)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: CountryFlag.fromCountryCode(
-                                'SA',
-                                height: AppConstants.width30(context),
-                                width: AppConstants.height20(context),
-                                borderRadius: AppConstants.sp10(context),
-                              ),
-                            ),
-                            // const SizedBox(width: 10,),
-                            // const Text("العربية",style: TextStyle(
-                            //     color: Colors.white
-                            // ),),
-                          ],
-                        ),
-                      ),
-
-                    ],
-                    iconColor: Colors.white,
-                    onChange: (index) {
-                      if(index==0)
-                      {
-                        setState(() {
-                          context.setLocale(const Locale("en"));
-                          CacheHelper.saveData(key: "language", value: "en");
-                        });
-
-                      }else{
-                        setState(() {
-                          context.setLocale(const Locale("ar"));
-                          CacheHelper.saveData(key: "language", value: "ar");
-                        });
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: EdgeInsets.symmetric(horizontal: AppConstants.sp20(context)),
+        //   child: SizedBox(
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.start,
+        //       children: [
+        //         TapRegion(
+        //           child: SimpleAccountMenu(
+        //             borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
+        //             backgroundColor: const Color(0xffF3F5FA),
+        //             iconsText:  [
+        //               Padding(
+        //                 padding: EdgeInsets.all(AppConstants.height5(context)),
+        //                 child: Row(
+        //                   mainAxisAlignment: MainAxisAlignment.center,
+        //                   children: [
+        //                     Center(
+        //                       child: CountryFlag.fromCountryCode(
+        //                         'US',
+        //                         height: AppConstants.width30(context),
+        //                         width: AppConstants.height20(context),
+        //                         borderRadius: AppConstants.sp10(context),
+        //                       ),
+        //                     ),
+        //                     // const SizedBox(width: 10,),
+        //                     // const Text("English",style: TextStyle(
+        //                     //     color: Colors.white
+        //                     // ),),
+        //                   ],
+        //                 ),
+        //               ),
+        //               Padding(
+        //                 padding: EdgeInsets.all(AppConstants.height5(context)),
+        //                 child: Row(
+        //                   mainAxisAlignment: MainAxisAlignment.center,
+        //                   children: [
+        //                     Center(
+        //                       child: CountryFlag.fromCountryCode(
+        //                         'SA',
+        //                         height: AppConstants.width30(context),
+        //                         width: AppConstants.height20(context),
+        //                         borderRadius: AppConstants.sp10(context),
+        //                       ),
+        //                     ),
+        //                     // const SizedBox(width: 10,),
+        //                     // const Text("العربية",style: TextStyle(
+        //                     //     color: Colors.white
+        //                     // ),),
+        //                   ],
+        //                 ),
+        //               ),
+        //
+        //             ],
+        //             iconColor: Colors.white,
+        //             onChange: (index) {
+        //               if(index==0)
+        //               {
+        //                 setState(() {
+        //                   context.setLocale(const Locale("en"));
+        //                   CacheHelper.saveData(key: "language", value: "en");
+        //                 });
+        //
+        //               }else{
+        //                 setState(() {
+        //                   context.setLocale(const Locale("ar"));
+        //                   CacheHelper.saveData(key: "language", value: "ar");
+        //                 });
+        //               }
+        //             },
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         Expanded(
           child: Padding(
             padding: EdgeInsets.all(MediaQuery.of(context).size.width * .05),

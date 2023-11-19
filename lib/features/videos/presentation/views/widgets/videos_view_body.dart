@@ -9,17 +9,14 @@ class VideosViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-        height: 240,
-        child: ChewieListItem(
-            videoPlayerController: VideoPlayerController.networkUrl(
-                Uri.parse(
-                    "http://resithon.site/upload/videos/65596dd21a043.mp4")),
-            looping: true)),
-      ],
+    return const SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ChewieListView(),
+        ],
+      ),
     );
   }
 }

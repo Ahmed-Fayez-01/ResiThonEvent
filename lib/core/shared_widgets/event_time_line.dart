@@ -54,7 +54,7 @@ class _EventTimeLineState extends State<EventTimeLine> {
                 child: Row(
                   children: [
                     MainTitleComponent(
-                        title: DateFormat("MMMM").format(DateTime(
+                        title: DateFormat("MMMM","en").format(DateTime(
                             int.parse(state.model.data!.startDate!.split(
                                 "-")[0]),
                             int.parse(state.model.data!.startDate!.split(
@@ -95,11 +95,11 @@ class _EventTimeLineState extends State<EventTimeLine> {
                       widget.all && widget.openClick ? context.read<
                           DatedAllSessionsCubit>().datedAllSessionsDetails(
                           query: {
-                            "date": DateFormat('yyyy-MM-dd').format(
+                            "date": DateFormat('yyyy-MM-dd',"en").format(
                                 selectedDate)
                           }) : context.read<DatedSubscribedSessionsCubit>()
                           .datedSubscribedSessionsDetails(query: {
-                        "date": DateFormat('yyyy-MM-dd').format(selectedDate)
+                        "date": DateFormat('yyyy-MM-dd',"en").format(selectedDate)
                       });
                     });
                   }

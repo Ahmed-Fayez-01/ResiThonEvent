@@ -151,7 +151,6 @@ class EditProfileViewBody extends StatelessWidget {
                     MultipartFile image = await MultipartFile.fromFile(
                       AppConstants.file!.path,
                       filename: fileName,
-                      contentType: MediaType('image', 'jpeg'),
                     );
                     context.read<EditProfileCubit>().editUserProfile(
                           name: name.text,
