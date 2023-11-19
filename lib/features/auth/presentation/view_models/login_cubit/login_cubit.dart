@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../core/utils/services/local_services/cache_helper.dart';
-import '../../../../user/home/presentation/view_models/event_cubit/event_cubit.dart';
 import '../../../data/repos/auth_repo.dart';
 
 
@@ -16,7 +15,6 @@ class LoginCubit extends Cubit<LoginState> {
     var result = await authRepo!.loginUser(code: code);
     return result.fold((failure) {
       emit(UserLoginErrorState(failure.errMessage));
-      print(failure.errMessage);
     }, (data) {
       CacheHelper.saveData(key: "name", value: data.data!.name);
       CacheHelper.saveData(key: "image", value: data.data!.image);
@@ -26,6 +24,8 @@ class LoginCubit extends Cubit<LoginState> {
       CacheHelper.saveData(key: "code", value: data.data!.code);
       CacheHelper.saveData(key: "id", value: data.data!.id);
       CacheHelper.saveData(key: "can_rate", value: data.data!.canRate);
+      CacheHelper.saveData(key: "event_start_day", value: data.data!.event_start_date);
+      CacheHelper.saveData(key: "event_end_day", value: data.data!.event_end_date);
       emit(UserLoginSuccessState());
     });
   }

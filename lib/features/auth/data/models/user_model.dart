@@ -22,6 +22,8 @@ class Data {
   bool? canRate;
   String? iCan;
   String? code;
+  String? event_start_date;
+  String? event_end_date;
   String? comment;
   String? points;
   String? qr;
@@ -36,6 +38,8 @@ class Data {
     role = json['role'];
     wantTo = json['want_to'];
     canRate = json['can_rate'];
+    event_start_date = json['event_start_date'];
+    event_end_date = json['event_end_date'];
     iCan = json['i_can'];
     code = json['code'];
     comment = json['comment'];

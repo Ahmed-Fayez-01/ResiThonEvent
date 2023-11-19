@@ -82,6 +82,8 @@ class _UserSideMenuState extends State<UserSideMenu> {
                   CacheHelper.removeData(key: "bio",);
                   CacheHelper.removeData(key: "code",);
                   CacheHelper.removeData(key: "can_rate",);
+                  CacheHelper.removeData(key: "event_start_day",);
+                  CacheHelper.removeData(key: "event_end_day",);
 
                   GoRouter.of(context).go("/loginView");
                 },
