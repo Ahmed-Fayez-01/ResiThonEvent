@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "912233290096",
+    "project_id": "resithon-d6e40",
+    "storage_bucket": "resithon-d6e40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912233290096:android:0e8fb47db9ea494471d7b5",
+        "android_client_info": {
+          "package_name": "com.resithonevent.resithon_event"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeAvtNV7K7-Mmc2zXX1unNR0v3SiEXheE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
