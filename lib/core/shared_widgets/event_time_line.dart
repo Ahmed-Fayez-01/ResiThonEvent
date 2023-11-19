@@ -11,7 +11,6 @@ import '../../features/agenda/presentation/view_models/dated_all_sessions_cubit/
 import '../../features/my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
 import '../../features/user/home/presentation/view_models/event_cubit/event_cubit.dart';
 import '../utils/assets/assets.dart';
-import '../utils/services/local_services/cache_helper.dart';
 import 'error_widget.dart';
 import 'main_title_component.dart';
 
@@ -26,19 +25,7 @@ class EventTimeLine extends StatefulWidget {
 }
 
 class _EventTimeLineState extends State<EventTimeLine> {
-  DateTime _focusDate = DateTime.now().isBefore(DateTime(
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[0]),
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[1]),
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[2])),) ?DateTime(
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[0]),
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[1]),
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[2])):DateTime.now();
+  DateTime _focusDate = DateTime.now();
 
 
   @override
