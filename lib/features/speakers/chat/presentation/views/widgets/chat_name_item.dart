@@ -16,7 +16,7 @@ class ChatNameItem extends StatelessWidget {
  final  String availble;
   @override
   Widget build(BuildContext context) {
-    return   Expanded(
+    return sessionsModel!.data!.isNotEmpty  ?  Expanded(
       child: ListView.separated(
         itemBuilder: (context,index){
           return
@@ -66,13 +66,13 @@ class ChatNameItem extends StatelessWidget {
                 ],
               ),
             ),
-          ) : null;
+          ) : const SizedBox.shrink();
         },
         separatorBuilder: (context,index){
           return SizedBox(height: AppConstants.height15(context),);
         },
         itemCount: sessionsModel!.data!.length,
-      ),
-    );
+      )
+    ) : const Text("Not Found") ;
   }
 }
