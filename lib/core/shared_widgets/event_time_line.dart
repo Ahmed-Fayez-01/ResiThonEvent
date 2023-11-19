@@ -28,19 +28,7 @@ class EventTimeLine extends StatefulWidget {
 class _EventTimeLineState extends State<EventTimeLine> {
   //modification
   //m
-  DateTime _focusDate = DateTime.now().isBefore(DateTime(
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[0]),
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[1]),
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[2])),) ?DateTime(
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[0]),
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[1]),
-      int.parse(CacheHelper.getData(key:"event_start_day").split(
-          "-")[2])):DateTime.now();
+  DateTime _focusDate = DateTime.now();
 
 
   @override

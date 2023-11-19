@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -13,7 +15,7 @@ import 'package:resithon_event/features/sessions/presentations/view_models/speci
 import 'package:resithon_event/features/user/home/presentation/view_models/event_cubit/event_cubit.dart';
 import 'package:resithon_event/features/user/projects/data/repos/project_reop/projects_repo_impl.dart';
 import 'package:resithon_event/features/user/projects/presentation/view_models/projects_cubit/all_projects_cubit.dart';
-
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'core/utils/constants.dart';
 import 'core/utils/roots/app_router.dart';
 import 'core/utils/services/local_services/cache_helper.dart';
@@ -38,12 +40,56 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 
 }
+
+
+final StreamSubscription<InternetConnectionStatus> listener =
+InternetConnectionChecker().onStatusChange.listen(
+      (InternetConnectionStatus status) {
+    switch (status) {
+      case InternetConnectionStatus.connected:
+      // ignore: avoid_print
+        print('Data connection is available.');
+        break;
+      case InternetConnectionStatus.disconnected:
+      // ignore: avoid_print
+        print('You are disconnected from the internet.');
+        break;
+    }
+  },
+);
+
+Future<void> execute(InternetConnectionChecker internetConnectionChecker,) async {
+  print('''The statement 'this machine is connected to the Internet' is: ''');
+  final bool isConnected = await InternetConnectionChecker().hasConnection;
+  print(isConnected.toString(),);
+  print(
+    'Current status: ${await InternetConnectionChecker().connectionStatus}',);
+}
+
+
+hasConnection() async {
+  AppConstants.hasConnectionResult = await InternetConnectionChecker().hasConnection;
+  if(AppConstants.hasConnectionResult == true) {
+    print('YAY! Free cute dog pics!');
+  } else {
+    print('No internet :( Reason:');
+
+  }
+}
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
-
-
+  await execute(InternetConnectionChecker());
+  final InternetConnectionChecker customInstance =
+  InternetConnectionChecker.createInstance(
+    checkTimeout: const Duration(seconds: 1),
+    checkInterval: const Duration(seconds: 1),
+  );
+  await execute(customInstance);
+  print("0"*20);
+  hasConnection();
+  print("0"*20);
   FirebaseMessaging.onMessage.listen((message) {
     debugPrint(
         '================================ FOREGROUND NOTIFICATION ================================');

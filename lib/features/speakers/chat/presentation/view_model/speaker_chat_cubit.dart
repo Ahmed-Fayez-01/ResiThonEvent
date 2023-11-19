@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:pusher_client/pusher_client.dart';
 import 'package:resithon_event/core/utils/services/remote_services/api_service.dart';
 // import 'package:pusher_client/pusher_client.dart';
@@ -17,6 +18,9 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
   SpeakerChatCubit(this.speakersChatRepo) : super(SpeakerChatInitial());
   SpeakersChatRepo? speakersChatRepo;
   static SpeakerChatCubit get(context) => BlocProvider.of(context);
+
+
+
 
 
   bool isActiveValue = true;

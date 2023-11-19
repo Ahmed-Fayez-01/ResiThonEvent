@@ -19,6 +19,7 @@ class AppConstants {
   static List<ProjectData> result = [];
   static List<ProjectData> foundedProjects=[];
   static int currentUserSessionIndex=0;
+  static bool? hasConnectionResult;
 
   static sp10(context){
     var height=MediaQuery.of(context).size.height*.012;
