@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:resithon_event/core/utils/colors/colors.dart';
 import 'package:resithon_event/features/speakers/chat/presentation/views/widgets/send_msg_button.dart';
 
+import '../../../../../../core/shared_widgets/no_internet_widget.dart';
 import '../../../../../../core/utils/constants.dart';
 import '../../../../../../core/utils/services/local_services/cache_helper.dart';
 import '../../../../../../core/utils/services/remote_services/service_locator.dart';
@@ -12,6 +15,7 @@ import '../../../data/repo/speaker_chat_repo_impl.dart';
 import '../../view_model/speaker_chat_cubit.dart';
 
 class ChatMessagesDetailsBody extends StatefulWidget {
+
   const ChatMessagesDetailsBody({Key? key, required this.chatType, required this.sessionId,   this.receiverId}) : super(key: key);
   final int chatType;
   final int sessionId;
@@ -20,10 +24,14 @@ class ChatMessagesDetailsBody extends StatefulWidget {
   State<ChatMessagesDetailsBody> createState() => _ChatMessagesDetailsBodyState();
 }
 
+
 class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
   final scrollController = ScrollController();
+
+
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
       create: (context)=> SpeakerChatCubit(getIt.get<SpeakersChatRepoImpl>(),)
         ..connectToServer(  type: widget.chatType ,
@@ -33,7 +41,7 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
             sessionId:  widget.sessionId)
         ..getAllMessages(
         type: widget.chatType ,
-        sessionId:  widget.sessionId),
+        sessionId:  widget.sessionId) ,
       child: BlocConsumer<SpeakerChatCubit , SpeakerChatState>(
         listener: (context,state){
           if(state is GetAllMessagesSuccessState){
@@ -49,7 +57,9 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
           }
         },
         builder: (context , state ){
-          return  Container(
+          return
+            AppConstants.hasConnectionResult==true ?
+            Container(
             color: const Color(0x66DCDCDC),
             child: Column(
               children: [
@@ -65,35 +75,46 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                         return Padding(padding: EdgeInsets.all(MediaQuery.of(context).size.height * .002),
                           child: Row(
                             children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * .7,
-                                child: Container(
-                                  width: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width * .2,
-                                  padding: EdgeInsets.all(
-                                      AppConstants.height15(context)),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primaryColor,
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(
-                                          AppConstants.height10(context)),
-                                      bottomRight: Radius.circular(
-                                          AppConstants.height10(context)),
-                                      bottomLeft: Radius.circular(
-                                          AppConstants.height10(context)),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "${SpeakerChatCubit.get(context).allChatMessages[index].message}",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: AppConstants.sp14(context),
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "Poppins"
-                                    ),),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: AppColors.primaryColor,
                                 ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: CachedNetworkImage(
+                                    imageUrl: "${SpeakerChatCubit.get(context).allChatMessages[index].senderImage}",
+                                    progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                        CircularProgressIndicator(value: downloadProgress.progress),
+                                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: AppConstants.width5(context),),
+                              Container(
+                                padding: EdgeInsets.all(
+                                    AppConstants.height15(context)),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primaryColor,
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(
+                                        AppConstants.height10(context)),
+                                    bottomRight: Radius.circular(
+                                        AppConstants.height10(context)),
+                                    bottomLeft: Radius.circular(
+                                        AppConstants.height10(context)),
+                                  ),
+                                ),
+                                child: Text(
+                                  "${SpeakerChatCubit.get(context).allChatMessages[index].message}",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: AppConstants.sp14(context),
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "Poppins"
+                                  ),),
                               ),
                             ],
                           ),
@@ -185,7 +206,8 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                 SizedBox(height: AppConstants.height20(context),),
               ],
             ),
-          );
+          ) :
+            const NoInternetWidget();
         },
 
       ),

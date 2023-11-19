@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resithon_event/features/speakers/chat/presentation/views/widgets/speaker_chat_view_body.dart';
 
+import '../../../../../core/shared_widgets/no_internet_widget.dart';
+import '../../../../../core/utils/constants.dart';
+
 class SpeakerChatView extends StatelessWidget {
   const SpeakerChatView({Key? key, required this.userType}) : super(key: key);
   final String userType;
@@ -38,7 +41,9 @@ class SpeakerChatView extends StatelessWidget {
       ),
       resizeToAvoidBottomInset: false,
       extendBody: true,
-      body: const SpeakerChatViewBody(),
+      body:
+      AppConstants.hasConnectionResult==true ?
+      const SpeakerChatViewBody() :  const NoInternetWidget(),
     );
   }
 }

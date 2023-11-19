@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/features/speakers/chat/presentation/views/widgets/chat_messages_details_body.dart';
 
+import '../../../../../core/shared_widgets/no_internet_widget.dart';
+
 class ChatMessagesDetails extends StatelessWidget {
   const ChatMessagesDetails({Key? key, required this.name, required this.image, required this.id, required this.sessionId}) : super(key: key);
   final String name;
@@ -62,11 +64,13 @@ class ChatMessagesDetails extends StatelessWidget {
       ),
       resizeToAvoidBottomInset: false,
       extendBody: true,
-      body:    ChatMessagesDetailsBody(
+      body:
+      AppConstants.hasConnectionResult==true ?
+      ChatMessagesDetailsBody(
         chatType: 0,
         sessionId: sessionId,
         receiverId:id,
-      ),
+      ) : const NoInternetWidget(),
     );
   }
 }
