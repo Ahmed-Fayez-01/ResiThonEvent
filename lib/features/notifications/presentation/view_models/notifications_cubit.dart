@@ -13,6 +13,7 @@ class NotificationsCubit extends Cubit<NotificationsStates> {
 
 
   int notificationsListLength = 0;
+  static int l = 0;
   Future<void> getNotificationsData() async {
     emit(GetAllNotificationsDataLoadingState());
     var result = await notificationsRepo!.getNotificationsData();

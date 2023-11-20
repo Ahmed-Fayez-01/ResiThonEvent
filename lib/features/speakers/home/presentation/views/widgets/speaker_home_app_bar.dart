@@ -17,6 +17,8 @@ class SpeakerHomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(CacheHelper.getData(key: "NotificationsListLengthInCash"));
+    print("mostafa in SpeakerHomeAppBar");
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
       child: Row(
@@ -36,16 +38,18 @@ class SpeakerHomeAppBar extends StatelessWidget {
             create: (context) => NotificationsCubit.get(context)..getNotificationsData(),
             child: BlocBuilder<NotificationsCubit , NotificationsStates>(
               builder: (context , state){
-                int lInCash = CacheHelper.getData(key: "NotificationsListLengthInCash") ?? 0 ;
-                var l = ( NotificationsCubit.get(context).notificationsListLength  - lInCash);
-                print(l);
-                print("5"*10);
-                print("5"*10);
+                 int lInCash = CacheHelper.getData(key: "NotificationsListLengthInCash") ?? 0 ;
+                 print(lInCash);
+                 print("mostafa lInCash");
+                 NotificationsCubit.l = ( NotificationsCubit.get(context).notificationsListLength  - lInCash);
+                 print(NotificationsCubit.l);
+                 print("5"*10);
+                 print("5"*10);
                 return
                   state is !GetAllNotificationsDataLoadingState ?
                   badges.Badge(
                   badgeContent: Text(
-                    '$l',
+                    '${NotificationsCubit.l}',
                     style: const TextStyle(color: Colors.white),
                   ) ,
                   child: AppBarIconWidget(

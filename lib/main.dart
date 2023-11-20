@@ -192,7 +192,7 @@ class ResiThon extends StatelessWidget {
               getIt.get<ProjectsRepoImpl>(),
             )..allProjectsDetails()),
         BlocProvider(
-          create: (context) => NotificationsCubit(getIt.get<NotificationsRepoImple>()..getNotificationsData()),
+          create: (context) => NotificationsCubit(getIt.get<NotificationsRepoImple>())..getNotificationsData(),
         ),
       ],
       child: MaterialApp.router(

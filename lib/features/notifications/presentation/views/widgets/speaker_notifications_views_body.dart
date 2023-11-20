@@ -35,6 +35,8 @@ class NotificationsViewsBody extends StatelessWidget {
         builder: (context , state){
           if(state is GetAllNotificationsDataSuccessState){
             CacheHelper.saveData(key: "NotificationsListLengthInCash", value: state.model.data!.length);
+            print(CacheHelper.getData(key: "NotificationsListLengthInCash"));
+            print("mostafa in NotificationsViewsBody");
             return Padding(
               padding: EdgeInsets.all(AppConstants.sp20(context)),
               child:

@@ -25,7 +25,6 @@ class NotificationsRepoImple extends NotificationsRepo
       sendCode: true,
       );
       var result=NotificationsModel.fromJson(response.data);
-
       return right(result);
     } catch(e)
     {

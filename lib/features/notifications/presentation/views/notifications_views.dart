@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resithon_event/core/utils/colors/colors.dart';
 import 'package:resithon_event/core/utils/services/local_services/cache_helper.dart';
 import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
@@ -16,13 +17,18 @@ import '../../../../core/utils/services/remote_services/service_locator.dart';
 import '../../../speakers/home/presentation/views/speaker_home_view.dart';
 import '../../data/repos/notifications_repo_impl.dart';
 
-class NotificationsViews extends StatelessWidget {
+class NotificationsViews extends StatefulWidget {
   const NotificationsViews({Key? key}) : super(key: key);
 
   @override
+  State<NotificationsViews> createState() => _NotificationsViewsState();
+}
+
+class _NotificationsViewsState extends State<NotificationsViews> {
+  @override
   Widget build(BuildContext context) {
     return   BlocProvider(
-      create: (context) => NotificationsCubit(getIt.get<NotificationsRepoImple>()),
+      create: (context) => NotificationsCubit(getIt.get<NotificationsRepoImple>())..getNotificationsData(),
       child: BlocConsumer<NotificationsCubit , NotificationsStates>(
         listener: (context,state){
           if(state is DeleteAllNotificationsSuccessState){
@@ -40,13 +46,13 @@ class NotificationsViews extends StatelessWidget {
                   size: MediaQuery.of(context).size.height*.016,
                   color: Colors.black,),
                 onPressed: (){
+                  setState(() {
+                    NotificationsCubit.l = 0;
+                    print(NotificationsCubit.l);
+                  });
                //   CacheHelper.removeData(key: "NotificationsListLengthInCash");
-                 Navigator.pop(context);
-                 //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                 //    return const SpeakerHomeView();
-                 //  }));
-
-                },
+                  GoRouter.of(context).pushReplacement("/speakerHomeView");
+        },
               ),
               actions: [
                 if(state is GetAllNotificationsDataSuccessState && state.model.data!.isNotEmpty)

@@ -11,6 +11,7 @@ import 'package:resithon_event/features/notifications/presentation/view_models/n
 import 'package:resithon_event/features/speakers/home/presentation/views/widgets/speaker_home_app_bar.dart';
 
 import '../../../../../../core/shared_widgets/event_time_line.dart';
+import '../../../../../../core/utils/services/local_services/cache_helper.dart';
 import '../../../../../agenda/presentation/view_models/dated_all_sessions_cubit/dated_all_sessions_cubit.dart';
 import '../../../../../my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
 import '../../../../../sessions/presentations/view_models/all_sessions_cubit/all_sessions_cubit.dart';
@@ -20,11 +21,21 @@ import '../../../../../sessions/presentations/views/widgets/sessions_list_view.d
 import '../../../../../user/home/presentation/view_models/event_cubit/event_cubit.dart';
 import '../../../../../user/projects/presentation/view_models/projects_cubit/all_projects_cubit.dart';
 
-class SpeakerHomeViewBody extends StatelessWidget {
+class SpeakerHomeViewBody extends StatefulWidget {
   const SpeakerHomeViewBody({super.key});
 
   @override
+  State<SpeakerHomeViewBody> createState() => _SpeakerHomeViewBodyState();
+}
+
+class _SpeakerHomeViewBodyState extends State<SpeakerHomeViewBody> {
+
+
+  @override
   Widget build(BuildContext context) {
+    print(CacheHelper.getData(key: "NotificationsListLengthInCash"));
+    print("mostafa in SpeakerHomeViewBody");
+    print(NotificationsCubit.l);
     return RefreshIndicator(
       onRefresh: () async{
         context.read<EventCubit>().eventDetails();
