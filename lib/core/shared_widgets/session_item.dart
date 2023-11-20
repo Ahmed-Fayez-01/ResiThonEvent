@@ -105,9 +105,10 @@ class SessionItem extends StatelessWidget {
                         SizedBox(
                           width: AppConstants.width15(context),
                         ),
-                        CircleAvatar(
+                        !instance!.session_expire!?  CircleAvatar(
                           radius: MediaQuery.of(context).size.height * .015,
-                          backgroundColor: instance!.count! < int.parse(instance!.totalCount!)
+
+                          backgroundColor: instance!.count! < int.parse(instance!.totalCount!) && !instance!.reservation_expire!
                               ? Colors.green
                               : AppColors.greyColor,
                           child: Text(
@@ -117,7 +118,7 @@ class SessionItem extends StatelessWidget {
                                 fontSize:
                                     MediaQuery.of(context).size.height * .015),
                           ),
-                        )
+                        ):const SizedBox()
                       ],
                     ),
                     SizedBox(

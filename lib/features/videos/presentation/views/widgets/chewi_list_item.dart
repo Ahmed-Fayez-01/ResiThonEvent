@@ -25,20 +25,25 @@ class _ChewieListItemState extends State<ChewieListItem> {
         videoPlayerController: widget.videoPlayerController,
         aspectRatio: 16 / 9,
         autoInitialize: true,
-        autoPlay: true,
         looping: widget.looping,
         errorBuilder: (context, errorMessage) {
+          print("errorMessage");
           return Center(
-            child: Text(
-              errorMessage,
-              style: const TextStyle(
-                color: Colors.white,
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.video_settings_rounded,color: Colors.grey,size: MediaQuery.of(context).size.height*.08),
+                const Text(
+                  "Error in Loading Video.....try Later",
+                  style:  TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
             ),
           );
         });
   }
-
   @override
   void dispose() {
     widget.videoPlayerController.dispose();
@@ -49,7 +54,7 @@ class _ChewieListItemState extends State<ChewieListItem> {
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding: EdgeInsets.all(AppConstants.sp20(context)),
+      padding: EdgeInsets.symmetric(horizontal:AppConstants.sp20(context)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
         child: Container(

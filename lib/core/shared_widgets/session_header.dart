@@ -21,12 +21,14 @@ class SessionHeader extends StatelessWidget {
       required this.count,
       required this.totalCount,
       required this.totalParticipant,
-      required this.imagPath,});
+      required this.imagPath, required this.reservation_expire, required this.expired,});
 
   final int count;
   final String imagPath;
   final String totalCount;
   final int totalParticipant;
+  final bool reservation_expire;
+  final bool expired;
 
   @override
   Widget build(BuildContext context) {
@@ -63,17 +65,19 @@ class SessionHeader extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
+                !expired? Container(
                     padding: EdgeInsets.all(AppConstants.sp10(context)),
                     decoration: BoxDecoration(
-                      color: count< int.parse(totalCount)
+                      color: count< int.parse(totalCount)&&!reservation_expire
                           ? const Color(0xff27AE60)
                           : AppColors.greyColor,
                       borderRadius:
                       BorderRadius.circular(AppConstants.sp10(context)),
                     ),
-                    child: Text(
-                      count< int.parse(totalCount) ? "Available" : "Completed",
+                    child:  Text(
+                      count < int.parse(totalCount) && !reservation_expire
+                          ? "Available"
+                          : count < int.parse(totalCount) && reservation_expire? "Not Available":"Completed",
                       style:  TextStyle(
                         color: Colors.white,
                         fontFamily: "Poppins",
@@ -81,7 +85,7 @@ class SessionHeader extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
+                  ):const SizedBox(),
                 ],
               ),
             ),

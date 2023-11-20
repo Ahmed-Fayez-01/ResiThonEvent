@@ -17,8 +17,8 @@ class EventCubit extends Cubit<EventState> {
     return result.fold((failure) {
       emit(UserEventErrorState(failure.errMessage));
     }, (data) {
-      CacheHelper.saveData(key: "chat_expired", value: data.data!.chat_expire_at);
-      CacheHelper.saveData(key: "session_expired", value: data.data!.session_expire_at);
+      CacheHelper.saveData(key: "chat_expired", value: data.data!.chatExpireAt);
+      CacheHelper.saveData(key: "session_expired", value: data.data!.sessionExpireAt);
       emit(UserEventSuccessState(data));
     });
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resithon_event/features/sessions/presentations/views/widgets/session_evaluation_view_body.dart';
-import 'package:resithon_event/features/user/projects/presentation/views/widgets/evaluation_view_body.dart';
 
 
 class SessionEvaluationView extends StatelessWidget {

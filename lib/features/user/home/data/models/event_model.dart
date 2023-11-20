@@ -18,8 +18,9 @@ class Data {
   String? startDate;
   String? endDate;
   String? image;
-  int? session_expire_at;
-  int? chat_expire_at;
+  int? sessionExpireAt;
+  int? chatExpireAt;
+  List<Videos>? videos;
 
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -28,8 +29,27 @@ class Data {
     startDate = json['start_date'];
     endDate = json['end_date'];
     image = json['image'];
-    session_expire_at = json['session_expire_at'];
-    chat_expire_at = json['chat_expire_at'];
+    sessionExpireAt = json['session_expire_at'];
+    chatExpireAt = json['chat_expire_at'];
+    if (json['videos'] != null) {
+      videos = <Videos>[];
+      json['videos'].forEach((v) {
+        videos!.add(Videos.fromJson(v));
+      });
+    }
+  }
+
+}
+
+class Videos {
+  int? id;
+  String? date;
+  String? path;
+
+  Videos.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    date = json['date'];
+    path = json['path'];
   }
 
 }

@@ -6,6 +6,7 @@ import 'package:resithon_event/core/shared_widgets/custom_search_bar.dart';
 import 'package:resithon_event/core/utils/services/remote_services/service_locator.dart';
 
 import '../../../../../../core/shared_widgets/custom_toggle_button.dart';
+import '../../../../../../core/shared_widgets/error_widget.dart';
 import '../../../../../../core/utils/constants.dart';
 import '../../../../../sessions/data/repos/sessions_repo/sessions_repo.dart';
 import '../../../../../sessions/presentations/view_models/subscribed_sessions_cubit/subscribed_sessions_cubit.dart';
@@ -19,21 +20,28 @@ class SpeakerChatViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context
+        .read<SubscribedSessionsCubit>()
+        .subscribedSessionsDetails();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SpeakerChatCubit(  getIt.get<SpeakersChatRepoImpl>(),)),
+        BlocProvider(
+            create: (context) => SpeakerChatCubit(
+                  getIt.get<SpeakersChatRepoImpl>(),
+                )),
       ],
       child: BlocBuilder<SpeakerChatCubit, SpeakerChatState>(
         builder: (context, state) {
           var speakerChatCubit = SpeakerChatCubit.get(context);
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal:AppConstants.width20(context)),
+            padding:
+                EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
             child: Column(
               children: [
                 SizedBox(
                   height: AppConstants.height20(context),
                 ),
-               // const CustomSearchBar(),
+                // const CustomSearchBar(),
                 SizedBox(
                   height: AppConstants.height20(context),
                 ),
@@ -52,7 +60,8 @@ class SpeakerChatViewBody extends StatelessWidget {
                     ),
                     CustomToggleButton(
                       onTap: () {
-                        speakerChatCubit.toggleChats(speakerChatCubit.isActiveValue = false);
+                        speakerChatCubit.toggleChats(
+                            speakerChatCubit.isActiveValue = false);
                       },
                       title: "inActiveSessions".tr(),
                       isActive: !speakerChatCubit.isActiveValue,
@@ -64,27 +73,54 @@ class SpeakerChatViewBody extends StatelessWidget {
                 ),
                 if (speakerChatCubit.isActiveValue == true)
                   BlocBuilder<SubscribedSessionsCubit, SubscribedSessionsState>(
-                      builder: (context,state){
-                        return
-                          state is UserSubscribedSessionsSuccessState ?
-                          ChatNameItem(
-                            availble: "avilable",
+                    builder: (context, state) {
+                      if (state is UserSubscribedSessionsSuccessState) {
+                        return ChatNameItem(
+                          availble: "avilable",
                           sessionsModel: state.model,
-                        ) : const Text("Error");
-                      },
-                       ),
-                if (speakerChatCubit.isActiveValue == false)
-                  BlocBuilder<SubscribedSessionsCubit, SubscribedSessionsState>(
-                    builder: (context,state){
-                      return
-                        state is UserSubscribedSessionsSuccessState ?
-                        ChatNameItem(
-                          availble: "not available",
-                          sessionsModel: state.model,
-                        ) : const Text("Error");
+                        );
+                      } else if (state is UserSubscribedSessionsErrorState) {
+                        return CustomErrorWidget(
+                          height: MediaQuery.of(context).size.height * .1,
+                          imgWidth: MediaQuery.of(context).size.width * .1,
+                        );
+                      } else if (state is UserSubscribedSessionsLoadingState) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * .1,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
                     },
                   ),
-
+                if (speakerChatCubit.isActiveValue == false)
+                  BlocBuilder<SubscribedSessionsCubit, SubscribedSessionsState>(
+                    builder: (context, state) {
+                      if (state is UserSubscribedSessionsSuccessState) {
+                        return InactiveSessionsWidget(
+                          availble: "not available",
+                          sessionsModel: state.model,
+                        );
+                      } else if (state is UserSubscribedSessionsErrorState) {
+                        return CustomErrorWidget(
+                          height: MediaQuery.of(context).size.height * .1,
+                          imgWidth: MediaQuery.of(context).size.width * .1,
+                        );
+                      } else if (state is UserSubscribedSessionsLoadingState) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * .1,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      } else {
+                        return SizedBox();
+                      }
+                    },
+                  ),
               ],
             ),
           );

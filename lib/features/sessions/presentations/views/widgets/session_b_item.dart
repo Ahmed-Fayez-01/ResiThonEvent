@@ -90,16 +90,16 @@ class _SessionBWidgetState extends State<SessionBWidget> {
                         Container(
                           padding: EdgeInsets.all(AppConstants.sp10(context)),
                           decoration: BoxDecoration(
-                            color: widget.instance!.status! == "available"
+                            color: widget.instance!.count! < int.parse(widget.instance!.totalCount!)
                                 ? const Color(0xff27AE60)
                                 : AppColors.greyColor,
                             borderRadius: BorderRadius.circular(
                                 AppConstants.sp10(context)),
                           ),
                           child: Text(
-                            widget.instance!.status! == "available"
+                            widget.instance!.count! < int.parse(widget.instance!.totalCount!) && !widget.instance!.reservation_expire!
                                 ? "Available"
-                                : "Completed",
+                                : widget.instance!.count! < int.parse(widget.instance!.totalCount!) && widget.instance!.reservation_expire!? "Not Available":"Completed",
                             style: const TextStyle(
                               color: Colors.white,
                               fontFamily: "Poppins",

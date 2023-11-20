@@ -72,6 +72,9 @@ class _UserSessionDetailsViewBodyState
                           imagPath: state.model.data!.image!,
                           totalParticipant:
                               state.model.data!.participants!.length,
+                          reservation_expire:
+                              state.model.data!.reservation_expire!,
+                          expired: state.model.data!.session_expire!,
                         ),
                         state.model.data!.session_expire!
                             ? const SizedBox()
