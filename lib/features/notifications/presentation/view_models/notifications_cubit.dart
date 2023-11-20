@@ -21,4 +21,27 @@ class NotificationsCubit extends Cubit<NotificationsStates> {
       emit(GetAllNotificationsDataSuccessState(data));
     });
   }
+
+    deleteOneNotifications({required int notifyId}) async {
+    emit(DeleteOneNotificationsLoadingState());
+    var result = await notificationsRepo!.deleteOneNotification(notifyId: notifyId);
+    return result.fold((failure) {
+      emit(DeleteOneNotificationsErrorState(failure.errMessage));
+      print(failure.errMessage);
+    }, (data) {
+      emit(DeleteOneNotificationsSuccessState(data));
+    });
+  }
+
+  deleteAllNotifications() async {
+    emit(DeleteAllNotificationsLoadingState());
+    var result = await notificationsRepo!.deleteAllNotifications();
+    return result.fold((failure) {
+      emit(DeleteAllNotificationsErrorState(failure.errMessage));
+      print(failure.errMessage);
+    }, (data) {
+      emit(DeleteAllNotificationsSuccessState(data));
+    });
+  }
+
 }

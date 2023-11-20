@@ -70,6 +70,7 @@ dependencies:
   video_player: ^2.8.1
   chewie: ^1.7.1
   qr_flutter: ^4.1.0
+  flutter_slidable: ^2.0.0
 
 
 dev_dependencies:

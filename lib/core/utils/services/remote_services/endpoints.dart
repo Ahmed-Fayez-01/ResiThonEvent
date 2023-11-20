@@ -15,4 +15,6 @@ class EndPoints {
   static const cancelSession = '/dettach-session';
   static const notifications = '/show-notifications';
   static const chatUsers = '/chat-users';
+  static const deleteOneNotification = '/delete-notifications';
+  static const deleteAllNotification = '/destroy-notifications';
 }
