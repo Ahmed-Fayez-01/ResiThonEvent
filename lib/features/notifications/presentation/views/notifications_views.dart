@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resithon_event/core/utils/colors/colors.dart';
+import 'package:resithon_event/core/utils/services/local_services/cache_helper.dart';
 import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
 import 'package:resithon_event/features/notifications/presentation/view_models/notifications_states.dart';
 import 'package:resithon_event/features/notifications/presentation/views/widgets/speaker_notifications_views_body.dart';
@@ -12,6 +13,7 @@ import '../../../../core/shared_widgets/custom_dialog.dart';
 import '../../../../core/utils/assets/assets.dart';
 import '../../../../core/utils/constants.dart';
 import '../../../../core/utils/services/remote_services/service_locator.dart';
+import '../../../speakers/home/presentation/views/speaker_home_view.dart';
 import '../../data/repos/notifications_repo_impl.dart';
 
 class NotificationsViews extends StatelessWidget {
@@ -38,7 +40,12 @@ class NotificationsViews extends StatelessWidget {
                   size: MediaQuery.of(context).size.height*.016,
                   color: Colors.black,),
                 onPressed: (){
-                  Navigator.pop(context);
+               //   CacheHelper.removeData(key: "NotificationsListLengthInCash");
+                 Navigator.pop(context);
+                 //  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                 //    return const SpeakerHomeView();
+                 //  }));
+
                 },
               ),
               actions: [

@@ -1,4 +1,5 @@
  import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/features/notifications/data/repos/notifications_repo.dart';
 
 import 'notifications_states.dart';
@@ -11,6 +12,7 @@ class NotificationsCubit extends Cubit<NotificationsStates> {
   NotificationsRepo? notificationsRepo;
 
 
+  int notificationsListLength = 0;
   Future<void> getNotificationsData() async {
     emit(GetAllNotificationsDataLoadingState());
     var result = await notificationsRepo!.getNotificationsData();
@@ -19,6 +21,9 @@ class NotificationsCubit extends Cubit<NotificationsStates> {
       print(failure.errMessage);
     }, (data) {
       emit(GetAllNotificationsDataSuccessState(data));
+      notificationsListLength = data.data!.length;
+      print(notificationsListLength);
+      print("AppConstants.notificationsListLength");
     });
   }
 

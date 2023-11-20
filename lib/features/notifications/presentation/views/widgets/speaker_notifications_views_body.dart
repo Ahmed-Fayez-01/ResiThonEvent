@@ -11,6 +11,7 @@ import 'package:resithon_event/features/speakers/chat/presentation/view_model/sp
 import '../../../../../../core/utils/constants.dart';
 import '../../../../../core/shared_widgets/empty_widget.dart';
 import '../../../../../core/utils/assets/assets.dart';
+import '../../../../../core/utils/services/local_services/cache_helper.dart';
 import '../../../../../core/utils/services/remote_services/service_locator.dart';
 import '../../view_models/notifications_cubit.dart';
 import 'notification_item.dart';
@@ -33,6 +34,7 @@ class NotificationsViewsBody extends StatelessWidget {
         },
         builder: (context , state){
           if(state is GetAllNotificationsDataSuccessState){
+            CacheHelper.saveData(key: "NotificationsListLengthInCash", value: state.model.data!.length);
             return Padding(
               padding: EdgeInsets.all(AppConstants.sp20(context)),
               child:

@@ -7,6 +7,7 @@ import 'package:resithon_event/core/shared_widgets/main_title_component.dart';
 import 'package:resithon_event/core/utils/assets/assets.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/core/shared_widgets/event_widget.dart';
+import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
 import 'package:resithon_event/features/speakers/home/presentation/views/widgets/speaker_home_app_bar.dart';
 
 import '../../../../../../core/shared_widgets/event_time_line.dart';
@@ -30,6 +31,7 @@ class SpeakerHomeViewBody extends StatelessWidget {
         context.read<AllSessionsCubit>().sessionsDetails();
         context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
         context.read<AllProjectsCubit>().allProjectsDetails();
+        context.read<NotificationsCubit>().getNotificationsData();
       },
       child: SingleChildScrollView(
         child: Column(

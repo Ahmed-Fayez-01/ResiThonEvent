@@ -6,6 +6,7 @@ import 'package:resithon_event/features/notifications/data/models/delete_notify_
 
 import 'package:resithon_event/features/notifications/data/models/notifications_model.dart';
 
+import '../../../../core/utils/constants.dart';
 import '../../../../core/utils/services/remote_services/api_service.dart';
 import '../../../../core/utils/services/remote_services/endpoints.dart';
 import 'notifications_repo.dart';
@@ -24,6 +25,7 @@ class NotificationsRepoImple extends NotificationsRepo
       sendCode: true,
       );
       var result=NotificationsModel.fromJson(response.data);
+
       return right(result);
     } catch(e)
     {

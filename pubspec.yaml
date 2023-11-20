@@ -71,6 +71,7 @@ dependencies:
   chewie: ^1.7.1
   qr_flutter: ^4.1.0
   flutter_slidable: ^2.0.0
+  badges: ^3.1.2
 
 
 dev_dependencies:
