@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:resithon_event/features/orginizer/scan_qr/data/repos/scan_repo/scan_repo_impl.dart';
 import 'package:resithon_event/features/profile/data/repos/edit_profile_repo_impl.dart';
 import 'package:resithon_event/features/user/projects/data/repos/project_reop/projects_repo_impl.dart';
 import '../../../../features/auth/data/repos/auth_repo_impl.dart';
@@ -35,6 +36,9 @@ void setup() {
     getIt.get<ApiService>(),
   ));
   getIt.registerSingleton<SpeakersChatRepoImpl>(SpeakersChatRepoImpl(
+    getIt.get<ApiService>(),
+  ));
+  getIt.registerSingleton<ScanRepoImpl>(ScanRepoImpl(
     getIt.get<ApiService>(),
   ));
 }

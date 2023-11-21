@@ -27,6 +27,7 @@ class Data {
   int? count;
   bool? attend;
   bool? reservation_expire;
+  bool? is_session;
   bool? session_expire;
   bool? chat_expire;
   bool? has_rate;
@@ -57,6 +58,7 @@ class Data {
     session_expire = json['session_expire'];
     session_started = json['session_started'];
     chat_expire = json['chat_expire'];
+    is_session = json['is_session'];
     description = json['description'];
     has_rate = json['has_rate'];
     is_arrived = json['is_arrived'];

@@ -60,6 +60,9 @@ class _UserSideMenuState extends State<UserSideMenu> {
                       GoRouter.of(context).push("/projectsView");
                     }else if (selectedMenu["title"] == "Videos"||selectedMenu["title"] == "الفديوهات") {
                       GoRouter.of(context).push("/videosView");
+                    }
+                    else if (selectedMenu["title"] == "WhatsApp"||selectedMenu["title"] == "واتساب") {
+
                     }else{
                       GoRouter.of(context).push("/aboutAppView");
                     }
@@ -97,7 +100,7 @@ class _UserSideMenuState extends State<UserSideMenu> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * .15,
+              height: MediaQuery.of(context).size.height * .08,
             )
           ],
         ),

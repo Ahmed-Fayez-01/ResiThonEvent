@@ -24,6 +24,7 @@ class Data {
   bool? reservation_expire;
   bool? session_expire;
   bool? chat_expire;
+  bool? is_session;
   bool? session_started;
   bool? has_rate;
   bool? is_arrived;
@@ -49,6 +50,7 @@ class Data {
     attend = json['attend'];
     reservation_expire = json['reservation_expire'];
     session_expire = json['session_expire'];
+    is_session = json['is_session'];
     session_started = json['session_started'];
     chat_expire = json['chat_expire'];
     description = json['description'];

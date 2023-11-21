@@ -56,6 +56,8 @@ class _SpeakerSideMenuState extends State<SpeakerSideMenu> {
                       GoRouter.of(context).push("/scheduleView");
                     } else if (selectedMenu["title"] == "Agenda"||selectedMenu["title"] == "الاجنده") {
                       GoRouter.of(context).push("/agendaView");
+                    }else if (selectedMenu["title"] == "Videos"||selectedMenu["title"] == "الفديوهات") {
+                      GoRouter.of(context).push("/videosView");
                     } else{
                       GoRouter.of(context).push("/aboutAppView");
                     }
@@ -78,6 +80,8 @@ class _SpeakerSideMenuState extends State<SpeakerSideMenu> {
                   CacheHelper.removeData(key: "bio",);
                   CacheHelper.removeData(key: "code",);
                   CacheHelper.removeData(key: "can_rate",);
+                  CacheHelper.removeData(key: "event_start_day",);
+                  CacheHelper.removeData(key: "event_end_day",);
 
                   GoRouter.of(context).go("/loginView");
                 },

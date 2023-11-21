@@ -56,6 +56,7 @@ class SessionHeader extends StatelessWidget {
               child: const CustomBackButton(),
             ),
           ),
+          if(CacheHelper.getData(key: "role") != "1")
           Positioned(
             bottom: MediaQuery.of(context).size.height * .04,
             right: 0,
@@ -90,6 +91,7 @@ class SessionHeader extends StatelessWidget {
               ),
             ),
           ),
+          if(CacheHelper.getData(key: "role") != "1")
           Positioned(
             bottom: 0,
             left: 0,

@@ -24,6 +24,10 @@ class SideMenuData{
       "title":"videos".tr(),
     },
     {
+      "icon": AssetData.whatsApp,
+      "title":"WhatsApp".tr(),
+    },
+    {
       "icon":AssetData.aboutApp,
       "title":"aboutApp".tr(),
     },
@@ -39,8 +43,12 @@ class SideMenuData{
       "title":"mySchedule".tr(),
     },
     {
-      "icon": AssetData.schedule,
+      "icon": AssetData.calender,
       "title":"agenda".tr(),
+    },
+    {
+      "icon": AssetData.videos,
+      "title":"videos".tr(),
     },
     {
       "icon":AssetData.aboutApp,

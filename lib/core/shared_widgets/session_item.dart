@@ -10,6 +10,8 @@ import 'package:resithon_event/core/utils/services/local_services/cache_keys.dar
 import 'package:resithon_event/core/utils/text_styles/styles.dart';
 import 'package:resithon_event/features/sessions/data/models/sessions_model.dart';
 
+import '../utils/services/local_services/cache_helper.dart';
+
 class SessionItem extends StatelessWidget {
   const SessionItem({super.key, required this.instance});
 
@@ -105,6 +107,7 @@ class SessionItem extends StatelessWidget {
                         SizedBox(
                           width: AppConstants.width15(context),
                         ),
+                        if (CacheHelper.getData(key: "role") != "1")
                         !instance!.session_expire!?  CircleAvatar(
                           radius: MediaQuery.of(context).size.height * .015,
 

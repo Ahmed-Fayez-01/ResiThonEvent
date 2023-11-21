@@ -22,6 +22,7 @@ import '../../../../../core/utils/assets/assets.dart';
 import '../../../../../core/utils/colors/colors.dart';
 import '../../../../../core/utils/constants.dart';
 import '../../../../../core/utils/text_styles/styles.dart';
+import '../../../../orginizer/scan_qr/presentation/views/scan_qr_view.dart';
 import '../../../../user/home/presentation/views/widgets/show_my_ticket.dart';
 import '../session_evaluation_view.dart';
 
@@ -76,6 +77,7 @@ class _UserSessionDetailsViewBodyState
                               state.model.data!.reservation_expire!,
                           expired: state.model.data!.session_expire!,
                         ),
+                        if (CacheHelper.getData(key: "role") != "1")
                         state.model.data!.session_expire!
                             ? const SizedBox()
                             : !state.model.data!.reservation_expire!
@@ -113,6 +115,7 @@ class _UserSessionDetailsViewBodyState
                         SizedBox(
                           height: AppConstants.height20(context),
                         ),
+
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: AppConstants.width20(context)),
@@ -156,20 +159,26 @@ class _UserSessionDetailsViewBodyState
                               SizedBox(
                                 height: AppConstants.height20(context),
                               ),
+                              if(CacheHelper.getData(key: "role") != "1")
                               MoreDetailsWidget(
                                 title: 'moreDetails'.tr(),
                                 description: state.model.data!.description!,
                               ),
+                              if(CacheHelper.getData(key: "role") != "1")
                               SizedBox(
                                 height: AppConstants.height20(context),
                               ),
+                              if(CacheHelper.getData(key: "role") != "1")
                               const ParticipantTitle(),
+                              if(CacheHelper.getData(key: "role") != "1")
                               SizedBox(
                                 height: AppConstants.height20(context),
                               ),
                             ],
                           ),
                         ),
+
+                        if(CacheHelper.getData(key: "role") != "1")
                         state.model.data!.participants!.isNotEmpty
                             ? SizedBox(
                                 height:
@@ -205,6 +214,17 @@ class _UserSessionDetailsViewBodyState
                               ),
                       ],
                     ),
+                  ),
+                ),
+                if (CacheHelper.getData(key: "role") == "1")
+                DefaultButton(
+                  onPress: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ScanQrPage(sessionId: state.model.data!.id!,)));
+                  },
+                  text: "Scan",
+                  icon: SvgPicture.asset(
+                    AssetData.scan,
+                    width: MediaQuery.of(context).size.width * .06,
                   ),
                 ),
                 if (CacheHelper.getData(key: "role") != "1" &&

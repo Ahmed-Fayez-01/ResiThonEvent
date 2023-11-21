@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/core/shared_widgets/session_item.dart';
 import 'package:resithon_event/features/sessions/data/models/sessions_model.dart';
@@ -19,27 +18,29 @@ class SessionsListView extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
-        return index == 0
-            ? Column(
-                children: [
-                  SizedBox(
-                    height: AppConstants.height10(context),
-                  ),
-                  GestureDetector(
-                      onTap: () {
-                        AppConstants.evaluationSubmit.clear();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => UserSessionDetailsView(
-                                    id: instance.data![index].id!)));
-                      },
-                      child: SessionItem(
-                        instance: instance.data![index],
-                      )),
-                ],
-              )
-            : GestureDetector(
+        if(instance.data![index].is_session!)
+          {
+            return index == 0
+                ? Column(
+              children: [
+                SizedBox(
+                  height: AppConstants.height10(context),
+                ),
+                GestureDetector(
+                    onTap: () {
+                      AppConstants.evaluationSubmit.clear();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserSessionDetailsView(
+                                  id: instance.data![index].id!)));
+                    },
+                    child: SessionItem(
+                      instance: instance.data![index],
+                    )),
+              ],
+            )
+                : GestureDetector(
                 onTap: () {
                   AppConstants.evaluationSubmit.clear();
                   Navigator.push(
@@ -51,6 +52,10 @@ class SessionsListView extends StatelessWidget {
                 child: SessionItem(
                   instance: instance.data![index],
                 ));
+          }else{
+          return const SizedBox();
+        }
+
       },
       itemCount: instance.data!.length,
       separatorBuilder: (BuildContext context, int index) {

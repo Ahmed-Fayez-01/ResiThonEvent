@@ -25,6 +25,8 @@ import 'features/agenda/presentation/view_models/dated_all_sessions_cubit/dated_
 import 'features/auth/data/repos/auth_repo_impl.dart';
 import 'features/auth/presentation/view_models/login_cubit/login_cubit.dart';
 import 'features/my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
+import 'features/orginizer/scan_qr/data/repos/scan_repo/scan_repo_impl.dart';
+import 'features/orginizer/scan_qr/presentation/view_models/scan_cubit/scan_cubit.dart';
 import 'features/profile/presentation/view_model/upload_image_profile/upload_image_profile_cubit.dart';
 import 'features/sessions/data/repos/sessions_repo/sessions_repo_impl.dart';
 import 'features/sessions/presentations/view_models/all_sessions_cubit/all_sessions_cubit.dart';
@@ -190,6 +192,10 @@ class ResiThon extends StatelessWidget {
             create: (context) => AllProjectsCubit(
               getIt.get<ProjectsRepoImpl>(),
             )..allProjectsDetails()),
+        BlocProvider(
+            create: (context) => ScanCubit(
+              getIt.get<ScanRepoImpl>(),
+            )),
       ],
       child: MaterialApp.router(
         title: "ResiThon",

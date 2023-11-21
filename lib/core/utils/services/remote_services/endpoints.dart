@@ -15,4 +15,5 @@ class EndPoints {
   static const cancelSession = '/dettach-session';
   static const notifications = '/show-notifications';
   static const chatUsers = '/chat-users';
+  static const scanUsers = '/save-reservation';
 }

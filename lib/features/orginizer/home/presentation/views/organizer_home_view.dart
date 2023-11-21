@@ -20,7 +20,6 @@ class OrganizerHomeView extends StatelessWidget {
             ),
           )
       ),
-
       resizeToAvoidBottomInset: false,
       extendBody: true,
       body: const OrganizerHomeViewBody(),

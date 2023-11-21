@@ -63,6 +63,8 @@ class AssetData {
 
   //popup
   static const book="assets/images/book.svg";
+  static const allowed="assets/images/allowed.svg";
+  static const notAllowed="assets/images/not_allowed.svg";
   static const cancel="assets/images/cancel.svg";
   static const noSessions="assets/images/no_sessions.png";
   static const noParticipant="assets/images/no_participant.svg";
@@ -71,5 +73,7 @@ class AssetData {
   static const noNotification="assets/images/no_notification.png";
   static const en="assets/images/en.png";
   static const ar="assets/images/ar.png";
+  static const whatsApp="assets/images/whats.svg";
+  static const qr="assets/images/qr.png";
 
 }
