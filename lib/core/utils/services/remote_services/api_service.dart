@@ -90,4 +90,27 @@ class ApiService {
     );
     return response;
   }
+
+
+
+  Future<Response> deleteData({
+    required String endPoint,
+    bool sendCode = false,
+    dynamic data,
+    Map<String,dynamic>? query,
+  }) async {
+    _dio.options.headers = {
+      "Accept":"application/json",
+      "Content-Type": "application/json",
+      if (sendCode)
+        "code": "${CacheKeysManger.getUserCodeFromCache()}"
+    };
+    var response = await _dio.delete(
+      "${EndPoints.baseUrl}$endPoint",
+      data: data,
+      queryParameters: query,
+    );
+    return response;
+  }
+
 }

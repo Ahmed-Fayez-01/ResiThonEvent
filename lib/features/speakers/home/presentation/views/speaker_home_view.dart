@@ -3,13 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:resithon_event/features/speakers/home/presentation/views/widgets/speaker_home_view_body.dart';
 import 'package:resithon_event/features/speakers/home/presentation/views/widgets/speaker_side_menu.dart';
 
-class SpeakerHomeView extends StatelessWidget {
+import '../../../../notifications/presentation/view_models/notifications_cubit.dart';
+
+class SpeakerHomeView extends StatefulWidget {
   const SpeakerHomeView({super.key});
 
   @override
+  State<SpeakerHomeView> createState() => _SpeakerHomeViewState();
+}
+
+class _SpeakerHomeViewState extends State<SpeakerHomeView> {
+  @override
   Widget build(BuildContext context) {
     return  Scaffold(
-
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0), // here the desired height
           child: AppBar(

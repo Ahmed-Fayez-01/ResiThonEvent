@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
 import 'package:resithon_event/features/profile/data/repos/edit_profile_repo_impl.dart';
 import 'package:resithon_event/features/profile/presentation/view_model/edit_profile/edit_profile_cubit.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/book_session_cubit/book_sessions_cubit.dart';
@@ -25,15 +26,13 @@ import 'features/agenda/presentation/view_models/dated_all_sessions_cubit/dated_
 import 'features/auth/data/repos/auth_repo_impl.dart';
 import 'features/auth/presentation/view_models/login_cubit/login_cubit.dart';
 import 'features/my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
-import 'features/orginizer/scan_qr/data/repos/scan_repo/scan_repo_impl.dart';
-import 'features/orginizer/scan_qr/presentation/view_models/scan_cubit/scan_cubit.dart';
+import 'features/notifications/data/repos/notifications_repo_impl.dart';
 import 'features/profile/presentation/view_model/upload_image_profile/upload_image_profile_cubit.dart';
 import 'features/sessions/data/repos/sessions_repo/sessions_repo_impl.dart';
 import 'features/sessions/presentations/view_models/all_sessions_cubit/all_sessions_cubit.dart';
 import 'features/sessions/presentations/view_models/subscribed_sessions_cubit/subscribed_sessions_cubit.dart';
 import 'features/sessions/presentations/view_models/toggle_cubit/toggle_cubit.dart';
-import 'features/speakers/chat/presentation/view_model/speaker_chat_cubit.dart';
-import 'features/user/home/data/repos/event_repo/event_repo_impl.dart';
+ import 'features/user/home/data/repos/event_repo/event_repo_impl.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
@@ -193,9 +192,8 @@ class ResiThon extends StatelessWidget {
               getIt.get<ProjectsRepoImpl>(),
             )..allProjectsDetails()),
         BlocProvider(
-            create: (context) => ScanCubit(
-              getIt.get<ScanRepoImpl>(),
-            )),
+          create: (context) => NotificationsCubit(getIt.get<NotificationsRepoImple>())..getNotificationsData(),
+        ),
       ],
       child: MaterialApp.router(
         title: "ResiThon",

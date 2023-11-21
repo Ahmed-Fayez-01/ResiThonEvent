@@ -19,6 +19,7 @@ import '../../../../../core/utils/services/local_services/cache_helper.dart';
 import '../../../../../core/utils/text_styles/styles.dart';
 import '../../../../agenda/presentation/view_models/dated_all_sessions_cubit/dated_all_sessions_cubit.dart';
 import '../../../../my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
+import '../../../../speakers/home/presentation/views/speaker_home_view.dart';
 import '../../view_models/login_cubit/login_cubit.dart';
 
 class LoginViewBody extends StatefulWidget {
@@ -209,7 +210,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                          GoRouter.of(context).go("/organizerHomeView");
                        }else if(CacheHelper.getData(key: "role")=="2")
                          {
-                           GoRouter.of(context).go("/speakerHomeView");
+                          GoRouter.of(context).go("/speakerHomeView");
+
                          }else
                            {
                              GoRouter.of(context).go("/userHomeView");
