@@ -17,6 +17,7 @@ import 'package:resithon_event/features/sessions/presentations/view_models/post_
 import 'package:resithon_event/features/sessions/presentations/view_models/specific_session_cubit/specific_sessions_cubit.dart';
 import 'package:resithon_event/features/user/home/presentation/view_models/event_cubit/event_cubit.dart';
 import 'package:resithon_event/features/user/projects/data/repos/project_reop/projects_repo_impl.dart';
+import 'package:resithon_event/features/user/projects/presentation/view_models/project_evaluation_cubit/project_evaluation_cubit.dart';
 import 'package:resithon_event/features/user/projects/presentation/view_models/projects_cubit/all_projects_cubit.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'core/utils/constants.dart';
@@ -179,13 +180,17 @@ class ResiThon extends StatelessWidget {
                   getIt.get<SessionsRepoImpl>(),
                 )),
         BlocProvider(
+            create: (context) => ProjectEvaluationCubit(
+                  getIt.get<ProjectsRepoImpl>(),
+                )..projectEvaluationDetails()),
+        BlocProvider(
             create: (context) => CancelSessionsCubit(
                   getIt.get<SessionsRepoImpl>(),
                 )),
         BlocProvider(
             create: (context) => GetSessionEvaluationCubit(
                   getIt.get<SessionsRepoImpl>(),
-                )),
+                )..getSessionEvaluationDetails()),
         BlocProvider(
             create: (context) => PostSessionEvaluationCubit(
                   getIt.get<SessionsRepoImpl>(),

@@ -9,24 +9,39 @@ import '../../../../../../core/utils/constants.dart';
 
 class SessionQuestionList extends StatelessWidget {
   const SessionQuestionList({super.key, required this.sessionId});
-final int sessionId;
+
+  final int sessionId;
+
   @override
   Widget build(BuildContext context) {
-    return  BlocBuilder<GetSessionEvaluationCubit, GetSessionEvaluationState>(
+    return BlocBuilder<GetSessionEvaluationCubit, GetSessionEvaluationState>(
       builder: (BuildContext context, state) {
         if (state is UserGetSessionEvaluationSuccessState) {
           return ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (BuildContext context,int index){
-              return  SessionQuestionItem(index: index, question: state.model.data![index].name!,id: state.model.data![index].id!, sessionId: sessionId,);
-            },itemCount: state.model.data!.length, separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(height: AppConstants.height20(context),);
-          },);
+            itemBuilder: (BuildContext context, int index) {
+              return SessionQuestionItem(
+                index: index,
+                question: state.model.data![index].name!,
+                id: state.model.data![index].id!,
+                sessionId: sessionId,
+              );
+            },
+            itemCount: state.model.data!.length,
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                height: AppConstants.height20(context),
+              );
+            },
+          );
         } else if (state is UserGetSessionEvaluationErrorState) {
           return CustomErrorWidget(
-            height: MediaQuery.of(context).size.height * .24,
-            imgWidth: MediaQuery.of(context).size.width * .2,
+            onTap: () {
+              context
+                  .read<GetSessionEvaluationCubit>()
+                  .getSessionEvaluationDetails();
+            },
           );
         } else if (state is GetAllNotificationsDataLoadingState) {
           return SizedBox(
@@ -40,8 +55,5 @@ final int sessionId;
         }
       },
     );
-
-
-
   }
 }

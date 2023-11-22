@@ -24,8 +24,9 @@ final int projectId;
           },);
         } else if (state is UserProjectEvaluationErrorState) {
           return CustomErrorWidget(
-            height: MediaQuery.of(context).size.height * .24,
-            imgWidth: MediaQuery.of(context).size.width * .2,
+            onTap: () {
+              context.read<ProjectEvaluationCubit>().projectEvaluationDetails();
+            },
           );
         } else if (state is UserProjectEvaluationLoadingState) {
           return SizedBox(

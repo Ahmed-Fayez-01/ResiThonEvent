@@ -313,14 +313,9 @@ class _EventTimeLineState extends State<EventTimeLine> {
             ],
           );
         } else if (state is UserEventErrorState) {
-          return CustomErrorWidget(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * .1, imgWidth: MediaQuery
-              .of(context)
-              .size
-              .width * .1,);
+          return CustomErrorWidget(onTap: (){
+            context.read<EventCubit>().eventDetails();
+          },);
         } else if (state is UserEventLoadingState) {
           return SizedBox(
             height: MediaQuery

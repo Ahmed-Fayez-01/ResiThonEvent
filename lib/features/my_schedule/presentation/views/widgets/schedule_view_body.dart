@@ -19,10 +19,10 @@ class ScheduleViewBody extends StatefulWidget {
 }
 
 class _ScheduleViewBodyState extends State<ScheduleViewBody> {
-
+  var date;
   @override
   void initState() {
-    var date;
+
     date= DateTime.now().isBefore(DateTime(
         int.parse(CacheHelper.getData(key:"event_start_day").split(
             "-")[0]),
@@ -108,7 +108,11 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
               );
             } else if (state is UserDatedSubscribedSessionsErrorState) {
               return Expanded(
-                child: CustomErrorWidget(height: MediaQuery.of(context).size.height*.2, imgWidth: MediaQuery.of(context).size.width*.2,),
+                child: CustomErrorWidget(onTap: () {
+                  context.read<DatedSubscribedSessionsCubit>().datedSubscribedSessionsDetails(query: {
+                    "date":DateFormat('yyyy-MM-dd',"en").format(date),
+                  });
+                },),
               );
             } else {
               return const SizedBox();

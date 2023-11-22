@@ -10,7 +10,7 @@ part 'get_session_evaluation_state.dart';
 class GetSessionEvaluationCubit extends Cubit<GetSessionEvaluationState> {
   GetSessionEvaluationCubit(this.sessionsRepo) : super(GetSessionEvaluationInitial());
   SessionsRepo? sessionsRepo;
-  Future<void> postSessionEvaluationDetails({required var data}) async {
+  Future<void> getSessionEvaluationDetails() async {
     emit(UserGetSessionEvaluationLoadingState());
     var result = await sessionsRepo!.getSessionsEvaluations();
     return result.fold((failure) {

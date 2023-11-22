@@ -144,7 +144,10 @@ class OrganizerHomeViewBody extends StatelessWidget {
                         ):FoodListView(instance: state.model,);
                       } else if (state
                       is UserSubscribedSessionsErrorState) {
-                        return CustomErrorWidget(height: MediaQuery.of(context).size.height*.24, imgWidth: MediaQuery.of(context).size.width*.2);
+                        return CustomErrorWidget(onTap: () {
+                          context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
+
+                        },);
                       } else if (state
                       is UserSubscribedSessionsLoadingState) {
                         return SizedBox(

@@ -66,7 +66,8 @@ class AssetData {
   static const allowed="assets/images/allowed.svg";
   static const notAllowed="assets/images/not_allowed.svg";
   static const cancel="assets/images/cancel.svg";
-  static const noSessions="assets/images/no_sessions.png";
+  static const noSessions="assets/images/no_sessions.svg";
+  static const delete="assets/images/delete.svg";
   static const noParticipant="assets/images/no_participant.svg";
   static const noInternet="assets/images/no_internet.svg";
   static const serverError="assets/images/server_error.svg";

@@ -45,9 +45,9 @@ class ChewieListView extends StatelessWidget {
                 return  SizedBox(height: AppConstants.height20(context),);
           },);
         } else if (state is UserEventErrorState) {
-          return CustomErrorWidget(
-            height: MediaQuery.of(context).size.height * .24,
-            imgWidth: MediaQuery.of(context).size.width * .2,
+          return CustomErrorWidget(onTap: () {
+            context.read<EventCubit>().eventDetails();
+          },
           );
         } else if (state is UserEventLoadingState) {
           return SizedBox(

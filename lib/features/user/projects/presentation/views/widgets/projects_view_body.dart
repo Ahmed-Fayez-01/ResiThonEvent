@@ -42,9 +42,10 @@ class ProjectsViewBody extends StatelessWidget {
                         instance: state.model,
                       );
                     } else if (state is UserAllProjectsErrorState) {
-                      return CustomErrorWidget(
-                          height: MediaQuery.of(context).size.height * .24,
-                          imgWidth: MediaQuery.of(context).size.width * .2);
+                      return CustomErrorWidget(onTap: () {
+                        context.read<AllProjectsCubit>().allProjectsDetails();
+                      },
+                      );
                     } else if (state is UserAllProjectsLoadingState) {
                       return const Expanded(
                         child: Center(

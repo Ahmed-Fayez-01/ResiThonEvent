@@ -21,9 +21,10 @@ class AgendaViewBody extends StatefulWidget {
 
 class _AgendaViewBodyState extends State<AgendaViewBody> {
   final List<Color> colors = <Color>[AppColors.primarySwatchColor, AppColors.secondaryColor, const Color(0xcc323232)];
+  var date;
   @override
   void initState() {
-    var date;
+
     date= DateTime.now().isBefore(DateTime(
         int.parse(CacheHelper.getData(key:"event_start_day").split(
             "-")[0]),
@@ -113,8 +114,12 @@ class _AgendaViewBodyState extends State<AgendaViewBody> {
                 ),
               );
             } else if (state is UserDatedAllSessionsErrorState) {
-              return Expanded(
-                child: CustomErrorWidget(height: MediaQuery.of(context).size.height*.2, imgWidth: MediaQuery.of(context).size.width*.2,),
+              return  Expanded(
+                child: CustomErrorWidget(onTap: () {
+                  context.read<DatedAllSessionsCubit>().datedAllSessionsDetails(query: {
+                    "date":DateFormat('yyyy-MM-dd',"en").format(date),
+                  });
+                },),
               );
             } else {
               return const SizedBox();

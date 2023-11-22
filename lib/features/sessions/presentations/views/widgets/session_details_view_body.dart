@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:resithon_event/core/shared_widgets/custom_back_button.dart';
 import 'package:resithon_event/core/shared_widgets/custom_dialog.dart';
 import 'package:resithon_event/core/shared_widgets/custon_time_count_down_widget.dart';
+import 'package:resithon_event/core/shared_widgets/error_widget.dart';
 import 'package:resithon_event/core/utils/services/local_services/cache_helper.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/all_sessions_cubit/all_sessions_cubit.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/book_session_cubit/book_sessions_cubit.dart';
@@ -595,10 +597,17 @@ class _UserSessionDetailsViewBodyState
             ),
           );
         } else if (state is UserSpecificSessionsErrorState) {
-          return SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Center(
-              child: Text(state.errMessage),
+          return Padding(
+            padding: EdgeInsets.all(AppConstants.sp20(context)),
+            child: Column(
+              children: [
+                const CustomBackButton(),
+                Expanded(
+                  child: CustomErrorWidget(onTap: (){
+                    context.read<SpecificSessionsCubit>().specificSessionsDetails(id: widget.id);
+                  }),
+                ),
+              ],
             ),
           );
         } else if (state is UserSpecificSessionsLoadingState) {

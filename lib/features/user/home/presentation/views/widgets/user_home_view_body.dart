@@ -16,8 +16,6 @@ import 'package:resithon_event/features/user/home/presentation/views/widgets/sho
 import 'package:resithon_event/features/user/home/presentation/views/widgets/user_home_app_bar.dart';
 
 import '../../../../../../core/shared_widgets/event_time_line.dart';
-import '../../../../../agenda/presentation/view_models/dated_all_sessions_cubit/dated_all_sessions_cubit.dart';
-import '../../../../../my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
 import '../../../../../sessions/presentations/view_models/all_sessions_cubit/all_sessions_cubit.dart';
 import '../../../../../sessions/presentations/view_models/subscribed_sessions_cubit/subscribed_sessions_cubit.dart';
 import '../../../../../sessions/presentations/view_models/toggle_cubit/toggle_cubit.dart';
@@ -166,7 +164,11 @@ class UserHomeViewBody extends StatelessWidget {
                               );
                             } else if (state
                                 is UserSubscribedSessionsErrorState) {
-                              return CustomErrorWidget(height: MediaQuery.of(context).size.height*.24, imgWidth: MediaQuery.of(context).size.width*.2);
+                              return CustomErrorWidget(
+                                onTap: () {
+                                  context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
+                                },
+                              );
                             } else if (state
                                 is UserSubscribedSessionsLoadingState) {
                               return SizedBox(
@@ -187,7 +189,11 @@ class UserHomeViewBody extends StatelessWidget {
                                 instance: state.model,
                               );
                             } else if (state is UserAllSessionsErrorState) {
-                              return CustomErrorWidget(height: MediaQuery.of(context).size.height*.24, imgWidth: MediaQuery.of(context).size.width*.2);
+                              return CustomErrorWidget(
+                                onTap: () {
+                                  context.read<AllSessionsCubit>().sessionsDetails();
+                                },
+                              );
                             } else if (state is UserAllSessionsLoadingState) {
                               return SizedBox(
                                 height: MediaQuery.of(context).size.height * .2,

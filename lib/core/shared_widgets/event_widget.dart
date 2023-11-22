@@ -106,9 +106,10 @@ class EventWidget extends StatelessWidget {
             ),
           );
         } else if (state is UserEventErrorState) {
-          return CustomErrorWidget(
-            height: MediaQuery.of(context).size.height * .24,
-            imgWidth: MediaQuery.of(context).size.width * .2,
+          return  CustomErrorWidget(
+            onTap: (){
+              context.read<EventCubit>().eventDetails();
+            },
           );
         } else if (state is UserEventLoadingState) {
           return SizedBox(

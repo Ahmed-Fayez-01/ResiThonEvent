@@ -81,8 +81,9 @@ class SpeakerChatViewBody extends StatelessWidget {
                         );
                       } else if (state is UserSubscribedSessionsErrorState) {
                         return CustomErrorWidget(
-                          height: MediaQuery.of(context).size.height * .1,
-                          imgWidth: MediaQuery.of(context).size.width * .1,
+                          onTap: () {
+                            context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
+                          },
                         );
                       } else if (state is UserSubscribedSessionsLoadingState) {
                         return SizedBox(
@@ -105,9 +106,9 @@ class SpeakerChatViewBody extends StatelessWidget {
                           sessionsModel: state.model,
                         );
                       } else if (state is UserSubscribedSessionsErrorState) {
-                        return CustomErrorWidget(
-                          height: MediaQuery.of(context).size.height * .1,
-                          imgWidth: MediaQuery.of(context).size.width * .1,
+                        return CustomErrorWidget(onTap: () {
+                          context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
+                        },
                         );
                       } else if (state is UserSubscribedSessionsLoadingState) {
                         return SizedBox(

@@ -69,19 +69,9 @@ class SessionsListView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
-            AssetData.calender,
+            AssetData.noSessions,
             fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width * .15,
-          ),
-          SizedBox(height: AppConstants.height10(context),),
-          Text(
-            "No Sessions Yet",
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: MediaQuery.of(context).size.height * .016,
-              fontFamily: "Poppins",
-              color: const Color(0xffA5A5A5),
-            ),
+            width: MediaQuery.of(context).size.width * .4,
           ),
         ],
       ),
