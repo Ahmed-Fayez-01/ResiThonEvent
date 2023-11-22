@@ -34,3 +34,7 @@ class GetAllUsersInChatErrorState extends SpeakerChatState {
   GetAllUsersInChatErrorState(this.errMessage);
 }
 
+
+class SendMessageToFirebaseLoadingState extends SpeakerChatState{}
+class SendMessageToFirebaseSuccessState extends SpeakerChatState{}
+class SendMessageToFirebaseErrorState extends SpeakerChatState{}

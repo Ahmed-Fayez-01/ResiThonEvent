@@ -1,5 +1,6 @@
  import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +11,8 @@ import 'package:resithon_event/core/utils/services/remote_services/api_service.d
 
 import '../../data/models/all_users_list_model.dart';
 import '../../data/models/message_model.dart';
+import '../../data/models/send_message_to_firebase_model.dart';
+import '../../data/models/speakers_chat_message_model.dart';
 import '../../data/repo/speaker_chat_repo.dart';
 
 part 'speaker_chat_state.dart';
@@ -138,6 +141,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
 
 
   var messageController = TextEditingController();
+  int unReadMessageNumberInCubit = 0;
   void sendMessage2({
     required String message,
     required int senderId,
@@ -161,8 +165,19 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
     ).then((value) {
       debugPrint("------- sendMessage done -------");
       print(value.data);
+      unReadMessageNumberInCubit++;
+      sendMessageToFirebase(SendMessageToFirebaseModel(
+          message: message,
+          sessionId: sessionId,
+          senderId: senderId,
+          reciverId: receiverId,
+          chatType: type,
+        unReadMessageNumber: unReadMessageNumberInCubit,
+      ),
+      );
       messageController.clear();
       emit(SendMessageSuccessState());
+
     }).catchError((error) {
       if (error is DioError && error.response?.statusCode == 403) {
         final data = error.response?.data;
@@ -240,6 +255,56 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
       print("speakersChatRepo is null");
       // Handle the case when speakersChatRepo is null
     }
+  }
+
+
+ // User? user;
+  Stream? messageStream;
+  SendMessageToFirebaseModel? sendMessageToFirebaseModel;
+  CollectionReference messagesCollection = FirebaseFirestore.instance.collection("chats") ;
+  sendMessageToFirebase(SendMessageToFirebaseModel sendMessageToFirebaseModel)
+  async {
+    emit(SendMessageToFirebaseLoadingState());
+    print("firebase"*10);
+    try {
+      DocumentSnapshot messageSnapshot = await messagesCollection.doc("messageId").get();
+      if (messageSnapshot.exists) {
+        await messagesCollection.doc("messageId").update(sendMessageToFirebaseModel.toMap());
+        print('Message updated successfully');
+
+        emit(SendMessageToFirebaseSuccessState());
+      } else {
+        await messagesCollection.doc("messageId").set(sendMessageToFirebaseModel.toMap());
+        print('Message created successfully');
+
+        emit(SendMessageToFirebaseSuccessState());
+      }
+    } catch (e) {
+
+      print('Error sending message: $e');
+      emit(SendMessageToFirebaseErrorState());
+    }
+    // ref.add(sendMessageToFirebaseModel.toMap()).then((value)
+    // {
+    //   print(value);
+    //   print("firebase success"*10);
+    //   print("------------------------");
+    //   print(ref.id);
+    //   print("------------------------");
+    //   print(sendMessageToFirebaseModel.sessionId);
+    //   print("------------------------");
+    //   print(sendMessageToFirebaseModel.senderId);
+    //   print("------------------------");
+    //   print(sendMessageToFirebaseModel.message);
+    //   print("------------------------");
+    //   emit(SendMessageToFirebaseSuccessState());
+    // }).catchError((error)
+    // {
+    //   print("firebase error "*10);
+    //   print("error in send message cubit ${error.toString()}");
+    //   emit(SendMessageToFirebaseErrorState());
+    // });
+
   }
 
 
