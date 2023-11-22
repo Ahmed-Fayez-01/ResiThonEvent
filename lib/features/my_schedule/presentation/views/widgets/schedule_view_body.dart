@@ -23,7 +23,7 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
   @override
   void initState() {
     var date;
-    DateTime.now().isBefore(DateTime(
+    date= DateTime.now().isBefore(DateTime(
         int.parse(CacheHelper.getData(key:"event_start_day").split(
             "-")[0]),
         int.parse(CacheHelper.getData(key:"event_start_day").split(

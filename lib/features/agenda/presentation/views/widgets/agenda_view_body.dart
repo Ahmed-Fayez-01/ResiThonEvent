@@ -24,7 +24,7 @@ class _AgendaViewBodyState extends State<AgendaViewBody> {
   @override
   void initState() {
     var date;
-    DateTime.now().isBefore(DateTime(
+    date= DateTime.now().isBefore(DateTime(
         int.parse(CacheHelper.getData(key:"event_start_day").split(
             "-")[0]),
         int.parse(CacheHelper.getData(key:"event_start_day").split(
