@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:resithon_event/core/shared_widgets/error_widget.dart';
 import 'package:resithon_event/features/my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
 
@@ -84,19 +85,10 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
                       child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
+                        SvgPicture.asset(
                           AssetData.noSessions,
                           fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width * .8,
-                        ),
-                        Text(
-                          "No Sessions Yet in Your Schedule",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: MediaQuery.of(context).size.height * .016,
-                            fontFamily: "Poppins",
-                            color: const Color(0xffA5A5A5),
-                          ),
+                          width: MediaQuery.of(context).size.width * .7,
                         ),
                       ],
                     ));

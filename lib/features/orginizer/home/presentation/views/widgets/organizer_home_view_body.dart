@@ -21,15 +21,20 @@ import '../../../../../sessions/presentations/view_models/all_sessions_cubit/all
 import '../../../../../sessions/presentations/view_models/subscribed_sessions_cubit/subscribed_sessions_cubit.dart';
 import '../../../../../sessions/presentations/view_models/toggle_cubit/toggle_cubit.dart';
 import '../../../../../sessions/presentations/views/widgets/sessions_list_view.dart';
+import '../../../../../user/home/presentation/view_models/event_cubit/event_cubit.dart';
 
 class OrganizerHomeViewBody extends StatelessWidget {
   const OrganizerHomeViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
+    return RefreshIndicator(
+      onRefresh: () async{
+        context.read<EventCubit>().eventDetails();
+        context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
+      },
+      child: ListView(
+        shrinkWrap: true,
         children: [
           SizedBox(
             height: AppConstants.height10(context),

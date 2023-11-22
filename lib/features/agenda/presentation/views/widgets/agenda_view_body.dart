@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:resithon_event/core/shared_widgets/agenda_item.dart';
 import 'package:resithon_event/core/shared_widgets/custom_back_button.dart';
 import 'package:resithon_event/core/shared_widgets/event_time_line.dart';
@@ -91,19 +92,10 @@ class _AgendaViewBodyState extends State<AgendaViewBody> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
+                      SvgPicture.asset(
                         AssetData.noSessions,
                         fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width * .8,
-                      ),
-                      Text(
-                        "No Sessions Yet in This Event",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: MediaQuery.of(context).size.height * .016,
-                          fontFamily: "Poppins",
-                          color: const Color(0xffA5A5A5),
-                        ),
+                        width: MediaQuery.of(context).size.width * .7,
                       ),
                     ],
                   ));
