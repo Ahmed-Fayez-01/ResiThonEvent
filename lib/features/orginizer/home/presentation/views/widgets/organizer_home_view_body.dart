@@ -60,6 +60,8 @@ class OrganizerHomeViewBody extends StatelessWidget {
                       CacheHelper.removeData(key: "can_rate",);
                       CacheHelper.removeData(key: "event_start_day",);
                       CacheHelper.removeData(key: "event_end_day",);
+                      CacheHelper.removeData(key: "take_attend_before",);
+                      CacheHelper.removeData(key: "stop_take_attend_before",);
 
                       GoRouter.of(context).go("/loginView");
                     }, iconPath: AssetData.signOut),

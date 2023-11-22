@@ -48,12 +48,9 @@ class _UserSessionDetailsViewBodyState
 
   @override
   Widget build(BuildContext context) {
-    print("Expired : ${CacheHelper.getData(key: "session_expired")}");
     return BlocBuilder<SpecificSessionsCubit, SpecificSessionsState>(
       builder: (BuildContext context, state) {
         if (state is UserSpecificSessionsSuccessState) {
-          print(
-              "${DateTime.parse("${state.model.data!.date} ${state.model.data!.endTime}").difference(DateTime.parse("${state.model.data!.date} ${state.model.data!.startTime}")).inSeconds}");
           return RefreshIndicator(
             onRefresh: () async {
               context
@@ -77,45 +74,72 @@ class _UserSessionDetailsViewBodyState
                               state.model.data!.reservation_expire!,
                           expired: state.model.data!.session_expire!,
                         ),
-                        if (CacheHelper.getData(key: "role") != "1")
-                        state.model.data!.session_expire!
+                        if (CacheHelper.getData(key: "role") == "1")
+                        state.model.data!.end_take_attend == true
                             ? const SizedBox()
-                            : !state.model.data!.reservation_expire!
-                                ? CustomCountDownWidget(
-                                    seconds: (DateTime.parse(
-                                                "${state.model.data!.date} ${state.model.data!.startTime}")
-                                            .difference(DateTime.now())
-                                            .inSeconds) -
-                                        int.parse(CacheHelper.getData(
-                                                    key: "session_expired")
-                                                .toString()) *
-                                            60,
-                                    title: 'Reservation End After',
-                                    id: widget.id,
-                                  )
-                                : state.model.data!.session_started!
-                                    ? CustomCountDownWidget(
-                                        seconds: (DateTime.parse(
-                                                "${state.model.data!.date} ${state.model.data!.endTime}")
-                                            .difference(DateTime.parse(
-                                                "${state.model.data!.date} ${state.model.data!.startTime}"))
-                                            .inSeconds),
-                                        title: 'Session in Progress',
-                                        color: AppColors.greenColor,
-                                        id: widget.id,
-                                      )
-                                    : CustomCountDownWidget(
-                                        seconds: (DateTime.parse(
-                                                "${state.model.data!.date} ${state.model.data!.startTime}")
-                                            .difference(DateTime.now())
-                                            .inSeconds),
-                                        title: 'Session Start After',
-                                        id: widget.id,
-                                      ),
+                            :  state.model.data!.can_start_take_attend == false
+                            ? CustomCountDownWidget(
+                          seconds: (DateTime.parse(
+                              "${state.model.data!.date} ${state.model.data!.startTime}")
+                              .difference(DateTime.now())
+                              .inSeconds) -
+                              int.parse(CacheHelper.getData(
+                                  key: "take_attend_before")
+                                  .toString())*60,
+                          title: 'Scan Available After',
+                          id: widget.id,
+                        )
+                            : CustomCountDownWidget(
+                          seconds: (DateTime.parse(
+                              "${state.model.data!.date} ${state.model.data!.startTime}")
+                              .add(Duration(
+                              minutes: int.parse(CacheHelper.getData(
+                                  key: "stop_take_attend_before")
+                                  .toString())))
+                              .difference(DateTime.now())
+                              .inSeconds),
+                          title: 'Scan Available For',
+                          id: widget.id,
+                          color: AppColors.greenColor,
+                        ),
+                        if (CacheHelper.getData(key: "role") != "1")
+                          state.model.data!.session_expire!
+                              ? const SizedBox()
+                              : !state.model.data!.reservation_expire!
+                                  ? CustomCountDownWidget(
+                                      seconds: (DateTime.parse(
+                                                  "${state.model.data!.date} ${state.model.data!.startTime}")
+                                              .difference(DateTime.now())
+                                              .inSeconds) -
+                                          int.parse(CacheHelper.getData(
+                                                      key: "session_expired")
+                                                  .toString()) *
+                                              60,
+                                      title: 'Reservation End After',
+                                      id: widget.id,
+                                    )
+                                  : state.model.data!.session_started!
+                                      ? CustomCountDownWidget(
+                                          seconds: (DateTime.parse(
+                                                  "${state.model.data!.date} ${state.model.data!.endTime}")
+                                              .difference(DateTime.parse(
+                                                  "${state.model.data!.date} ${state.model.data!.startTime}"))
+                                              .inSeconds),
+                                          title: 'Session in Progress',
+                                          color: AppColors.greenColor,
+                                          id: widget.id,
+                                        )
+                                      : CustomCountDownWidget(
+                                          seconds: (DateTime.parse(
+                                                  "${state.model.data!.date} ${state.model.data!.startTime}")
+                                              .difference(DateTime.now())
+                                              .inSeconds),
+                                          title: 'Session Start After',
+                                          id: widget.id,
+                                        ),
                         SizedBox(
                           height: AppConstants.height20(context),
                         ),
-
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: AppConstants.width20(context)),
@@ -159,74 +183,105 @@ class _UserSessionDetailsViewBodyState
                               SizedBox(
                                 height: AppConstants.height20(context),
                               ),
-                              if(CacheHelper.getData(key: "role") != "1")
-                              MoreDetailsWidget(
-                                title: 'moreDetails'.tr(),
-                                description: state.model.data!.description!,
-                              ),
-                              if(CacheHelper.getData(key: "role") != "1")
-                              SizedBox(
-                                height: AppConstants.height20(context),
-                              ),
-                              if(CacheHelper.getData(key: "role") != "1")
-                              const ParticipantTitle(),
-                              if(CacheHelper.getData(key: "role") != "1")
-                              SizedBox(
-                                height: AppConstants.height20(context),
-                              ),
+                              if (CacheHelper.getData(key: "role") != "1")
+                                MoreDetailsWidget(
+                                  title: 'moreDetails'.tr(),
+                                  description: state.model.data!.description!,
+                                ),
+                              if (CacheHelper.getData(key: "role") != "1")
+                                SizedBox(
+                                  height: AppConstants.height20(context),
+                                ),
+                              if (CacheHelper.getData(key: "role") != "1")
+                                const ParticipantTitle(),
+                              if (CacheHelper.getData(key: "role") != "1")
+                                SizedBox(
+                                  height: AppConstants.height20(context),
+                                ),
                             ],
                           ),
                         ),
-
-                        if(CacheHelper.getData(key: "role") != "1")
-                        state.model.data!.participants!.isNotEmpty
-                            ? SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * .15,
-                                child: ParticipantList(
-                                  participants: state.model.data!.participants,
-                                ),
-                              )
-                            : Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SvgPicture.asset(
-                                    AssetData.noParticipant,
-                                    fit: BoxFit.cover,
-                                    width:
-                                        MediaQuery.of(context).size.width * .5,
+                        if (CacheHelper.getData(key: "role") != "1")
+                          state.model.data!.participants!.isNotEmpty
+                              ? SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * .15,
+                                  child: ParticipantList(
+                                    participants:
+                                        state.model.data!.participants,
                                   ),
-                                  Text(
-                                    "No Participants have Joined Yet be the First One.",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize:
-                                          MediaQuery.of(context).size.height *
-                                              .016,
-                                      fontFamily: "Poppins",
-                                      color: const Color(0xffA5A5A5),
+                                )
+                              : Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SvgPicture.asset(
+                                      AssetData.noParticipant,
+                                      fit: BoxFit.cover,
+                                      width: MediaQuery.of(context).size.width *
+                                          .5,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: AppConstants.height20(context),
-                                  ),
-                                ],
-                              ),
+                                    Text(
+                                      "No Participants have Joined Yet be the First One.",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                .016,
+                                        fontFamily: "Poppins",
+                                        color: const Color(0xffA5A5A5),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: AppConstants.height20(context),
+                                    ),
+                                  ],
+                                ),
                       ],
                     ),
                   ),
                 ),
                 if (CacheHelper.getData(key: "role") == "1")
-                DefaultButton(
-                  onPress: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ScanQrPage(sessionId: state.model.data!.id!,)));
-                  },
-                  text: "Scan",
-                  icon: SvgPicture.asset(
-                    AssetData.scan,
-                    width: MediaQuery.of(context).size.width * .06,
-                  ),
-                ),
+                state.model.data!.end_take_attend == true
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: const BoxDecoration(
+                              color: Color(0xCCA5A5A5),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.all(AppConstants.sp20(context)),
+                              child: Text(
+                                "Scan Ended",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            .018,
+                                    fontFamily: "Poppins",
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : state.model.data!.can_start_take_attend == false ?const SizedBox():DefaultButton(
+                        onPress: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ScanQrPage(
+                                        sessionId: state.model.data!.id!,
+                                      )));
+                        },
+                        text: "Scan",
+                        icon: SvgPicture.asset(
+                          AssetData.scan,
+                          width: MediaQuery.of(context).size.width * .06,
+                        ),
+                      ),
                 if (CacheHelper.getData(key: "role") != "1" &&
                     CacheHelper.getData(key: "role") != "2")
                   state.model.data!.session_expire!

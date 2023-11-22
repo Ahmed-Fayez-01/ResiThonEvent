@@ -14,7 +14,7 @@ class FoodListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return instance.data!.isNotEmpty? ListView.separated(
+    return instance.data!.isNotEmpty ? ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {

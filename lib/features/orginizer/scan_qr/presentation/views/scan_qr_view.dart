@@ -44,11 +44,6 @@ class _ScanQrPageState extends State<ScanQrPage> {
                   context, MaterialPageRoute(builder: (context) => ScanQrPage(sessionId: widget.sessionId,)));
             }, text: "Okay"), sessionId: widget.sessionId);
 
-        // Future.delayed(const Duration(milliseconds: 3000), () {
-        //   setState(() {
-        //
-        //   });
-        // });
       }
     });
   }

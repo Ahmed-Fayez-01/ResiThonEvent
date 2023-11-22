@@ -141,7 +141,7 @@ Future AcceptablePopUp({
                                       Expanded(
                                         child: Text(
                                           state.model.data!.name!,
-                                          textAlign: TextAlign.center,
+                                          textAlign: TextAlign.start,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
@@ -194,6 +194,44 @@ Future AcceptablePopUp({
                                       ),
                                     ],
                                   ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Lunch Type : ",
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Poppins",
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .02,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: AppConstants.width5(context),
+                                      ),
+                                      Text(
+                                        state.model.data!.lunch!,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: "Poppins",
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .02,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: AppConstants.height20(context),),
                                   Column(
                                     children: [
                                       Text(

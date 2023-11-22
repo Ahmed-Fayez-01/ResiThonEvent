@@ -1,5 +1,5 @@
 class EndPoints {
-  static const baseUrl = "http://resithon.site/api";
+  static const baseUrl = "https://resithon.com/api";
 
   static const userLogin = '/login';
   static const editProfile = '/update-profile';

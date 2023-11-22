@@ -23,7 +23,7 @@ class EventWidget extends StatelessWidget {
             padding:
                 EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
             child: Container(
-              height: MediaQuery.of(context).size.height * .25,
+              height: MediaQuery.of(context).size.height * .29,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
                 color: Colors.white,
@@ -63,9 +63,13 @@ class EventWidget extends StatelessWidget {
                         horizontal: AppConstants.height20(context)),
                     child: Row(
                       children: [
-                        Text(
-                          state.model.data!.name!,
-                          style: Styles.eventSessionTitle(context),
+                        Expanded(
+                          child: Text(
+                            state.model.data!.name!,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Styles.eventSessionTitle(context),
+                          ),
                         ),
                       ],
                     ),

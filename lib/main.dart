@@ -6,6 +6,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
+import 'package:resithon_event/features/orginizer/scan_qr/data/repos/scan_repo/scan_repo_impl.dart';
+import 'package:resithon_event/features/orginizer/scan_qr/presentation/view_models/scan_cubit/scan_cubit.dart';
 import 'package:resithon_event/features/profile/data/repos/edit_profile_repo_impl.dart';
 import 'package:resithon_event/features/profile/presentation/view_model/edit_profile/edit_profile_cubit.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/book_session_cubit/book_sessions_cubit.dart';
@@ -32,65 +34,67 @@ import 'features/sessions/data/repos/sessions_repo/sessions_repo_impl.dart';
 import 'features/sessions/presentations/view_models/all_sessions_cubit/all_sessions_cubit.dart';
 import 'features/sessions/presentations/view_models/subscribed_sessions_cubit/subscribed_sessions_cubit.dart';
 import 'features/sessions/presentations/view_models/toggle_cubit/toggle_cubit.dart';
- import 'features/user/home/data/repos/event_repo/event_repo_impl.dart';
+import 'features/user/home/data/repos/event_repo/event_repo_impl.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-
   await Firebase.initializeApp();
 
   print("Handling a background message: ${message.messageId}");
-
 }
 
-
 final StreamSubscription<InternetConnectionStatus> listener =
-InternetConnectionChecker().onStatusChange.listen(
-      (InternetConnectionStatus status) {
+    InternetConnectionChecker().onStatusChange.listen(
+  (InternetConnectionStatus status) {
     switch (status) {
       case InternetConnectionStatus.connected:
-      // ignore: avoid_print
+        // ignore: avoid_print
         print('Data connection is available.');
         break;
       case InternetConnectionStatus.disconnected:
-      // ignore: avoid_print
+        // ignore: avoid_print
         print('You are disconnected from the internet.');
         break;
     }
   },
 );
 
-Future<void> execute(InternetConnectionChecker internetConnectionChecker,) async {
+Future<void> execute(
+  InternetConnectionChecker internetConnectionChecker,
+) async {
   print('''The statement 'this machine is connected to the Internet' is: ''');
   final bool isConnected = await InternetConnectionChecker().hasConnection;
-  print(isConnected.toString(),);
   print(
-    'Current status: ${await InternetConnectionChecker().connectionStatus}',);
+    isConnected.toString(),
+  );
+  print(
+    'Current status: ${await InternetConnectionChecker().connectionStatus}',
+  );
 }
 
-
 hasConnection() async {
-  AppConstants.hasConnectionResult = await InternetConnectionChecker().hasConnection;
-  if(AppConstants.hasConnectionResult == true) {
+  AppConstants.hasConnectionResult =
+      await InternetConnectionChecker().hasConnection;
+  if (AppConstants.hasConnectionResult == true) {
     print('YAY! Free cute dog pics!');
   } else {
     print('No internet :( Reason:');
-
   }
 }
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await EasyLocalization.ensureInitialized();
   await execute(InternetConnectionChecker());
   final InternetConnectionChecker customInstance =
-  InternetConnectionChecker.createInstance(
+      InternetConnectionChecker.createInstance(
     checkTimeout: const Duration(seconds: 1),
     checkInterval: const Duration(seconds: 1),
   );
   await execute(customInstance);
-  print("0"*20);
+  print("0" * 20);
   hasConnection();
-  print("0"*20);
+  print("0" * 20);
   FirebaseMessaging.onMessage.listen((message) {
     debugPrint(
         '================================ FOREGROUND NOTIFICATION ================================');
@@ -119,12 +123,14 @@ Future main() async {
   //   CacheHelper.saveData(key: "device_token", value: token);
   //   print("token is $token");
   // });
-  runApp(EasyLocalization(
-      supportedLocales: const [Locale("en")],
-      startLocale: const Locale("en"),
-      path: "lib/core/language", // <-- change the path of the translation files
-      child: const ResiThon()
-  ),);
+  runApp(
+    EasyLocalization(
+        supportedLocales: const [Locale("en")],
+        startLocale: const Locale("en"),
+        path:
+            "lib/core/language", // <-- change the path of the translation files
+        child: const ResiThon()),
+  );
 }
 
 class ResiThon extends StatelessWidget {
@@ -136,63 +142,66 @@ class ResiThon extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) => LoginCubit(
-              getIt.get<AuthRepoImpl>(),
-            )),BlocProvider(
-            create: (context) => UploadImageProfileCubit(
-            )),
+                  getIt.get<AuthRepoImpl>(),
+                )),
+        BlocProvider(create: (context) => UploadImageProfileCubit()),
         BlocProvider(
             create: (context) => EditProfileCubit(
-              getIt.get<EditProfileRepoImpl>(),
-            )),
+                  getIt.get<EditProfileRepoImpl>(),
+                )),
         BlocProvider(
             create: (context) => EventCubit(
-              getIt.get<EventRepoImpl>(),
-            )..eventDetails()),
-        BlocProvider(
-            create: (context) => ToggleCubit(
-            )),
+                  getIt.get<EventRepoImpl>(),
+                )..eventDetails()),
+        BlocProvider(create: (context) => ToggleCubit()),
         BlocProvider(
             create: (context) => AllSessionsCubit(
-              getIt.get<SessionsRepoImpl>(),
-            )..sessionsDetails()),
+                  getIt.get<SessionsRepoImpl>(),
+                )..sessionsDetails()),
         BlocProvider(
             create: (context) => DatedAllSessionsCubit(
-              getIt.get<SessionsRepoImpl>(),
-            )),
+                  getIt.get<SessionsRepoImpl>(),
+                )),
         BlocProvider(
             create: (context) => DatedSubscribedSessionsCubit(
-              getIt.get<SessionsRepoImpl>(),
-            )),
+                  getIt.get<SessionsRepoImpl>(),
+                )),
         BlocProvider(
             create: (context) => SpecificSessionsCubit(
-              getIt.get<SessionsRepoImpl>(),
-            )),
+                  getIt.get<SessionsRepoImpl>(),
+                )),
         BlocProvider(
             create: (context) => SubscribedSessionsCubit(
-              getIt.get<SessionsRepoImpl>(),
-            )..subscribedSessionsDetails()),
+                  getIt.get<SessionsRepoImpl>(),
+                )..subscribedSessionsDetails()),
         BlocProvider(
             create: (context) => BookSessionsCubit(
-              getIt.get<SessionsRepoImpl>(),
-            )),
+                  getIt.get<SessionsRepoImpl>(),
+                )),
         BlocProvider(
             create: (context) => CancelSessionsCubit(
-              getIt.get<SessionsRepoImpl>(),
-            )),
+                  getIt.get<SessionsRepoImpl>(),
+                )),
         BlocProvider(
             create: (context) => GetSessionEvaluationCubit(
-              getIt.get<SessionsRepoImpl>(),
-            )),
+                  getIt.get<SessionsRepoImpl>(),
+                )),
         BlocProvider(
             create: (context) => PostSessionEvaluationCubit(
-              getIt.get<SessionsRepoImpl>(),
-            )),
+                  getIt.get<SessionsRepoImpl>(),
+                )),
         BlocProvider(
             create: (context) => AllProjectsCubit(
-              getIt.get<ProjectsRepoImpl>(),
-            )..allProjectsDetails()),
+                  getIt.get<ProjectsRepoImpl>(),
+                )..allProjectsDetails()),
         BlocProvider(
-          create: (context) => NotificationsCubit(getIt.get<NotificationsRepoImple>())..getNotificationsData(),
+          create: (context) =>
+              NotificationsCubit(getIt.get<NotificationsRepoImple>())
+                ..getNotificationsData(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              ScanCubit(getIt.get<ScanRepoImpl>()),
         ),
       ],
       child: MaterialApp.router(

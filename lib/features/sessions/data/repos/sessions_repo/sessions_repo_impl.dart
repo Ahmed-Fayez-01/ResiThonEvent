@@ -44,6 +44,7 @@ class SessionsRepoImpl implements SessionsRepo {
       var result = SessionsModel.fromJson(response.data);
       return right(result);
     } catch (e) {
+      print("dhjsdhjdida ${e}");
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
       }

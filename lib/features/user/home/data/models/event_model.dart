@@ -20,6 +20,8 @@ class Data {
   String? image;
   int? sessionExpireAt;
   int? chatExpireAt;
+  int? takeAttendBefore;
+  int? stopTakeAttendBefore;
   List<Videos>? videos;
 
 
@@ -30,6 +32,8 @@ class Data {
     endDate = json['end_date'];
     image = json['image'];
     sessionExpireAt = json['session_expire_at'];
+    takeAttendBefore = json['take_attend_before'];
+    stopTakeAttendBefore = json['stop_take_attend_before'];
     chatExpireAt = json['chat_expire_at'];
     if (json['videos'] != null) {
       videos = <Videos>[];

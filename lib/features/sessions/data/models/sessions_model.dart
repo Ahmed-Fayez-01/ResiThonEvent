@@ -32,6 +32,8 @@ class Data {
   bool? chat_expire;
   bool? has_rate;
   bool? is_arrived;
+  bool? can_start_take_attend;
+  bool? end_take_attend;
   bool? session_started;
   String? description;
   String? speaker;
@@ -59,6 +61,8 @@ class Data {
     session_started = json['session_started'];
     chat_expire = json['chat_expire'];
     is_session = json['is_session'];
+    can_start_take_attend = json['can_start_take_attend'];
+    end_take_attend = json['end_take_attend'];
     description = json['description'];
     has_rate = json['has_rate'];
     is_arrived = json['is_arrived'];
