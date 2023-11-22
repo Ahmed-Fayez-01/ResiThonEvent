@@ -1,11 +1,15 @@
-import 'package:country_flags/country_flags.dart';
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:resithon_event/core/shared_widgets/custom_dialog.dart';
 import 'package:resithon_event/core/shared_widgets/logo_text.dart';
+import 'package:resithon_event/core/utils/assets/assets.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/all_sessions_cubit/all_sessions_cubit.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/subscribed_sessions_cubit/subscribed_sessions_cubit.dart';
@@ -13,13 +17,9 @@ import 'package:resithon_event/features/user/home/presentation/view_models/event
 import 'package:resithon_event/features/user/projects/presentation/view_models/projects_cubit/all_projects_cubit.dart';
 import '../../../../../core/shared_widgets/bottom_trailer_component.dart';
 import '../../../../../core/shared_widgets/custom_button.dart';
-import '../../../../../core/shared_widgets/simple_account_menu.dart';
 import '../../../../../core/utils/colors/colors.dart';
 import '../../../../../core/utils/services/local_services/cache_helper.dart';
 import '../../../../../core/utils/text_styles/styles.dart';
-import '../../../../agenda/presentation/view_models/dated_all_sessions_cubit/dated_all_sessions_cubit.dart';
-import '../../../../my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
-import '../../../../speakers/home/presentation/views/speaker_home_view.dart';
 import '../../view_models/login_cubit/login_cubit.dart';
 
 class LoginViewBody extends StatefulWidget {
@@ -33,12 +33,46 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   TextEditingController otpCode = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  late StreamSubscription<InternetConnectionStatus> subscription;
+
+  @override
+  initState() {
+    super.initState();
+
+    subscription = InternetConnectionChecker().onStatusChange.listen(
+      (InternetConnectionStatus status) {
+        switch (status) {
+          case InternetConnectionStatus.connected:
+            setState(() {
+              AppConstants.hasInternet = true;
+            });
+            break;
+          case InternetConnectionStatus.disconnected:
+            // ignore: avoid_print
+            setState(() {
+              AppConstants.hasInternet = false;
+            });
+            break;
+        }
+      },
+    );
+  }
+
+// Be sure to cancel subscription after you are done
+  @override
+  dispose() {
+    super.dispose();
+
+    subscription.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: AppConstants.height20(context),),
+        SizedBox(
+          height: AppConstants.height20(context),
+        ),
         // Padding(
         //   padding: EdgeInsets.symmetric(horizontal: AppConstants.sp20(context)),
         //   child: SizedBox(
@@ -189,11 +223,28 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 BlocConsumer<LoginCubit, LoginState>(
                   builder: (BuildContext context, state) {
                     return DefaultButton(
-                      height: MediaQuery.of(context).size.height*.017,
+                        height: MediaQuery.of(context).size.height * .017,
                         onPress: () {
                           if (_formKey.currentState!.validate()) {
                             print("otp:${otpCode.text}");
-                           context.read<LoginCubit>().loginUser(code: otpCode.text);
+                            if (AppConstants.hasInternet!) {
+                              context
+                                  .read<LoginCubit>()
+                                  .loginUser(code: otpCode.text);
+                            } else {
+                              customPopUpDialog(
+                                  context: context,
+                                  icon: AssetData.noInternet,
+                                  button: DefaultButton(
+                                    onPress: () {
+                                      Navigator.pop(context);
+                                    },
+                                    text: "okay",
+                                    borderRadius: AppConstants.sp10(context),
+                                  ),
+                                  mainTitle:
+                                      "please, check your internet connection and try again.");
+                            }
                           }
                         },
                         text: 'login'.tr(),
@@ -203,19 +254,17 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     if (state is UserLoginSuccessState) {
                       context.read<AllSessionsCubit>().sessionsDetails();
                       context.read<EventCubit>().eventDetails();
-                      context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
+                      context
+                          .read<SubscribedSessionsCubit>()
+                          .subscribedSessionsDetails();
                       context.read<AllProjectsCubit>().allProjectsDetails();
-                     if(CacheHelper.getData(key: "role")=="1")
-                       {
-                         GoRouter.of(context).go("/organizerHomeView");
-                       }else if(CacheHelper.getData(key: "role")=="2")
-                         {
-                          GoRouter.of(context).go("/speakerHomeView");
-
-                         }else
-                           {
-                             GoRouter.of(context).go("/userHomeView");
-                           }
+                      if (CacheHelper.getData(key: "role") == "1") {
+                        GoRouter.of(context).go("/organizerHomeView");
+                      } else if (CacheHelper.getData(key: "role") == "2") {
+                        GoRouter.of(context).go("/speakerHomeView");
+                      } else {
+                        GoRouter.of(context).go("/userHomeView");
+                      }
                     } else if (state is UserLoginErrorState) {
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -238,7 +287,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                 borderRadius: BorderRadius.circular(10)),
                             content: SizedBox(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 20),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   mainAxisSize: MainAxisSize.min,
@@ -253,7 +303,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                                     Text(
                                       "loadingLogin".tr(),
                                       style: const TextStyle(
-                                          fontWeight: FontWeight.bold, fontSize: 14),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
                                     ),
                                   ],
                                 ),
