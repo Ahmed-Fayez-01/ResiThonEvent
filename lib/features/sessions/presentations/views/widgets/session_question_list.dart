@@ -17,6 +17,7 @@ class SessionQuestionList extends StatelessWidget {
     return BlocBuilder<GetSessionEvaluationCubit, GetSessionEvaluationState>(
       builder: (BuildContext context, state) {
         if (state is UserGetSessionEvaluationSuccessState) {
+          AppConstants.numberOfQuestions=state.model.data!.length;
           return ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

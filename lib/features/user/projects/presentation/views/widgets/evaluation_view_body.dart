@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:resithon_event/core/shared_widgets/custom_button.dart';
 import 'package:resithon_event/features/user/projects/presentation/views/widgets/question_list.dart';
 
+import '../../../../../../core/shared_widgets/custom_dialog.dart';
 import '../../../../../../core/utils/assets/assets.dart';
 import '../../../../../../core/utils/colors/colors.dart';
 import '../../../../../../core/utils/constants.dart';
@@ -87,6 +88,15 @@ final int projectId;
                 listener: (BuildContext context, state) {
                   if (state is UserPostProjectEvaluationSuccessState) {
                     Navigator.pop(context);
+                    customPopUpDialog(
+                      context: context,
+                      icon: AssetData.book,
+                      mainTitle: "Your rating has been sent successfully",
+                    );
+                    Future.delayed(const Duration(milliseconds: 2000), () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    });
                   } else if (state is UserPostProjectEvaluationErrorState) {
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(

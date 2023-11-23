@@ -16,7 +16,7 @@ final int sessionId;
             systemOverlayStyle:  const SystemUiOverlayStyle(
               statusBarColor: Colors.white, // <-- SEE HERE
               statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
-              systemNavigationBarColor:Colors.white,
+              systemNavigationBarColor:Color(0xffEDC907),
               statusBarBrightness: Brightness.light, //<-- For iOS SEE HERE (dark icons)
             ),
           )

@@ -122,6 +122,7 @@ class SessionsRepoImpl implements SessionsRepo {
       var result = SessionEvaluationResponseModel.fromJson(response.data);
       return right(result);
     } catch (e) {
+      print("faaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:$e");
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
       }

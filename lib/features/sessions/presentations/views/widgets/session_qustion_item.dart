@@ -84,7 +84,7 @@ class _SessionQuestionItemState extends State<SessionQuestionItem> {
                         AppConstants.evaluationSubmit.remove(m);
                         AppConstants.evaluationSubmit.add({
                           "question_id":widget.id,
-                          "project_id": widget.sessionId,
+                          "session_id": widget.sessionId,
                           "rate": index + 1,
                           "comment": comments[widget.index].text,
                         });
@@ -95,7 +95,7 @@ class _SessionQuestionItemState extends State<SessionQuestionItem> {
                       {
                         AppConstants.evaluationSubmit.add({
                           "question_id":widget.id,
-                          "project_id": widget.sessionId,
+                          "session_id": widget.sessionId,
                           "rate": index + 1,
                           "comment": comments[widget.index].text,
                         });
@@ -104,7 +104,7 @@ class _SessionQuestionItemState extends State<SessionQuestionItem> {
                   }else{
                   AppConstants.evaluationSubmit.add({
                     "question_id":widget.id,
-                    "project_id": widget.sessionId,
+                    "session_id": widget.sessionId,
                     "rate": index + 1,
                     "comment": comments[widget.index].text,
                   });
@@ -164,7 +164,7 @@ class _SessionQuestionItemState extends State<SessionQuestionItem> {
           height: AppConstants.height5(context),
         ),
         CustomTextFormField(
-          maxLines: 3,
+          maxLines: 1,
           onChange: (value){
             if(AppConstants.evaluationSubmit.isNotEmpty)
             {
