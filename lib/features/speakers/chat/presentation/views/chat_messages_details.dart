@@ -7,11 +7,13 @@ import 'package:resithon_event/features/speakers/chat/presentation/views/widgets
 import '../../../../../core/shared_widgets/no_internet_widget.dart';
 
 class ChatMessagesDetails extends StatelessWidget {
-  const ChatMessagesDetails({Key? key, required this.name, required this.image, required this.id, required this.sessionId}) : super(key: key);
+  const ChatMessagesDetails({Key? key, required this.name, required this.image, required this.id, required this.sessionId, required this.lastMsgNumber, required this.lastMsg}) : super(key: key);
   final String name;
   final String image;
   final int id;
   final int sessionId;
+  final int lastMsgNumber;
+  final String lastMsg;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,7 @@ class ChatMessagesDetails extends StatelessWidget {
         chatType: 0,
         sessionId: sessionId,
         receiverId:id,
+
       ) : const NoInternetWidget(),
     );
   }
