@@ -16,11 +16,9 @@ class ChatNameItem extends StatelessWidget {
  final  String availble;
   @override
   Widget build(BuildContext context) {
-    print(!sessionsModel!.data![0].session_started!);
-    print(!sessionsModel!.data![0].is_arrived!);
-    print(!sessionsModel!.data![0].chat_expire!);
     return sessionsModel!.data!.isNotEmpty  ?  Expanded(
       child: ListView.separated(
+        shrinkWrap: true,
         itemBuilder: (context,index){
           return
             sessionsModel!.data![index].session_started! && sessionsModel!.data![index].is_arrived!&& !sessionsModel!.data![index].chat_expire! ?

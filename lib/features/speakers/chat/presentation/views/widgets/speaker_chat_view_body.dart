@@ -36,7 +36,7 @@ class SpeakerChatViewBody extends StatelessWidget {
           return Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
-            child: Column(
+            child:Column(
               children: [
                 SizedBox(
                   height: AppConstants.height20(context),

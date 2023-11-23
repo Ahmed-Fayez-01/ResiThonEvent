@@ -64,18 +64,24 @@ class _SessionBWidgetState extends State<SessionBWidget> {
                     ),
                   ),
                 ),
-                Container(
-                  height: MediaQuery.of(context).size.height * .14,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x26000000),
-                        spreadRadius: 0,
-                        blurRadius: 12,
-                        offset: Offset(0, 0), // changes position of shadow
-                      ),
-                    ],
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(AppConstants.sp10(context)),
+                      topRight: Radius.circular(AppConstants.sp10(context))),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * .14,
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.circular(AppConstants.sp10(context)),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x26000000),
+                          spreadRadius: 0,
+                          blurRadius: 12,
+                          offset: Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Positioned(
@@ -90,16 +96,27 @@ class _SessionBWidgetState extends State<SessionBWidget> {
                         Container(
                           padding: EdgeInsets.all(AppConstants.sp10(context)),
                           decoration: BoxDecoration(
-                            color: widget.instance!.count! < int.parse(widget.instance!.totalCount!)
+                            color: widget.instance!.count! <
+                                        int.parse(
+                                            widget.instance!.totalCount!) &&
+                                    !widget.instance!.reservation_expire!
                                 ? const Color(0xff27AE60)
                                 : AppColors.greyColor,
                             borderRadius: BorderRadius.circular(
                                 AppConstants.sp10(context)),
                           ),
                           child: Text(
-                            widget.instance!.count! < int.parse(widget.instance!.totalCount!) && !widget.instance!.reservation_expire!
+                            widget.instance!.count! <
+                                        int.parse(
+                                            widget.instance!.totalCount!) &&
+                                    !widget.instance!.reservation_expire!
                                 ? "Available"
-                                : widget.instance!.count! < int.parse(widget.instance!.totalCount!) && widget.instance!.reservation_expire!? "Not Available":"Completed",
+                                : widget.instance!.count! <
+                                            int.parse(
+                                                widget.instance!.totalCount!) &&
+                                        widget.instance!.reservation_expire!
+                                    ? "Not Available"
+                                    : "Completed",
                             style: const TextStyle(
                               color: Colors.white,
                               fontFamily: "Poppins",
@@ -139,7 +156,8 @@ class _SessionBWidgetState extends State<SessionBWidget> {
               padding: EdgeInsets.symmetric(
                   horizontal: AppConstants.width20(context)),
               child: UserImageAndName(
-                  image: widget.instance!.speaker_image!, name: widget.instance!.speaker!),
+                  image: widget.instance!.speaker_image!,
+                  name: widget.instance!.speaker!),
             ),
             SizedBox(
               height: AppConstants.height15(context),
@@ -147,7 +165,7 @@ class _SessionBWidgetState extends State<SessionBWidget> {
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: AppConstants.height20(context)),
-              child:  Row(
+              child: Row(
                 children: [
                   Expanded(
                     child: DescriptionPoint(
@@ -155,7 +173,9 @@ class _SessionBWidgetState extends State<SessionBWidget> {
                       description: widget.instance!.venue!,
                     ),
                   ),
-                  SizedBox(width: AppConstants.width10(context),),
+                  SizedBox(
+                    width: AppConstants.width10(context),
+                  ),
                   Expanded(
                     child: DescriptionPoint(
                       iconPath: AssetData.calender,
