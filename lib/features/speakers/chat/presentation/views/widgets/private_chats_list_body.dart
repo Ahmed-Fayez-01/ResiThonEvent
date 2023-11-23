@@ -15,7 +15,7 @@ class PrivateChatsListBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('chat').snapshots(),
+      stream: FirebaseFirestore.instance.collection('chats').snapshots(),
     builder: (context, snapshot) {
       if (snapshot.hasError) {
         return Text('Error: ${snapshot.error}');
@@ -23,11 +23,17 @@ class PrivateChatsListBody extends StatelessWidget {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return const CircularProgressIndicator();
       }
-      List<SendMessageToFirebaseModel>? chatDocuments = snapshot.data!.docs.cast<SendMessageToFirebaseModel>();
-      var unReadMessageNumber = chatDocuments[0].unReadMessageNumber;
-      var message = chatDocuments[0].message;
-      print(unReadMessageNumber);
-      print(message);
+     // List<SendMessageToFirebaseModel>? chatDocuments = snapshot.data!.docs.cast<SendMessageToFirebaseModel>();
+     // var unReadMessageNumber = chatDocuments[0].unReadMessageNumber;
+     // var message = chatDocuments[0].message;
+     // print(unReadMessageNumber);
+     // print(message);
+      final List<Map<String, dynamic>> data = snapshot.data!.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+      print("ddddddddddddddddd");
+      print(data[0]["message"]);
+      print(data[0]["sessionId"]);
       return Expanded(
         child: ListView.separated(
           itemBuilder: (context, index) {
@@ -39,8 +45,8 @@ class PrivateChatsListBody extends StatelessWidget {
                       id:    allUsersListInChatModel.data![index].id!,
                       image: allUsersListInChatModel.data![index].image.toString(),
                       sessionId:sessionId,
-                      lastMsg: message.toString(),
-                      lastMsgNumber: unReadMessageNumber!,
+                      lastMsg: "${data[0]["message"]}",
+                      lastMsgNumber: data[0]["unReadMessageNumber"],
                     );
                   }));
                   // GoRouter.of(context).push("/chatMessagesDetails");
@@ -49,6 +55,8 @@ class PrivateChatsListBody extends StatelessWidget {
                   name:  allUsersListInChatModel.data![index].name.toString(),
                   id:    allUsersListInChatModel.data![index].id!,
                   image: allUsersListInChatModel.data![index].image.toString(),
+                  lastMessageFromFirebase: "${data[0]["message"]}",
+                  lastMessageNumberFromFirebase: "${data[0]["unReadMessageNumber"]}",
                 ));
           },
           separatorBuilder: (context, index) {

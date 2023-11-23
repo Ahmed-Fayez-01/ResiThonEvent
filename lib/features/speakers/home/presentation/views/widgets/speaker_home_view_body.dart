@@ -139,6 +139,7 @@ class _SpeakerHomeViewBodyState extends State<SpeakerHomeViewBody> {
                   SizedBox(
                     height: AppConstants.height10(context),
                   ),
+
                   AppConstants.currentUserSessionIndex == 0
                       ? BlocBuilder<SubscribedSessionsCubit,
                       SubscribedSessionsState>(

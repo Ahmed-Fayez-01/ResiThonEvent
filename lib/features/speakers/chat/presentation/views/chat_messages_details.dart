@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resithon_event/core/utils/constants.dart';
@@ -27,6 +28,9 @@ class ChatMessagesDetails extends StatelessWidget {
             color: Colors.black,),
           onPressed: (){
             Navigator.pop(context);
+            FirebaseFirestore.instance.collection('chats').doc("messageId").update({
+              'unReadMessageNumber': 0,
+            });
           },
         ),
         elevation: 0,

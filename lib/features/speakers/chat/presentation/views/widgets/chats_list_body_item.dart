@@ -5,9 +5,11 @@ import '../../../../../../core/utils/colors/colors.dart';
 import '../../../../../../core/utils/constants.dart';
 
 class ChatsListBodyItem extends StatelessWidget {
-  const ChatsListBodyItem({Key? key, required this.name, required this.image, required this.id}) : super(key: key);
+  const ChatsListBodyItem({Key? key, required this.name, required this.image, required this.id, required this.lastMessageFromFirebase, required this.lastMessageNumberFromFirebase}) : super(key: key);
   final String name;
   final String image;
+  final String lastMessageFromFirebase;
+  final String lastMessageNumberFromFirebase;
   final int id;
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class ChatsListBodyItem extends StatelessWidget {
               ),
               SizedBox(height: AppConstants.height10(context),),
               Text(
-                "off course, am with u",
+                lastMessageFromFirebase,
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: AppConstants.sp10(context),
@@ -81,7 +83,7 @@ class ChatsListBodyItem extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "2",
+                    "$lastMessageNumberFromFirebase",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: AppConstants.sp10(context),
