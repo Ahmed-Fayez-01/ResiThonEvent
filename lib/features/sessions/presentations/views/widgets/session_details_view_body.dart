@@ -77,33 +77,36 @@ class _UserSessionDetailsViewBodyState
                           expired: state.model.data!.session_expire!,
                         ),
                         if (CacheHelper.getData(key: "role") == "1")
-                        state.model.data!.end_take_attend == true
-                            ? const SizedBox()
-                            :  state.model.data!.can_start_take_attend == false
-                            ? CustomCountDownWidget(
-                          seconds: (DateTime.parse(
-                              "${state.model.data!.date} ${state.model.data!.startTime}")
-                              .difference(DateTime.now())
-                              .inSeconds) -
-                              int.parse(CacheHelper.getData(
-                                  key: "take_attend_before")
-                                  .toString())*60,
-                          title: 'Scan Available After',
-                          id: widget.id,
-                        )
-                            : CustomCountDownWidget(
-                          seconds: (DateTime.parse(
-                              "${state.model.data!.date} ${state.model.data!.startTime}")
-                              .add(Duration(
-                              minutes: int.parse(CacheHelper.getData(
-                                  key: "stop_take_attend_before")
-                                  .toString())))
-                              .difference(DateTime.now())
-                              .inSeconds),
-                          title: 'Scan Available For',
-                          id: widget.id,
-                          color: AppColors.greenColor,
-                        ),
+                          state.model.data!.end_take_attend == true
+                              ? const SizedBox()
+                              : state.model.data!.can_start_take_attend == false
+                                  ? CustomCountDownWidget(
+                                      seconds: (DateTime.parse(
+                                                  "${state.model.data!.date} ${state.model.data!.startTime}")
+                                              .difference(DateTime.now())
+                                              .inSeconds) -
+                                          int.parse(CacheHelper.getData(
+                                                      key: "take_attend_before")
+                                                  .toString()) *
+                                              60,
+                                      title: 'Scan Available After',
+                                      id: widget.id,
+                                    )
+                                  : CustomCountDownWidget(
+                                      seconds: (DateTime.parse(
+                                              "${state.model.data!.date} ${state.model.data!.startTime}")
+                                          .add(Duration(
+                                              minutes: int.parse(
+                                                  CacheHelper.getData(
+                                                          key:
+                                                              "stop_take_attend_before")
+                                                      .toString())))
+                                          .difference(DateTime.now())
+                                          .inSeconds),
+                                      title: 'Scan Available For',
+                                      id: widget.id,
+                                      color: AppColors.greenColor,
+                                    ),
                         if (CacheHelper.getData(key: "role") != "1")
                           state.model.data!.session_expire!
                               ? const SizedBox()
@@ -124,8 +127,7 @@ class _UserSessionDetailsViewBodyState
                                       ? CustomCountDownWidget(
                                           seconds: (DateTime.parse(
                                                   "${state.model.data!.date} ${state.model.data!.endTime}")
-                                              .difference(DateTime.parse(
-                                                  "${state.model.data!.date} ${state.model.data!.startTime}"))
+                                              .difference(DateTime.now())
                                               .inSeconds),
                                           title: 'Session in Progress',
                                           color: AppColors.greenColor,
@@ -243,78 +245,74 @@ class _UserSessionDetailsViewBodyState
                   ),
                 ),
                 if (CacheHelper.getData(key: "role") == "1")
-                state.model.data!.end_take_attend == true
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            decoration: const BoxDecoration(
-                              color: Color(0xCCA5A5A5),
-                            ),
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.all(AppConstants.sp20(context)),
-                              child: Text(
-                                "Scan Ended",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            .018,
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w500),
+                  state.model.data!.end_take_attend == true
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              decoration: const BoxDecoration(
+                                color: Color(0xCCA5A5A5),
+                              ),
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.all(AppConstants.sp20(context)),
+                                child: Text(
+                                  "Scan Ended",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              .018,
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                    : state.model.data!.can_start_take_attend == false ?const SizedBox():DefaultButton(
-                        onPress: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ScanQrPage(
-                                        sessionId: state.model.data!.id!,
-                                      )));
-                        },
-                        text: "Scan",
-                        icon: SvgPicture.asset(
-                          AssetData.scan,
-                          width: MediaQuery.of(context).size.width * .06,
-                        ),
-                      ),
-                if (CacheHelper.getData(key: "role") != "1" &&
-                    CacheHelper.getData(key: "role") != "2")
-                  state.model.data!.session_expire!
-                      ? DefaultButton(
-                          backgroundColor: AppColors.secondaryColor,
-                          onPress: () {
-                            if (state.model.data!.has_rate!) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text("This Session Already Rated"),
-                                backgroundColor: Colors.red,
-                              ));
-                            } else {
-                              if (state.model.data!.is_arrived!) {
+                          ],
+                        )
+                      : state.model.data!.can_start_take_attend == false
+                          ? const SizedBox()
+                          : DefaultButton(
+                              onPress: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            SessionEvaluationView(
-                                              sessionId: widget.id,
+                                        builder: (context) => ScanQrPage(
+                                              sessionId: state.model.data!.id!,
                                             )));
-                              } else {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content: Text("Rating Not Available For You"),
-                                  backgroundColor: Colors.red,
-                                ));
-                              }
-                            }
-                          },
-                          text: "Rate The Session")
+                              },
+                              text: "Scan",
+                              icon: SvgPicture.asset(
+                                AssetData.scan,
+                                width: MediaQuery.of(context).size.width * .06,
+                              ),
+                            ),
+                if (CacheHelper.getData(key: "role") != "1" &&
+                    CacheHelper.getData(key: "role") != "2")
+                  state.model.data!.session_expire!
+                      ? state.model.data!.is_arrived!
+                          ? DefaultButton(
+                              backgroundColor: AppColors.secondaryColor,
+                              onPress: () {
+                                if (state.model.data!.has_rate!) {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text("This Session Already Rated"),
+                                    backgroundColor: Colors.red,
+                                  ));
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SessionEvaluationView(
+                                                sessionId: widget.id,
+                                              )));
+                                }
+                              },
+                              text: "Rate The Session")
+                          : const SizedBox()
                       : !state.model.data!.reservation_expire!
                           ? state.model.data!.count! <
                                   int.parse(state.model.data!.totalCount!)
@@ -572,7 +570,149 @@ class _UserSessionDetailsViewBodyState
                                           )
                                   ],
                                 )
-                              : const SizedBox()
+                              : state.model.data!.count! ==
+                                          int.parse(
+                                              state.model.data!.totalCount!) &&
+                                      state.model.data!.attend!
+                                  ? Column(
+                                      children: [
+                                         BlocConsumer<CancelSessionsCubit,
+                                                CancelSessionsState>(
+                                                builder: (BuildContext context,
+                                                    state) {
+                                                  return DefaultButton(
+                                                    onPress: () {
+                                                      context
+                                                          .read<
+                                                              CancelSessionsCubit>()
+                                                          .cancelBookSession(
+                                                              id: widget.id);
+                                                    },
+                                                    text: "cancelSessionButton"
+                                                        .tr(),
+                                                    backgroundColor:
+                                                        const Color(0xff323232),
+                                                  );
+                                                },
+                                                listener: (BuildContext context,
+                                                    CancelSessionsState state) {
+                                                  if (state
+                                                      is UserCancelSessionsSuccessState) {
+                                                    context
+                                                        .read<
+                                                            SubscribedSessionsCubit>()
+                                                        .subscribedSessionsDetails();
+                                                    context
+                                                        .read<
+                                                            AllSessionsCubit>()
+                                                        .sessionsDetails();
+                                                    Navigator.pop(context);
+                                                    customPopUpDialog(
+                                                      context: context,
+                                                      button: DefaultButton(
+                                                        onPress: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                          context
+                                                              .read<
+                                                                  SpecificSessionsCubit>()
+                                                              .specificSessionsDetails(
+                                                                  id: widget
+                                                                      .id);
+                                                        },
+                                                        text: "okay".tr(),
+                                                        borderRadius:
+                                                            AppConstants.sp10(
+                                                                context),
+                                                        backgroundColor:
+                                                            const Color(
+                                                                0xff323232),
+                                                      ),
+                                                      icon: AssetData.cancel,
+                                                      mainTitle:
+                                                          "cancelMessage".tr(),
+                                                    );
+                                                  } else if (state
+                                                      is UserCancelSessionsErrorState) {
+                                                    Navigator.pop(context);
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          state.errMessage),
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                    ));
+                                                  } else if (state
+                                                      is UserCancelSessionsLoadingState) {
+                                                    showDialog(
+                                                      context: context,
+                                                      barrierDismissible: false,
+                                                      builder: (context) =>
+                                                          WillPopScope(
+                                                        onWillPop: () {
+                                                          return Future.value(
+                                                              false);
+                                                        },
+                                                        child: AlertDialog(
+                                                          insetPadding:
+                                                              const EdgeInsets
+                                                                  .all(0),
+                                                          contentPadding:
+                                                              EdgeInsets.zero,
+                                                          clipBehavior: Clip
+                                                              .antiAliasWithSaveLayer,
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                          content: SizedBox(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      vertical:
+                                                                          20),
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .min,
+                                                                children: [
+                                                                  SpinKitCubeGrid(
+                                                                    color: AppColors
+                                                                        .primaryColor,
+                                                                    size: 40.0,
+                                                                  ),
+                                                                  const SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  Text(
+                                                                    "loadingLogin"
+                                                                        .tr(),
+                                                                    style: const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        fontSize:
+                                                                            14),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                              )
+                                      ],
+                                    )
+                                  : const SizedBox()
                           : state.model.data!.session_started!
                               ? DefaultButton(
                                   onPress: () {
@@ -603,8 +743,10 @@ class _UserSessionDetailsViewBodyState
               children: [
                 const CustomBackButton(),
                 Expanded(
-                  child: CustomErrorWidget(onTap: (){
-                    context.read<SpecificSessionsCubit>().specificSessionsDetails(id: widget.id);
+                  child: CustomErrorWidget(onTap: () {
+                    context
+                        .read<SpecificSessionsCubit>()
+                        .specificSessionsDetails(id: widget.id);
                   }),
                 ),
               ],

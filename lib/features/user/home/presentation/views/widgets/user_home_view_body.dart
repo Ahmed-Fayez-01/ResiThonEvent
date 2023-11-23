@@ -122,8 +122,8 @@ class UserHomeViewBody extends StatelessWidget {
                     child: Row(
                       children: [
                         CustomToggleButton(
-                          title: "subScribed".tr(),
-                          iconPath: AssetData.done,
+                          title: "all".tr(),
+                          iconPath: AssetData.all,
                           onTap: () {
                             if (AppConstants.currentUserSessionIndex != 0) {
                               cubit.toggleButton();
@@ -137,8 +137,8 @@ class UserHomeViewBody extends StatelessWidget {
                           width: AppConstants.width10(context),
                         ),
                         CustomToggleButton(
-                          title: "all".tr(),
-                          iconPath: AssetData.all,
+                          title: "subScribed".tr(),
+                          iconPath: AssetData.done,
                           onTap: () {
                             if (AppConstants.currentUserSessionIndex != 1) {
                               cubit.toggleButton();
@@ -155,7 +155,30 @@ class UserHomeViewBody extends StatelessWidget {
                     height: AppConstants.height10(context),
                   ),
                   AppConstants.currentUserSessionIndex == 0
-                      ? BlocBuilder<SubscribedSessionsCubit,
+                      ? BlocBuilder<AllSessionsCubit, AllSessionsState>(
+                    builder: (BuildContext context, state) {
+                      if (state is UserAllSessionsSuccessState) {
+                        return SessionsListView(
+                          instance: state.model,
+                        );
+                      } else if (state is UserAllSessionsErrorState) {
+                        return CustomErrorWidget(
+                          onTap: () {
+                            context.read<AllSessionsCubit>().sessionsDetails();
+                          },
+                        );
+                      } else if (state is UserAllSessionsLoadingState) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * .2,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  ):BlocBuilder<SubscribedSessionsCubit,
                           SubscribedSessionsState>(
                           builder: (BuildContext context, state) {
                             if (state is UserSubscribedSessionsSuccessState) {
@@ -182,30 +205,6 @@ class UserHomeViewBody extends StatelessWidget {
                             }
                           },
                         )
-                      : BlocBuilder<AllSessionsCubit, AllSessionsState>(
-                          builder: (BuildContext context, state) {
-                            if (state is UserAllSessionsSuccessState) {
-                              return SessionsListView(
-                                instance: state.model,
-                              );
-                            } else if (state is UserAllSessionsErrorState) {
-                              return CustomErrorWidget(
-                                onTap: () {
-                                  context.read<AllSessionsCubit>().sessionsDetails();
-                                },
-                              );
-                            } else if (state is UserAllSessionsLoadingState) {
-                              return SizedBox(
-                                height: MediaQuery.of(context).size.height * .2,
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                            } else {
-                              return const SizedBox();
-                            }
-                          },
-                        ),
                 ],
               );
             },

@@ -16,131 +16,133 @@ class SessionEvaluationViewBody extends StatelessWidget {
 final int sessionId;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
-          child: Column(
-            children: [
-              Column(
-                children: [
-                  SvgPicture.asset(
-                    AssetData.sessionEvaluationBanner,
-                    width: MediaQuery.of(context).size.width * .3,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "It’s ",
-                        style: TextStyle(
-                          fontFamily: "Poppins",
-                          fontWeight: FontWeight.w500,
-                          fontSize: MediaQuery.of(context).size.height * .018,
-                        ),
-                      ),
-                      Text(
-                        "time",
-                        style: TextStyle(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding:
+                EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    SvgPicture.asset(
+                      AssetData.sessionEvaluationBanner,
+                      width: MediaQuery.of(context).size.width * .3,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "It’s ",
+                          style: TextStyle(
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.w500,
                             fontSize: MediaQuery.of(context).size.height * .018,
-                            color: Color(0xffEDC907)),
-                      ),
-                      Text(
-                        " to ",
-                        style: TextStyle(
-                          fontFamily: "Poppins",
-                          fontWeight: FontWeight.w500,
-                          fontSize: MediaQuery.of(context).size.height * .018,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "evaluation",
-                        style: TextStyle(
+                        Text(
+                          "time",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontWeight: FontWeight.w500,
+                              fontSize: MediaQuery.of(context).size.height * .018,
+                              color: Color(0xffEDC907)),
+                        ),
+                        Text(
+                          " to ",
+                          style: TextStyle(
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.w500,
                             fontSize: MediaQuery.of(context).size.height * .018,
-                            color: Color(0xffEDC907)),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: AppConstants.height20(context),
-              ),
-              SessionQuestionList(sessionId: sessionId,),
-              BlocConsumer<PostSessionEvaluationCubit,
-                  PostSessionEvaluationState>(
-                builder: (BuildContext context, state) {
-                  return DefaultButton(
-                      onPress: () {
-                        context
-                            .read<PostSessionEvaluationCubit>()
-                            .postSessionEvaluationDetails(
-                                data: AppConstants.evaluationSubmit);
-                      },
-                      text: "Submit",backgroundColor: const Color(0xffEDC907),);
-                },
-                listener: (BuildContext context, state) {
-                  if (state is UserPostSessionEvaluationSuccessState) {
-                    Navigator.pop(context);
-                  } else if (state is UserPostSessionEvaluationErrorState) {
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(state.errMessage),
-                      backgroundColor: Colors.red,
-                    ));
-                  } else if (state is UserPostSessionEvaluationLoadingState) {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => WillPopScope(
-                        onWillPop: () {
-                          return Future.value(false);
+                          ),
+                        ),
+                        Text(
+                          "evaluation",
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontWeight: FontWeight.w500,
+                              fontSize: MediaQuery.of(context).size.height * .018,
+                              color: Color(0xffEDC907)),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: AppConstants.height20(context),
+                ),
+                SessionQuestionList(sessionId: sessionId,),
+                BlocConsumer<PostSessionEvaluationCubit,
+                    PostSessionEvaluationState>(
+                  builder: (BuildContext context, state) {
+                    return DefaultButton(
+                        onPress: () {
+                          context
+                              .read<PostSessionEvaluationCubit>()
+                              .postSessionEvaluationDetails(
+                                  data: AppConstants.evaluationSubmit);
                         },
-                        child: AlertDialog(
-                          insetPadding: const EdgeInsets.all(0),
-                          contentPadding: EdgeInsets.zero,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          content: SizedBox(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SpinKitCubeGrid(
-                                    color: AppColors.primaryColor,
-                                    size: 40.0,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "loadingLogin".tr(),
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14),
-                                  ),
-                                ],
+                        text: "Submit",backgroundColor: const Color(0xffEDC907),);
+                  },
+                  listener: (BuildContext context, state) {
+                    if (state is UserPostSessionEvaluationSuccessState) {
+                      Navigator.pop(context);
+                    } else if (state is UserPostSessionEvaluationErrorState) {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(state.errMessage),
+                        backgroundColor: Colors.red,
+                      ));
+                    } else if (state is UserPostSessionEvaluationLoadingState) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => WillPopScope(
+                          onWillPop: () {
+                            return Future.value(false);
+                          },
+                          child: AlertDialog(
+                            insetPadding: const EdgeInsets.all(0),
+                            contentPadding: EdgeInsets.zero,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            content: SizedBox(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    SpinKitCubeGrid(
+                                      color: AppColors.primaryColor,
+                                      size: 40.0,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "loadingLogin".tr(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

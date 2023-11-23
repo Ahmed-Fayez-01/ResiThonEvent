@@ -17,6 +17,7 @@ class SessionQuestionItem extends StatefulWidget {
 
 class _SessionQuestionItemState extends State<SessionQuestionItem> {
   List<bool> selected = [false, false, false, false, false];
+  bool added=false;
   List<TextEditingController> comments = [
     TextEditingController(),
     TextEditingController(),
@@ -27,6 +28,7 @@ class _SessionQuestionItemState extends State<SessionQuestionItem> {
 
   @override
   Widget build(BuildContext context) {
+    print("IDDDDDDDDDDDDDDDD:${widget.id}");
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -86,8 +88,19 @@ class _SessionQuestionItemState extends State<SessionQuestionItem> {
                           "rate": index + 1,
                           "comment": comments[widget.index].text,
                         });
+                        added =true;
                       }
                     }
+                    if(!added)
+                      {
+                        AppConstants.evaluationSubmit.add({
+                          "question_id":widget.id,
+                          "project_id": widget.sessionId,
+                          "rate": index + 1,
+                          "comment": comments[widget.index].text,
+                        });
+                        added=false;
+                      }
                   }else{
                   AppConstants.evaluationSubmit.add({
                     "question_id":widget.id,

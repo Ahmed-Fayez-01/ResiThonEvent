@@ -20,6 +20,7 @@ class ScanRepoImpl implements ScanRepo{
       return right(result);
     } catch(e)
     {
+      print("ffffffffffffffffff${e}");
       if(e is DioException)
       {
         return left(ServerFailure.fromDioError(e));

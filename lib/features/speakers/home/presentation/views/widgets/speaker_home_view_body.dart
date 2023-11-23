@@ -107,8 +107,8 @@ class _SpeakerHomeViewBodyState extends State<SpeakerHomeViewBody> {
                     child: Row(
                       children: [
                         CustomToggleButton(
-                          title: "mySessions".tr(),
-                          iconPath: AssetData.done,
+                          title: "all".tr(),
+                          iconPath: AssetData.all,
                           onTap: () {
                             if (AppConstants.currentUserSessionIndex != 0) {
                               cubit.toggleButton();
@@ -122,8 +122,8 @@ class _SpeakerHomeViewBodyState extends State<SpeakerHomeViewBody> {
                           width: AppConstants.width10(context),
                         ),
                         CustomToggleButton(
-                          title: "all".tr(),
-                          iconPath: AssetData.all,
+                          title: "mySessions".tr(),
+                          iconPath: AssetData.done,
                           onTap: () {
                             if (AppConstants.currentUserSessionIndex != 1) {
                               cubit.toggleButton();
@@ -133,6 +133,8 @@ class _SpeakerHomeViewBodyState extends State<SpeakerHomeViewBody> {
                               ? true
                               : false,
                         ),
+
+
                       ],
                     ),
                   ),
@@ -140,7 +142,31 @@ class _SpeakerHomeViewBodyState extends State<SpeakerHomeViewBody> {
                     height: AppConstants.height10(context),
                   ),
                   AppConstants.currentUserSessionIndex == 0
-                      ? BlocBuilder<SubscribedSessionsCubit,
+                      ? BlocBuilder<AllSessionsCubit, AllSessionsState>(
+                    builder: (BuildContext context, state) {
+                      if (state is UserAllSessionsSuccessState) {
+                        return SessionsListView(
+                          instance: state.model,
+                        );
+                      } else if (state is UserAllSessionsErrorState) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * .2,
+                          child: Center(
+                            child: Text(state.errMessage),
+                          ),
+                        );
+                      } else if (state is UserAllSessionsLoadingState) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * .2,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  ): BlocBuilder<SubscribedSessionsCubit,
                       SubscribedSessionsState>(
                     builder: (BuildContext context, state) {
                       if (state is UserSubscribedSessionsSuccessState) {
@@ -157,31 +183,6 @@ class _SpeakerHomeViewBodyState extends State<SpeakerHomeViewBody> {
                         );
                       } else if (state
                       is UserSubscribedSessionsLoadingState) {
-                        return SizedBox(
-                          height: MediaQuery.of(context).size.height * .2,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
-                  )
-                      : BlocBuilder<AllSessionsCubit, AllSessionsState>(
-                    builder: (BuildContext context, state) {
-                      if (state is UserAllSessionsSuccessState) {
-                        return SessionsListView(
-                          instance: state.model,
-                        );
-                      } else if (state is UserAllSessionsErrorState) {
-                        return SizedBox(
-                          height: MediaQuery.of(context).size.height * .2,
-                          child: Center(
-                            child: Text(state.errMessage),
-                          ),
-                        );
-                      } else if (state is UserAllSessionsLoadingState) {
                         return SizedBox(
                           height: MediaQuery.of(context).size.height * .2,
                           child: const Center(

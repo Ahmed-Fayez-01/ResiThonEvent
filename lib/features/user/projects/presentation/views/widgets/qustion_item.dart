@@ -17,6 +17,7 @@ class QuestionItem extends StatefulWidget {
 
 class _QuestionItemState extends State<QuestionItem> {
   List<bool> selected = [false, false, false, false, false];
+  bool added=false;
   List<TextEditingController> comments = [
     TextEditingController(),
     TextEditingController(),
@@ -86,7 +87,18 @@ class _QuestionItemState extends State<QuestionItem> {
                           "rate": index + 1,
                           "comment": comments[widget.index].text,
                         });
+                        added=true;
                       }
+                    }
+                    if(!added)
+                    {
+                      AppConstants.evaluationSubmit.add({
+                        "question_id":widget.id,
+                        "project_id": widget.projectId,
+                        "rate": index + 1,
+                        "comment": comments[widget.index].text,
+                      });
+                      added=false;
                     }
                   }else{
                   AppConstants.evaluationSubmit.add({
