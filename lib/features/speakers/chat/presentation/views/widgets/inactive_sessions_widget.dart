@@ -33,7 +33,7 @@ class InactiveSessionsWidget extends StatelessWidget {
                   },
                   child: Container(
                     padding: EdgeInsets.all(AppConstants.sp20(context)),
-                    height: MediaQuery.of(context).size.height * .12,
+                    //height: MediaQuery.of(context).size.height * .12,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius:

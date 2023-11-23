@@ -19,8 +19,7 @@ class SessionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var list = List<Widget>.generate(
-      instance!.participants!.length,
+    var list = List<Widget>.generate(instance!.participants!.length,
       (i) => Container(
         height: MediaQuery.of(context).size.height * .03,
         width: MediaQuery.of(context).size.height * .03,

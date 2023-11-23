@@ -39,8 +39,7 @@ import 'features/user/home/data/repos/event_repo/event_repo_impl.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-
-  print("Handling a background message: ${message.messageId}");
+  debugPrint("Handling a background message: ${message.messageId}");
 }
 
 final StreamSubscription<InternetConnectionStatus> listener =
@@ -48,12 +47,12 @@ final StreamSubscription<InternetConnectionStatus> listener =
   (InternetConnectionStatus status) {
     switch (status) {
       case InternetConnectionStatus.connected:
-        // ignore: avoid_print
-        print('Data connection is available.');
+
+        debugPrint('Data connection is available.');
         break;
       case InternetConnectionStatus.disconnected:
         // ignore: avoid_print
-        print('You are disconnected from the internet.');
+        debugPrint('You are disconnected from the internet.');
         break;
     }
   },
@@ -62,12 +61,12 @@ final StreamSubscription<InternetConnectionStatus> listener =
 Future<void> execute(
   InternetConnectionChecker internetConnectionChecker,
 ) async {
-  print('''The statement 'this machine is connected to the Internet' is: ''');
+  debugPrint('''The statement 'this machine is connected to the Internet' is: ''');
   final bool isConnected = await InternetConnectionChecker().hasConnection;
-  print(
+  debugPrint(
     isConnected.toString(),
   );
-  print(
+  debugPrint(
     'Current status: ${await InternetConnectionChecker().connectionStatus}',
   );
 }
@@ -76,9 +75,9 @@ hasConnection() async {
   AppConstants.hasConnectionResult =
       await InternetConnectionChecker().hasConnection;
   if (AppConstants.hasConnectionResult == true) {
-    print('YAY! Free cute dog pics!');
+    debugPrint('YAY! Free cute dog pics!');
   } else {
-    print('No internet :( Reason:');
+    debugPrint('No internet :( Reason:');
   }
 }
 
@@ -93,9 +92,9 @@ Future main() async {
     checkInterval: const Duration(seconds: 1),
   );
   await execute(customInstance);
-  print("0" * 20);
+  debugPrint("0" * 20);
   hasConnection();
-  print("0" * 20);
+  debugPrint("0" * 20);
   FirebaseMessaging.onMessage.listen((message) {
     debugPrint(
         '================================ FOREGROUND NOTIFICATION ================================');
@@ -104,7 +103,7 @@ Future main() async {
     debugPrint('Notification body: ${message.notification!.body}');
   });
   FirebaseMessaging.instance.getToken().then((value) {
-    print(value);
+    debugPrint(value.toString());
     CacheHelper.saveData(key: 'FCM_Token', value: value).then((value) {
       if (value) {
         AppConstants.fcmToke = CacheHelper.getData(key: 'FCM_Token');

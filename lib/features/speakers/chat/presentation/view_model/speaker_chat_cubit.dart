@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:pusher_client/pusher_client.dart';
@@ -172,6 +173,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
           senderId: senderId,
           reciverId: receiverId,
           chatType: type,
+          timeOfDay: TimeOfDay.now(),
         unReadMessageNumber: unReadMessageNumberInCubit,
       ),
       );
@@ -284,26 +286,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
       print('Error sending message: $e');
       emit(SendMessageToFirebaseErrorState());
     }
-    // ref.add(sendMessageToFirebaseModel.toMap()).then((value)
-    // {
-    //   print(value);
-    //   print("firebase success"*10);
-    //   print("------------------------");
-    //   print(ref.id);
-    //   print("------------------------");
-    //   print(sendMessageToFirebaseModel.sessionId);
-    //   print("------------------------");
-    //   print(sendMessageToFirebaseModel.senderId);
-    //   print("------------------------");
-    //   print(sendMessageToFirebaseModel.message);
-    //   print("------------------------");
-    //   emit(SendMessageToFirebaseSuccessState());
-    // }).catchError((error)
-    // {
-    //   print("firebase error "*10);
-    //   print("error in send message cubit ${error.toString()}");
-    //   emit(SendMessageToFirebaseErrorState());
-    // });
+
 
   }
 
