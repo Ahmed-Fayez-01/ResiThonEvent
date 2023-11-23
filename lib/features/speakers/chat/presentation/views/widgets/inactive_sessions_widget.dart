@@ -18,7 +18,7 @@ class InactiveSessionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return sessionsModel!.data!.isNotEmpty  ? Expanded(
       child: ListView.separated(
         itemBuilder: (context, index) {
           return !sessionsModel!.data![index].session_started! ||
@@ -112,6 +112,16 @@ class InactiveSessionsWidget extends StatelessWidget {
         },
         itemCount: sessionsModel!.data!.length,
       ),
-    );
+    ):Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              AssetData.noSessions,
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width * .5,
+            ),
+          ],
+        ));
   }
 }

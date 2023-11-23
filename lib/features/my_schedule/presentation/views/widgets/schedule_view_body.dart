@@ -88,7 +88,7 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
                         SvgPicture.asset(
                           AssetData.noSessions,
                           fit: BoxFit.cover,
-                          width: MediaQuery.of(context).size.width * .7,
+                          width: MediaQuery.of(context).size.width * .5,
                         ),
                       ],
                     ));

@@ -5,7 +5,6 @@ import 'package:resithon_event/features/auth/presentation/views/login_view.dart'
 
 import 'package:resithon_event/features/onboarding/presentaion/views/onboarding_screen.dart';
 import 'package:resithon_event/features/sessions/presentations/views/see_more_sessions_view.dart';
-import 'package:resithon_event/features/user/chat/presentation/views/user_chat_view.dart';
 import 'package:resithon_event/features/videos/presentation/views/videos_view.dart';
 import '../../../features/agenda/presentation/views/agenda_view.dart';
 import '../../../features/my_schedule/presentation/views/schedule_view.dart';
@@ -89,11 +88,7 @@ abstract class AppRouter {
     GoRoute(
       path: "/scheduleView",
       builder: (context, state) => const ScheduleView(),
-    ),GoRoute(
-      path: "/userChatView",
-      builder: (context, state) => const UserChatView(),
     ),
-
     //Speaker Roots
     GoRoute(
       path: "/speakerHomeView",

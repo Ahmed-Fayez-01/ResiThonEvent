@@ -73,6 +73,16 @@ class ChatNameItem extends StatelessWidget {
         },
         itemCount: sessionsModel!.data!.length,
       )
-    ) : const Text("Not Found") ;
+    ) : Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              AssetData.noSessions,
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width * .5,
+            ),
+          ],
+        ));
   }
 }

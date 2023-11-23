@@ -95,7 +95,7 @@ class _AgendaViewBodyState extends State<AgendaViewBody> {
                       SvgPicture.asset(
                         AssetData.noSessions,
                         fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width * .7,
+                        width: MediaQuery.of(context).size.width * .5,
                       ),
                     ],
                   ));

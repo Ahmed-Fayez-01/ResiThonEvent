@@ -25,31 +25,41 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RichText(
-                text: TextSpan(
-                  text: 'Resi ',
-                  style: Styles.splashTitle(context).copyWith(
-                      color: AppColors.secondaryColor
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                        text: 'Thon',
-                        style: Styles.splashTitle(context).copyWith(
-                            color: Colors.white
-                        ),),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+        // Expanded(
+        //   child: Row(
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       RichText(
+        //         text: TextSpan(
+        //           text: 'YA ',
+        //           style: Styles.splashTitle(context).copyWith(
+        //               color: AppColors.secondaryColor
+        //           ),
+        //           children: <TextSpan>[
+        //             TextSpan(
+        //                 text: 'HALAA',
+        //                 style: Styles.splashTitle(context).copyWith(
+        //                     color: Colors.white
+        //                 ),),
+        //           ],
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              AssetData.logo,
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width * .6,
+            ),
+          ],
+        )
       ],
     );
   }

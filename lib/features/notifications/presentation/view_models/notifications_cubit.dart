@@ -23,8 +23,7 @@ class NotificationsCubit extends Cubit<NotificationsStates> {
     }, (data) {
       emit(GetAllNotificationsDataSuccessState(data));
       notificationsListLength = data.data!.length;
-      print(notificationsListLength);
-      print("AppConstants.notificationsListLength");
+
     });
   }
 

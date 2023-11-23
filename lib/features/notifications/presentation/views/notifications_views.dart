@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resithon_event/core/utils/colors/colors.dart';
-import 'package:resithon_event/core/utils/services/local_services/cache_helper.dart';
 import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
 import 'package:resithon_event/features/notifications/presentation/view_models/notifications_states.dart';
 import 'package:resithon_event/features/notifications/presentation/views/widgets/speaker_notifications_views_body.dart';
@@ -14,7 +13,6 @@ import '../../../../core/shared_widgets/custom_dialog.dart';
 import '../../../../core/utils/assets/assets.dart';
 import '../../../../core/utils/constants.dart';
 import '../../../../core/utils/services/remote_services/service_locator.dart';
-import '../../../speakers/home/presentation/views/speaker_home_view.dart';
 import '../../data/repos/notifications_repo_impl.dart';
 
 class NotificationsViews extends StatefulWidget {
@@ -48,7 +46,6 @@ class _NotificationsViewsState extends State<NotificationsViews> {
                 onPressed: (){
                   setState(() {
                     NotificationsCubit.l = 0;
-                    print(NotificationsCubit.l);
                   });
                //   CacheHelper.removeData(key: "NotificationsListLengthInCash");
                   GoRouter.of(context).pushReplacement("/speakerHomeView");
@@ -76,7 +73,6 @@ class _NotificationsViewsState extends State<NotificationsViews> {
                     icon: Icon(Icons.delete_forever,
                       color: AppColors.primaryColor,),
                   )
-
               ],
               elevation: 0,
               systemOverlayStyle:  const SystemUiOverlayStyle(

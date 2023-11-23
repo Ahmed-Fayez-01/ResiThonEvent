@@ -75,6 +75,7 @@ class AssetData {
   static const en="assets/images/en.png";
   static const ar="assets/images/ar.png";
   static const whatsApp="assets/images/whats.svg";
+  static const sessionEvaluationBanner="assets/images/session_evaluation_banner.svg";
   static const qr="assets/images/qr.png";
 
 }

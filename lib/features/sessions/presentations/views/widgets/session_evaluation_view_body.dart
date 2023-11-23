@@ -23,10 +23,14 @@ final int sessionId;
               EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
           child: Column(
             children: [
-              Row(
+              Column(
                 children: [
-                  Expanded(
-                      child: Row(
+                  SvgPicture.asset(
+                    AssetData.sessionEvaluationBanner,
+                    width: MediaQuery.of(context).size.width * .3,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "It’s ",
@@ -42,7 +46,7 @@ final int sessionId;
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.w500,
                             fontSize: MediaQuery.of(context).size.height * .018,
-                            color: AppColors.primarySwatchColor),
+                            color: Color(0xffEDC907)),
                       ),
                       Text(
                         " to ",
@@ -58,13 +62,9 @@ final int sessionId;
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.w500,
                             fontSize: MediaQuery.of(context).size.height * .018,
-                            color: AppColors.primarySwatchColor),
+                            color: Color(0xffEDC907)),
                       ),
                     ],
-                  )),
-                  SvgPicture.asset(
-                    AssetData.evaluationBanner,
-                    width: MediaQuery.of(context).size.width * .3,
                   ),
                 ],
               ),
@@ -82,7 +82,7 @@ final int sessionId;
                             .postSessionEvaluationDetails(
                                 data: AppConstants.evaluationSubmit);
                       },
-                      text: "Submit");
+                      text: "Submit",backgroundColor: const Color(0xffEDC907),);
                 },
                 listener: (BuildContext context, state) {
                   if (state is UserPostSessionEvaluationSuccessState) {

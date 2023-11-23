@@ -21,6 +21,8 @@ class EventCubit extends Cubit<EventState> {
       CacheHelper.saveData(key: "session_expired", value: data.data!.sessionExpireAt);
       CacheHelper.saveData(key: "take_attend_before", value: data.data!.takeAttendBefore);
       CacheHelper.saveData(key: "stop_take_attend_before", value: data.data!.stopTakeAttendBefore);
+      CacheHelper.saveData(key: "event_start_day", value: data.data!.startDate);
+      CacheHelper.saveData(key: "event_end_day", value: data.data!.endDate);
       emit(UserEventSuccessState(data));
     });
   }

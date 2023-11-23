@@ -40,34 +40,18 @@ class _SplashSecondaryBodyState extends State<SplashSecondaryBody> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RichText(
-                text: TextSpan(
-                  text: 'Resi ',
-                  style: Styles.splashTitle(context).copyWith(
-                    color: AppColors.secondaryColor,
-                    fontSize: MediaQuery.of(context).size.height * .035,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Thon',
-                      style: Styles.splashTitle(context).copyWith(
-                        color: AppColors.primarySwatchColor,
-                        fontSize: MediaQuery.of(context).size.height * .035,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              AssetData.logo,
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width * .5,
+            ),
+          ],
+        )
       ],
     );
   }

@@ -210,7 +210,7 @@ class ResiThon extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
-        title: "ResiThon",
+        title: "YA HALAA",
         theme: themeDataLight,
         builder: (context, child) {
           return MediaQuery(

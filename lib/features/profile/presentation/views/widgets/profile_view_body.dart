@@ -39,6 +39,7 @@ class ProfileViewBody extends StatelessWidget {
         ),
         DefaultButton(
           onPress: () {
+            AppConstants.file = null;
             Navigator.push(
                 context,
                 MaterialPageRoute(

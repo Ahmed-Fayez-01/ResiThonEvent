@@ -22,12 +22,10 @@ TextEditingController name = TextEditingController();
 TextEditingController bio = TextEditingController();
 
 class EditProfileViewBody extends StatelessWidget {
-  EditProfileViewBody({Key? key}) : super(key: key);
+  const EditProfileViewBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    AppConstants.file = null;
-
     return Padding(
       padding: EdgeInsets.all(AppConstants.sp20(context)),
       child: Column(

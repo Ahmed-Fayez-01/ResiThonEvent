@@ -64,7 +64,7 @@ class SessionsListView extends StatelessWidget {
         );
       },
     ): SizedBox(
-      height: MediaQuery.of(context).size.height*.2,
+      height: MediaQuery.of(context).size.height*.18,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -10,16 +10,16 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
 //fayez
     return  Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(0.0), // here the desired height
           child: AppBar(
             elevation: 0,
             systemOverlayStyle:  const SystemUiOverlayStyle(
-              statusBarColor: AppColors.primarySwatchColor, // <-- SEE HERE
-              statusBarIconBrightness: Brightness.light, //<-- For Android SEE HERE (dark icons)
-              systemNavigationBarColor: AppColors.primarySwatchColor,
-              statusBarBrightness: Brightness.dark, //<-- For iOS SEE HERE (dark icons)
+              statusBarColor: Colors.white, // <-- SEE HERE
+              statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
+              systemNavigationBarColor: Colors.white,
+              statusBarBrightness: Brightness.light, //<-- For iOS SEE HERE (dark icons)
             ),
           )
       ),

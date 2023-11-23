@@ -43,8 +43,10 @@ class _EventTimeLineState extends State<EventTimeLine> {
           "-")[2])):DateTime.now();
 
 
+
   @override
   Widget build(BuildContext context) {
+    print("DAteeeeeeeeeeeeee:${_focusDate}");
     return BlocBuilder<EventCubit, EventState>(
       builder: (BuildContext context, EventState state) {
         if (state is UserEventSuccessState) {

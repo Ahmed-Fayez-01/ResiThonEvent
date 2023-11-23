@@ -86,9 +86,8 @@ class SpeakerChatViewBody extends StatelessWidget {
                           },
                         );
                       } else if (state is UserSubscribedSessionsLoadingState) {
-                        return SizedBox(
-                          height: MediaQuery.of(context).size.height * .1,
-                          child: const Center(
+                        return const Expanded(
+                          child: Center(
                             child: CircularProgressIndicator(),
                           ),
                         );
@@ -111,14 +110,13 @@ class SpeakerChatViewBody extends StatelessWidget {
                         },
                         );
                       } else if (state is UserSubscribedSessionsLoadingState) {
-                        return SizedBox(
-                          height: MediaQuery.of(context).size.height * .1,
-                          child: const Center(
+                        return const Expanded(
+                          child: Center(
                             child: CircularProgressIndicator(),
                           ),
                         );
                       } else {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                     },
                   ),

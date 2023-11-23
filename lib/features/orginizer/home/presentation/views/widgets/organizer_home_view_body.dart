@@ -144,7 +144,7 @@ class OrganizerHomeViewBody extends StatelessWidget {
                       SubscribedSessionsState>(
                     builder: (BuildContext context, state) {
                       if (state is UserSubscribedSessionsSuccessState) {
-                        return AppConstants.currentUserSessionIndex == 0 ?SessionsListView(
+                        return AppConstants.currentUserSessionIndex == 0 ?OrganizerSessionsListView(
                           instance: state.model,
                         ):FoodListView(instance: state.model,);
                       } else if (state
