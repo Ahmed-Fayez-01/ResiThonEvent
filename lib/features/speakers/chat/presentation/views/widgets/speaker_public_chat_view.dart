@@ -25,7 +25,6 @@ class SpeakerPublicChatView extends StatelessWidget {
             size: MediaQuery.of(context).size.height*.016,
             color: Colors.black,),
           onPressed: (){
-            print("fayez");
             FirebaseFirestore.instance.collection('chats').doc("publicChat").update({
               'unReadMessageNumber': 0,
             });
@@ -76,7 +75,7 @@ class SpeakerPublicChatView extends StatelessWidget {
       body:        ChatMessagesDetailsBody(
         chatType: 1,
         sessionId: sessionId,
-    reciverId: 1,
+        reciverId: 1,
       ),
     );
   }

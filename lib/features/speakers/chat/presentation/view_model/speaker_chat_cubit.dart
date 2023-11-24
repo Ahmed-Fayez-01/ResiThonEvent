@@ -5,17 +5,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:pusher_client/pusher_client.dart';
-import 'package:resithon_event/core/utils/services/local_services/cache_keys.dart';
 import 'package:resithon_event/core/utils/services/remote_services/api_service.dart';
-// import 'package:pusher_client/pusher_client.dart';
 
 import '../../../../../core/utils/services/local_services/cache_helper.dart';
 import '../../data/models/all_users_list_model.dart';
 import '../../data/models/message_model.dart';
 import '../../data/models/send_message_to_firebase_model.dart';
-import '../../data/models/speakers_chat_message_model.dart';
 import '../../data/repo/speaker_chat_repo.dart';
 
 part 'speaker_chat_state.dart';
@@ -97,7 +93,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
       channel?.bind('chat-event', (PusherEvent? event) {
        getAllMessages(
          type: type,
-         sessionId: sessionId,
+         sessionId: sessionId, reciverId: '',
        );
         print('Received event: ${event?.eventName}, data: ${event?.data}');
       });
@@ -127,11 +123,10 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
       print(event?.data);
       var messageData = json.decode("${event?.data}");
       String message = messageData['message'];
-      print(message);
-      print("9999999999999999999");
+
      getAllMessages(
        type: type,
-       sessionId: sessionId,
+       sessionId: sessionId, reciverId: '',
      );
       FocusManager.instance.primaryFocus?.unfocus();
       // print('Received Pusher message: $message');
@@ -202,6 +197,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
   getAllMessages({
     required int type,
     required int sessionId,
+    required String reciverId,
 }) {
     emit(GetAllMessagesLoadingState());
     ApiService(Dio()).get(
@@ -209,7 +205,18 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
      endPoint: "/get-messages?type=$type&session_id=$sessionId"
     ).then((value) {
       getMessageModel = GetMessageModel.fromJson(value.data);
-      allChatMessages = getMessageModel?.data ?? [];
+      if(type==0)
+        {
+          getMessageModel?.data?.forEach((element) {
+            if(element.senderId==CacheHelper.getData(key: "id").toString() || element.senderId == reciverId)
+            {
+              allChatMessages.add(element);
+            }
+          });
+        }else{
+        allChatMessages = getMessageModel?.data ?? [];
+      }
+
       print(value.data);
       print("get all messages done ");
       emit(GetAllMessagesSuccessState());

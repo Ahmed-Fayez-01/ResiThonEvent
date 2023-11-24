@@ -43,13 +43,12 @@ class ChatListView extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       extendBody: true,
       body:
-      AppConstants.hasConnectionResult==true ?
       ChatListViewBody(
         sessionId: sessionId,
         name: name,
         groupImage: groupImage,
 
-      ) :  const NoInternetWidget(),
+      )
     );
   }
 }

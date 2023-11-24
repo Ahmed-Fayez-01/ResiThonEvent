@@ -42,8 +42,7 @@ class SpeakerChatView extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       extendBody: true,
       body:
-      AppConstants.hasConnectionResult==true ?
-      const SpeakerChatViewBody() :  const NoInternetWidget(),
+      const SpeakerChatViewBody()
     );
   }
 }

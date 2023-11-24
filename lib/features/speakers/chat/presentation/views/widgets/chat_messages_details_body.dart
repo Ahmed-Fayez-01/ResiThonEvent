@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
  import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
  import 'package:resithon_event/core/utils/colors/colors.dart';
@@ -39,7 +38,7 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
             sessionId:  widget.sessionId)
         ..getAllMessages(
         type: widget.chatType ,
-        sessionId:  widget.sessionId) ,
+        sessionId:  widget.sessionId, reciverId: widget.reciverId.toString()) ,
       child: BlocConsumer<SpeakerChatCubit , SpeakerChatState>(
         listener: (context,state){
           if(state is GetAllMessagesSuccessState){
@@ -54,11 +53,7 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
           }
         },
         builder: (context , state ){
-          print(CacheHelper.getData(key: "id"));
-          print("asasasasas");
-          return
-            AppConstants.hasConnectionResult==true ?
-            Container(
+          return Container(
             color: const Color(0x66DCDCDC),
             child: Column(
               children: [
@@ -203,10 +198,6 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                         SizedBox(width: AppConstants.width10(context),),
                         InkWell(
                             onTap: (){
-                              print("m");
-                              print(widget.sessionId);
-                              print(CacheHelper.getData(key: "id"));
-                              print(widget.chatType);
                               SpeakerChatCubit.get(context).sendMessage2(
                                 sessionId: widget.sessionId,
                                 senderId: CacheHelper.getData(key: "id"),
@@ -234,8 +225,7 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                 SizedBox(height: AppConstants.height20(context),),
               ],
             ),
-          ) :
-            const NoInternetWidget();
+          );
         },
 
       ),

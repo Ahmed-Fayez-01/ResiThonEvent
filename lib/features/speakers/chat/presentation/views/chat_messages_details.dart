@@ -95,13 +95,11 @@ class ChatMessagesDetails extends StatelessWidget {
       ),
       resizeToAvoidBottomInset: false,
       extendBody: true,
-      body: AppConstants.hasConnectionResult == true
-          ? ChatMessagesDetailsBody(
+      body:  ChatMessagesDetailsBody(
               chatType: 0,
               sessionId: sessionId,
-        reciverId: id,
+              reciverId: id,
             )
-          : const NoInternetWidget(),
     );
   }
 }
