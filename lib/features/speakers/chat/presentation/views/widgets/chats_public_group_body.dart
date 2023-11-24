@@ -52,10 +52,11 @@ class ChatsPublicGroupBody extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         }
+
         final List<Map<String, dynamic>> data = snapshot.data!.docs
             .map((doc) => doc.data() as Map<String, dynamic>)
             .toList();
-
+        print(data);
         return InkWell(
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -85,6 +86,7 @@ class ChatsPublicGroupBody extends StatelessWidget {
                   height: MediaQuery.of(context).size.height*.06,
                   width: MediaQuery.of(context).size.height*.06,
                   decoration: BoxDecoration(
+                    color: AppColors.greyColor.withOpacity(.2),
                     borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.06),
                   ),
                   child: ClipRRect(
@@ -121,7 +123,7 @@ class ChatsPublicGroupBody extends StatelessWidget {
                       ),
                       SizedBox(height: AppConstants.height10(context),),
                       Text(
-                        data.isNotEmpty?"${data[0]["message"]}": "",
+                        data.isNotEmpty?"${data[1]["message"]}": "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -147,7 +149,7 @@ class ChatsPublicGroupBody extends StatelessWidget {
                     //   ),
                     // ),
                     SizedBox(height: AppConstants.height10(context),),
-                    if(data[0]["unReadMessageNumber"]!=0)
+                    if(data[1]["unReadMessageNumber"]!=0)
                     Container(
                       height: MediaQuery.of(context).size.height*.025,
                       width: MediaQuery.of(context).size.height*.025,
@@ -157,7 +159,7 @@ class ChatsPublicGroupBody extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          data.isNotEmpty?"${data[0]["unReadMessageNumber"]}": "",
+                          data.isNotEmpty?"${data[1]["unReadMessageNumber"]}": "",
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontFamily: "Poppins",

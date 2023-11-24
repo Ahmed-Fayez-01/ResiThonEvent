@@ -13,11 +13,12 @@ import 'chats_public_group_body.dart';
 
 class ChatListViewBody extends StatelessWidget {
   const ChatListViewBody(
-      {Key? key, required this.sessionId, required this.name, required this.groupImage})
+      {Key? key, required this.sessionId, required this.name, required this.groupImage,  })
       : super(key: key);
   final int sessionId;
   final String name;
   final String groupImage;
+
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +91,7 @@ class ChatListViewBody extends StatelessWidget {
                   PrivateChatsListBody(
                     allUsersListInChatModel: state.allUsersListInChatModel,
                     sessionId: sessionId,
+
                   ),
               ],
             ),

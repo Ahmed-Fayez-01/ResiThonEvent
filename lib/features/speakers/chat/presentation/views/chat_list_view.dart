@@ -48,6 +48,7 @@ class ChatListView extends StatelessWidget {
         sessionId: sessionId,
         name: name,
         groupImage: groupImage,
+
       ) :  const NoInternetWidget(),
     );
   }

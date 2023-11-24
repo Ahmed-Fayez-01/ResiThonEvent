@@ -28,6 +28,7 @@ class ChatsListBodyItem extends StatelessWidget {
             height: MediaQuery.of(context).size.height*.06,
             width: MediaQuery.of(context).size.height*.06,
             decoration: BoxDecoration(
+              color: AppColors.greyColor.withOpacity(.2),
               borderRadius: BorderRadius.circular( MediaQuery.of(context).size.height*.06,),
             ),
             child: ClipRRect(
@@ -66,15 +67,15 @@ class ChatsListBodyItem extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-              Text(
-                "time",
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: AppConstants.sp10(context),
-                  color: AppColors.greyColor,
-                ),
-              ),
+              //
+              // Text(
+              //   "time",
+              //   style: TextStyle(
+              //     fontWeight: FontWeight.w400,
+              //     fontSize: AppConstants.sp10(context),
+              //     color: AppColors.greyColor,
+              //   ),
+              // ),
               SizedBox(height: AppConstants.height10(context),),
               if(lastMessageNumberFromFirebase!="0")
               Container(

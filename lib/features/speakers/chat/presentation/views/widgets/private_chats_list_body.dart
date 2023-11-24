@@ -5,13 +5,15 @@ import 'package:resithon_event/features/speakers/chat/data/models/all_users_list
 import 'package:resithon_event/features/speakers/chat/data/models/send_message_to_firebase_model.dart';
 
  import '../../../../../../core/utils/constants.dart';
+import '../../../../../../core/utils/services/local_services/cache_helper.dart';
 import '../chat_messages_details.dart';
 import 'chats_list_body_item.dart';
 
 class PrivateChatsListBody extends StatelessWidget {
-  const PrivateChatsListBody({Key? key, required this.allUsersListInChatModel, required this.sessionId}) : super(key: key);
+  const PrivateChatsListBody({Key? key, required this.allUsersListInChatModel, required this.sessionId, }) : super(key: key);
   final AllUsersListInChatModel allUsersListInChatModel;
   final int sessionId;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -37,6 +39,7 @@ class PrivateChatsListBody extends StatelessWidget {
       return Expanded(
         child: ListView.separated(
           itemBuilder: (context, index) {
+            print("${allUsersListInChatModel.data![index].id!}");
             return InkWell(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -45,8 +48,8 @@ class PrivateChatsListBody extends StatelessWidget {
                       id:    allUsersListInChatModel.data![index].id!,
                       image: allUsersListInChatModel.data![index].image.toString(),
                       sessionId:sessionId,
-                      lastMsg: data.isNotEmpty? "${data[0]["message"]}" : "",
-                      lastMsgNumber: data.isNotEmpty? "${data[0]["unReadMessageNumber"]}" : "0",
+                      lastMsg:  data[0]["message"]!=null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["message"]}" : "",
+                      lastMsgNumber: data[0]["unReadMessageNumber"]!=null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["unReadMessageNumber"]}" : "0",
 
                     );
                   }));
@@ -56,8 +59,12 @@ class PrivateChatsListBody extends StatelessWidget {
                   name:  allUsersListInChatModel.data![index].name.toString(),
                   id:    allUsersListInChatModel.data![index].id!,
                   image: allUsersListInChatModel.data![index].image.toString(),
-                  lastMessageFromFirebase: data.isNotEmpty?"${data[0]["message"]}": "",
-                  lastMessageNumberFromFirebase: data.isNotEmpty? "${data[0]["unReadMessageNumber"]}" : "0",
+                  lastMessageFromFirebase:
+                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]!=null ?
+                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["message"] != null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["message"]}" : "" : "",
+                  lastMessageNumberFromFirebase:
+                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]!=null ?
+                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["unReadMessageNumber"]!=null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["unReadMessageNumber"]}" : "0": "0",
                   // time: data.isNotEmpty? "${data[0]["timeOfDay"]}" : "",
                 ));
           },

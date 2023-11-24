@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/features/speakers/chat/presentation/views/widgets/chat_messages_details_body.dart';
 
+import '../../../../../../core/utils/colors/colors.dart';
+
 class SpeakerPublicChatView extends StatelessWidget {
   const SpeakerPublicChatView({Key? key, required this.groupImage, required this.groupName, required this.sessionId }) : super(key: key);
   final String groupImage;
@@ -41,13 +43,14 @@ class SpeakerPublicChatView extends StatelessWidget {
         title: Row(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height*.035,
-              width: MediaQuery.of(context).size.height*.035,
+              height: MediaQuery.of(context).size.height*.04,
+              width: MediaQuery.of(context).size.height*.04,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.0175,),
+                color: AppColors.greyColor.withOpacity(.2),
+                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.04,),
               ),
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.0175,),
+                  borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.04,),
                   child:
                     CachedNetworkImage(
                     imageUrl: groupImage,
@@ -73,7 +76,7 @@ class SpeakerPublicChatView extends StatelessWidget {
       body:        ChatMessagesDetailsBody(
         chatType: 1,
         sessionId: sessionId,
-     //   senderId: senderId,
+    reciverId: 1,
       ),
     );
   }

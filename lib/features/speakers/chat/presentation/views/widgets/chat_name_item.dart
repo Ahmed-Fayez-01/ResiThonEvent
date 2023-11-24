@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../../core/utils/assets/assets.dart';
 import '../../../../../../core/utils/colors/colors.dart';
 import '../../../../../../core/utils/constants.dart';
-import '../../../../../../core/utils/roots/app_router.dart';
-import '../../../../../sessions/data/models/sessions_model.dart';
+ import '../../../../../sessions/data/models/sessions_model.dart';
 import '../chat_list_view.dart';
-import '../chat_view.dart';
 
 class ChatNameItem extends StatelessWidget {
   const ChatNameItem(

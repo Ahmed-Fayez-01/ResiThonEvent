@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
  import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
  import 'package:resithon_event/core/utils/colors/colors.dart';
@@ -13,10 +14,10 @@ import '../../view_model/speaker_chat_cubit.dart';
 
 class ChatMessagesDetailsBody extends StatefulWidget {
 
-  const ChatMessagesDetailsBody({Key? key, required this.chatType, required this.sessionId,    }) : super(key: key);
+  const ChatMessagesDetailsBody({Key? key, required this.chatType, required this.sessionId, required this.reciverId,    }) : super(key: key);
   final int chatType;
   final int sessionId;
-//  final int? senderId;
+   final int reciverId;
   @override
   State<ChatMessagesDetailsBody> createState() => _ChatMessagesDetailsBodyState();
 }
@@ -211,8 +212,9 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                                 senderId: CacheHelper.getData(key: "id"),
                                 type: widget.chatType,
                                 message: SpeakerChatCubit.get(context).messageController.text,
-                              //  receiverId: widget.senderId,
+                               receiverId: widget.reciverId,
                               );
+
                               Future.delayed(const Duration(seconds: 2)).then((value) {
                                 FocusManager.instance.primaryFocus?.unfocus();
                                 scrollController.jumpTo(

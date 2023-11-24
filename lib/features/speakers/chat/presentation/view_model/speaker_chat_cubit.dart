@@ -11,6 +11,7 @@ import 'package:resithon_event/core/utils/services/local_services/cache_keys.dar
 import 'package:resithon_event/core/utils/services/remote_services/api_service.dart';
 // import 'package:pusher_client/pusher_client.dart';
 
+import '../../../../../core/utils/services/local_services/cache_helper.dart';
 import '../../data/models/all_users_list_model.dart';
 import '../../data/models/message_model.dart';
 import '../../data/models/send_message_to_firebase_model.dart';
@@ -147,7 +148,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
   void sendMessage2({
     required String message,
     required int senderId,
-    int? receiverId,
+    required int receiverId,
     required int type,
     required int sessionId,
 }) async {
@@ -157,7 +158,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
       sendCode: true,
       data: {
         "sender_id" : senderId,
-        if(receiverId != null)
+        if(type == 0)
         "receiver_id" :receiverId,
         "message": message,
         "type": type,
@@ -271,16 +272,25 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
     // prive ==0
     if(chatType==0){
       try {
-        DocumentSnapshot messageSnapshot = await messagesCollection.doc("${CacheKeysManger.getUserCodeFromCache()}").get();
+        final messageSnapshot = await messagesCollection.doc("privateChats").get();
         if (messageSnapshot.exists) {
-          await messagesCollection.doc("${CacheKeysManger.getUserCodeFromCache()}").update(sendMessageToFirebaseModel.toMap());
+          await messagesCollection.doc("privateChats").update({
+            "${CacheHelper.getData(key: "id").toString()}${sendMessageToFirebaseModel.reciverId}": sendMessageToFirebaseModel.toMap(),
+            "${sendMessageToFirebaseModel.reciverId}${CacheHelper.getData(key: "id").toString()}": sendMessageToFirebaseModel.toMap(),
+          });
           print('Message updated successfully');
           emit(SendMessageToFirebaseSuccessState());
         } else {
-          await messagesCollection.doc("${CacheKeysManger.getUserCodeFromCache()}").set(sendMessageToFirebaseModel.toMap());
+          await messagesCollection.doc("privateChats").set({
+            "${CacheHelper.getData(key: "id").toString()}${sendMessageToFirebaseModel.reciverId}": sendMessageToFirebaseModel.toMap(),
+            "${sendMessageToFirebaseModel.reciverId}${CacheHelper.getData(key: "id").toString()}": sendMessageToFirebaseModel.toMap(),
+          });
           print('Message created successfully');
           emit(SendMessageToFirebaseSuccessState());
         }
+      } catch (e) {
+        print('Error sending message: $e');
+        emit(SendMessageToFirebaseErrorState());
       } catch (e) {
         print('Error sending message: $e');
         emit(SendMessageToFirebaseErrorState());
