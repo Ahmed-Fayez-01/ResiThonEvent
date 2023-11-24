@@ -66,7 +66,7 @@ class NotificationItem extends StatelessWidget {
              Expanded(
                flex: 1,
                child:  Text(
-               "1 day",
+               "${notificationsModel!.date}",
                style: TextStyle(
                  fontWeight: FontWeight.w400,
                  fontSize: MediaQuery.of(context).size.height*.014,

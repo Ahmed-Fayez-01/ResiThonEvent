@@ -21,6 +21,7 @@ class InactiveSessionsWidget extends StatelessWidget {
     return sessionsModel!.data!.isNotEmpty  ? Expanded(
       child: ListView.separated(
         itemBuilder: (context, index) {
+          print("${!sessionsModel!.data![index].session_started!} ${!sessionsModel!.data![index].is_arrived!} ${sessionsModel!.data![index].chat_expire!}");
           return !sessionsModel!.data![index].session_started! ||
                   !sessionsModel!.data![index].is_arrived! ||
                   sessionsModel!.data![index].chat_expire!

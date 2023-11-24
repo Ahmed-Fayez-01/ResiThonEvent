@@ -14,7 +14,7 @@ import '../../../../../core/utils/services/local_services/cache_helper.dart';
 import '../../view_models/dated_all_sessions_cubit/dated_all_sessions_cubit.dart';
 
 class AgendaViewBody extends StatefulWidget {
-  AgendaViewBody({super.key});
+  const AgendaViewBody({super.key});
 
   @override
   State<AgendaViewBody> createState() => _AgendaViewBodyState();

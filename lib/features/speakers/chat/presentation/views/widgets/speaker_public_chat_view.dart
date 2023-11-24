@@ -1,13 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/features/speakers/chat/presentation/views/widgets/chat_messages_details_body.dart';
 
 class SpeakerPublicChatView extends StatelessWidget {
-  const SpeakerPublicChatView({Key? key, required this.groupImage, required this.groupName, required this.sessionId}) : super(key: key);
+  const SpeakerPublicChatView({Key? key, required this.groupImage, required this.groupName, required this.sessionId }) : super(key: key);
   final String groupImage;
   final String groupName;
   final int sessionId;
+
   // final int id;
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,12 @@ class SpeakerPublicChatView extends StatelessWidget {
             size: MediaQuery.of(context).size.height*.016,
             color: Colors.black,),
           onPressed: (){
+            print("fayez");
+            FirebaseFirestore.instance.collection('chats').doc("publicChat").update({
+              'unReadMessageNumber': 0,
+            });
             Navigator.pop(context);
+
           },
         ),
         elevation: 0,
@@ -41,16 +49,12 @@ class SpeakerPublicChatView extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.0175,),
                   child:
-                  Image.asset(
-                    groupImage,
-                    fit: BoxFit.cover,
+                    CachedNetworkImage(
+                    imageUrl: groupImage,
+                    progressIndicatorBuilder: (context, url, downloadProgress) =>
+                        CircularProgressIndicator(value: downloadProgress.progress),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
-                    // CachedNetworkImage(
-                  //   imageUrl: groupImage,
-                  //   progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  //       CircularProgressIndicator(value: downloadProgress.progress),
-                  //   errorWidget: (context, url, error) => const Icon(Icons.error),
-                  // ),
               ),
             ),
             SizedBox(width: AppConstants.width10(context),),
@@ -69,6 +73,7 @@ class SpeakerPublicChatView extends StatelessWidget {
       body:        ChatMessagesDetailsBody(
         chatType: 1,
         sessionId: sessionId,
+     //   senderId: senderId,
       ),
     );
   }

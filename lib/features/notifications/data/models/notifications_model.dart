@@ -31,6 +31,7 @@ class Data {
   int? id;
   String? title;
   String? message;
+  String? date;
 
   Data({this.id, this.title, this.message});
 
@@ -38,6 +39,7 @@ class Data {
     id = json['id'];
     title = json['title'];
     message = json['message'];
+    date = json['date'];
   }
 
   Map<String, dynamic> toJson() {
@@ -45,6 +47,7 @@ class Data {
     data['id'] = id;
     data['title'] = title;
     data['message'] = message;
+    data['date'] = date;
     return data;
   }
 }

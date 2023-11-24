@@ -32,8 +32,8 @@ class PrivateChatsListBody extends StatelessWidget {
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
       print("ddddddddddddddddd");
-      print(data[0]["message"]);
-      print(data[0]["sessionId"]);
+      //print(data[0]["message"]);
+      //print(data[0]["sessionId"]);
       return Expanded(
         child: ListView.separated(
           itemBuilder: (context, index) {
@@ -45,8 +45,9 @@ class PrivateChatsListBody extends StatelessWidget {
                       id:    allUsersListInChatModel.data![index].id!,
                       image: allUsersListInChatModel.data![index].image.toString(),
                       sessionId:sessionId,
-                      lastMsg: "${data[0]["message"]}",
-                      lastMsgNumber: data[0]["unReadMessageNumber"],
+                      lastMsg: data.isNotEmpty? "${data[0]["message"]}" : "",
+                      lastMsgNumber: data.isNotEmpty? "${data[0]["unReadMessageNumber"]}" : "0",
+
                     );
                   }));
                   // GoRouter.of(context).push("/chatMessagesDetails");
@@ -55,8 +56,9 @@ class PrivateChatsListBody extends StatelessWidget {
                   name:  allUsersListInChatModel.data![index].name.toString(),
                   id:    allUsersListInChatModel.data![index].id!,
                   image: allUsersListInChatModel.data![index].image.toString(),
-                  lastMessageFromFirebase: "${data[0]["message"]}",
-                  lastMessageNumberFromFirebase: "${data[0]["unReadMessageNumber"]}",
+                  lastMessageFromFirebase: data.isNotEmpty?"${data[0]["message"]}": "",
+                  lastMessageNumberFromFirebase: data.isNotEmpty? "${data[0]["unReadMessageNumber"]}" : "0",
+                  // time: data.isNotEmpty? "${data[0]["timeOfDay"]}" : "",
                 ));
           },
           separatorBuilder: (context, index) {

@@ -6,9 +6,10 @@ import '../../../../../core/shared_widgets/no_internet_widget.dart';
 import '../../../../../core/utils/constants.dart';
 
 class ChatListView extends StatelessWidget {
-  const ChatListView({Key? key, required this.name, required this.sessionId}) : super(key: key);
+  const ChatListView({Key? key, required this.name, required this.sessionId, required this.groupImage}) : super(key: key);
   final String name;
   final int sessionId;
+  final String groupImage;
   @override
   Widget build(BuildContext context) {
     return   Scaffold(
@@ -20,6 +21,7 @@ class ChatListView extends StatelessWidget {
             size: MediaQuery.of(context).size.height*.016,
             color: Colors.black,),
           onPressed: (){
+
             Navigator.pop(context);
           },
         ),
@@ -45,6 +47,7 @@ class ChatListView extends StatelessWidget {
       ChatListViewBody(
         sessionId: sessionId,
         name: name,
+        groupImage: groupImage,
       ) :  const NoInternetWidget(),
     );
   }

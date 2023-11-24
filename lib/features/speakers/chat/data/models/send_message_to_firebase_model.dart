@@ -9,9 +9,10 @@ class SendMessageToFirebaseModel
   final int? reciverId;
   final int? chatType;
   final int? unReadMessageNumber;
-  final TimeOfDay? timeOfDay;
 
-  SendMessageToFirebaseModel( {required this.timeOfDay ,required this.unReadMessageNumber , required this.message, required this.sessionId, required this.senderId, required this.reciverId, required this.chatType});
+
+  SendMessageToFirebaseModel( {
+  required this.unReadMessageNumber , required this.message, required this.sessionId, required this.senderId, required this.reciverId, required this.chatType});
 
 
   Map<String , dynamic> toMap()
@@ -24,7 +25,7 @@ class SendMessageToFirebaseModel
         "reciverId":reciverId,
         "chatType":chatType,
         "unReadMessageNumber":unReadMessageNumber,
-        "timeOfDay":timeOfDay,
+
 
       };
   }

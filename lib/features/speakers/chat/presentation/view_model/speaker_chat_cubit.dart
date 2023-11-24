@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:pusher_client/pusher_client.dart';
+import 'package:resithon_event/core/utils/services/local_services/cache_keys.dart';
 import 'package:resithon_event/core/utils/services/remote_services/api_service.dart';
 // import 'package:pusher_client/pusher_client.dart';
 
@@ -173,9 +174,8 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
           senderId: senderId,
           reciverId: receiverId,
           chatType: type,
-          timeOfDay: TimeOfDay.now(),
         unReadMessageNumber: unReadMessageNumberInCubit,
-      ),
+      ), type,
       );
       messageController.clear();
       emit(SendMessageSuccessState());
@@ -264,27 +264,44 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
   Stream? messageStream;
   SendMessageToFirebaseModel? sendMessageToFirebaseModel;
   CollectionReference messagesCollection = FirebaseFirestore.instance.collection("chats") ;
-  sendMessageToFirebase(SendMessageToFirebaseModel sendMessageToFirebaseModel)
+  sendMessageToFirebase(SendMessageToFirebaseModel sendMessageToFirebaseModel, int chatType)
   async {
     emit(SendMessageToFirebaseLoadingState());
     print("firebase"*10);
-    try {
-      DocumentSnapshot messageSnapshot = await messagesCollection.doc("messageId").get();
-      if (messageSnapshot.exists) {
-        await messagesCollection.doc("messageId").update(sendMessageToFirebaseModel.toMap());
-        print('Message updated successfully');
-
-        emit(SendMessageToFirebaseSuccessState());
-      } else {
-        await messagesCollection.doc("messageId").set(sendMessageToFirebaseModel.toMap());
-        print('Message created successfully');
-
-        emit(SendMessageToFirebaseSuccessState());
+    // prive ==0
+    if(chatType==0){
+      try {
+        DocumentSnapshot messageSnapshot = await messagesCollection.doc("${CacheKeysManger.getUserCodeFromCache()}").get();
+        if (messageSnapshot.exists) {
+          await messagesCollection.doc("${CacheKeysManger.getUserCodeFromCache()}").update(sendMessageToFirebaseModel.toMap());
+          print('Message updated successfully');
+          emit(SendMessageToFirebaseSuccessState());
+        } else {
+          await messagesCollection.doc("${CacheKeysManger.getUserCodeFromCache()}").set(sendMessageToFirebaseModel.toMap());
+          print('Message created successfully');
+          emit(SendMessageToFirebaseSuccessState());
+        }
+      } catch (e) {
+        print('Error sending message: $e');
+        emit(SendMessageToFirebaseErrorState());
       }
-    } catch (e) {
-
-      print('Error sending message: $e');
-      emit(SendMessageToFirebaseErrorState());
+    }
+    else{
+      try {
+        DocumentSnapshot messageSnapshot = await messagesCollection.doc("publicChat").get();
+        if (messageSnapshot.exists) {
+          await messagesCollection.doc("publicChat").update(sendMessageToFirebaseModel.toMap());
+          print('Message updated successfully');
+          emit(SendMessageToFirebaseSuccessState());
+        } else {
+          await messagesCollection.doc("publicChat").set(sendMessageToFirebaseModel.toMap());
+          print('Message created successfully');
+          emit(SendMessageToFirebaseSuccessState());
+        }
+      } catch (e) {
+        print('Error sending message: $e');
+        emit(SendMessageToFirebaseErrorState());
+      }
     }
 
 

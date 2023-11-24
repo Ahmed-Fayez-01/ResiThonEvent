@@ -13,8 +13,8 @@ class ChatMessagesDetails extends StatelessWidget {
   final String image;
   final int id;
   final int sessionId;
-  final int lastMsgNumber;
-  final String lastMsg;
+  final dynamic lastMsgNumber;
+  final String? lastMsg;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class ChatMessagesDetails extends StatelessWidget {
       ChatMessagesDetailsBody(
         chatType: 0,
         sessionId: sessionId,
-        receiverId:id,
+
 
       ) : const NoInternetWidget(),
     );

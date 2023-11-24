@@ -1,10 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:resithon_event/core/utils/colors/colors.dart';
+ import 'package:resithon_event/core/utils/colors/colors.dart';
 import 'package:resithon_event/features/speakers/chat/presentation/views/widgets/send_msg_button.dart';
 
 import '../../../../../../core/shared_widgets/no_internet_widget.dart';
@@ -16,10 +13,10 @@ import '../../view_model/speaker_chat_cubit.dart';
 
 class ChatMessagesDetailsBody extends StatefulWidget {
 
-  const ChatMessagesDetailsBody({Key? key, required this.chatType, required this.sessionId,   this.receiverId}) : super(key: key);
+  const ChatMessagesDetailsBody({Key? key, required this.chatType, required this.sessionId,    }) : super(key: key);
   final int chatType;
   final int sessionId;
-  final int? receiverId;
+//  final int? senderId;
   @override
   State<ChatMessagesDetailsBody> createState() => _ChatMessagesDetailsBodyState();
 }
@@ -45,7 +42,6 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
       child: BlocConsumer<SpeakerChatCubit , SpeakerChatState>(
         listener: (context,state){
           if(state is GetAllMessagesSuccessState){
-            print("dd");
             Future.delayed(const Duration(milliseconds: 100)).then((value) {
               FocusManager.instance.primaryFocus?.unfocus();
                scrollController.jumpTo(
@@ -57,7 +53,7 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
           }
         },
         builder: (context , state ){
-          print(  widget.receiverId.toString() == CacheHelper.getData(key: "id") );
+          print(CacheHelper.getData(key: "id"));
           print("asasasasas");
           return
             AppConstants.hasConnectionResult==true ?
@@ -67,23 +63,25 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal:AppConstants.sp10(context)),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppConstants.sp10(context),
+                      vertical: AppConstants.sp10(context),
+                    ),
                     child: ListView.builder(
                       controller: scrollController,
-                      shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),
                       itemCount: SpeakerChatCubit.get(context).allChatMessages.length,
                       itemBuilder: (context, index) {
-                        return Padding(padding: EdgeInsets.all(MediaQuery.of(context).size.height * .002),
-                          child: Align(
-                            alignment: widget.receiverId.toString() == CacheHelper.getData(key: "id")
-                                ? Alignment.topLeft
-                                : Alignment.topLeft,
+                        // Chat message bubble code remains the same
+                        return Padding(
+                          padding: EdgeInsets.all(MediaQuery.of(context).size.height * .005,),
+                          child: Directionality(
+                            textDirection: SpeakerChatCubit.get(context).allChatMessages[index].senderId != CacheHelper.getData(key: "id").toString()?TextDirection.rtl:TextDirection.ltr,
                             child: Row(
-                               mainAxisAlignment: widget.receiverId.toString() == CacheHelper.getData(key: "id")
-                                   ? MainAxisAlignment.end:
-                               MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                // Sender image container
                                 Container(
                                   height: 40,
                                   width: 40,
@@ -102,28 +100,45 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                                   ),
                                 ),
                                 SizedBox(width: AppConstants.width5(context),),
-                                Container(
-                                  padding: EdgeInsets.all(
-                                      AppConstants.height15(context)),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primaryColor,
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(
-                                          AppConstants.height10(context)),
-                                      bottomRight: Radius.circular(
-                                          AppConstants.height10(context)),
-                                      bottomLeft: Radius.circular(
-                                          AppConstants.height10(context)),
+                                // Message container
+                                Flexible(
+                                  child: Padding(
+                                    padding:
+                                    (SpeakerChatCubit.get(context).allChatMessages[index].senderId) != CacheHelper.getData(key: "id").toString() ?
+                                    EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width*.1
+                                    ) : EdgeInsets.only(
+                                        right: MediaQuery.of(context).size.width*.1
+                                    ),
+                                    child: Container(
+                                      padding: EdgeInsets.all(AppConstants.height15(context)),
+                                      decoration: BoxDecoration(
+                                        color: (SpeakerChatCubit.get(context).allChatMessages[index].senderId) != CacheHelper.getData(key: "id").toString() ?
+                                        AppColors.primaryColor : const Color(0xffDCDCDC),
+                                        borderRadius:
+                                        (SpeakerChatCubit.get(context).allChatMessages[index].senderId) == CacheHelper.getData(key: "id").toString() ?
+                                        BorderRadius.only(
+                                          topRight: Radius.circular(AppConstants.height10(context)),
+                                          bottomRight: Radius.circular(AppConstants.height10(context)),
+                                          bottomLeft: Radius.circular(AppConstants.height10(context)),
+                                        ) : BorderRadius.only(
+                                          topLeft: Radius.circular(AppConstants.height10(context)),
+                                          bottomRight: Radius.circular(AppConstants.height10(context)),
+                                          bottomLeft: Radius.circular(AppConstants.height10(context)),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "${SpeakerChatCubit.get(context).allChatMessages[index].message}",
+                                        style: TextStyle(
+                                            color: (SpeakerChatCubit.get(context).allChatMessages[index].senderId) != CacheHelper.getData(key: "id").toString() ?
+                                            Colors.white : Colors.black,
+                                            fontSize: AppConstants.sp14(context),
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Poppins"
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                  child: Text(
-                                    "${SpeakerChatCubit.get(context).allChatMessages[index].message}",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: AppConstants.sp14(context),
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "Poppins"
-                                    ),),
                                 ),
                               ],
                             ),
@@ -196,7 +211,7 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                                 senderId: CacheHelper.getData(key: "id"),
                                 type: widget.chatType,
                                 message: SpeakerChatCubit.get(context).messageController.text,
-                                receiverId: widget.receiverId,
+                              //  receiverId: widget.senderId,
                               );
                               Future.delayed(const Duration(seconds: 2)).then((value) {
                                 FocusManager.instance.primaryFocus?.unfocus();
