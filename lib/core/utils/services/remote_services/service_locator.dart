@@ -6,7 +6,7 @@ import 'package:resithon_event/features/user/projects/data/repos/project_reop/pr
 import '../../../../features/auth/data/repos/auth_repo_impl.dart';
 import '../../../../features/notifications/data/repos/notifications_repo_impl.dart';
 import '../../../../features/sessions/data/repos/sessions_repo/sessions_repo_impl.dart';
-import '../../../../features/speakers/chat/data/repo/speaker_chat_repo_impl.dart';
+// import '../../../../features/speakers/chat/data/repo/speaker_chat_repo_impl.dart';
 import '../../../../features/user/home/data/repos/event_repo/event_repo_impl.dart';
 import 'api_service.dart';
 //dependency Injection
@@ -35,9 +35,9 @@ void setup() {
   getIt.registerSingleton<NotificationsRepoImple>(NotificationsRepoImple(
     getIt.get<ApiService>(),
   ));
-  getIt.registerSingleton<SpeakersChatRepoImpl>(SpeakersChatRepoImpl(
-    getIt.get<ApiService>(),
-  ));
+  // getIt.registerSingleton<SpeakersChatRepoImpl>(SpeakersChatRepoImpl(
+  //   getIt.get<ApiService>(),
+  // ));
   getIt.registerSingleton<ScanRepoImpl>(ScanRepoImpl(
     getIt.get<ApiService>(),
   ));

@@ -20,6 +20,7 @@ import 'package:resithon_event/features/user/projects/data/repos/project_reop/pr
 import 'package:resithon_event/features/user/projects/presentation/view_models/project_evaluation_cubit/project_evaluation_cubit.dart';
 import 'package:resithon_event/features/user/projects/presentation/view_models/projects_cubit/all_projects_cubit.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:resithon_event/firebase_options.dart';
 import 'core/utils/constants.dart';
 import 'core/utils/roots/app_router.dart';
 import 'core/utils/services/local_services/cache_helper.dart';
@@ -83,7 +84,9 @@ hasConnection() async {
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await EasyLocalization.ensureInitialized();
   await execute(InternetConnectionChecker());
   final InternetConnectionChecker customInstance =

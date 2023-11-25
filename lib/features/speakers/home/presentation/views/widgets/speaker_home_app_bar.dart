@@ -10,7 +10,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
 import 'package:resithon_event/features/notifications/presentation/view_models/notifications_states.dart';
 import '../../../../../../core/utils/services/local_services/cache_helper.dart';
-import '../../../../chat/presentation/views/chat_view.dart';
+// import '../../../../chat/presentation/views/chat_view.dart';
 
 class SpeakerHomeAppBar extends StatelessWidget {
   const SpeakerHomeAppBar({super.key});
@@ -70,11 +70,11 @@ class SpeakerHomeAppBar extends StatelessWidget {
           ),
           AppBarIconWidget(
             press: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const SpeakerChatView(
-                  userType: "2",
-                );
-              }));
+              // Navigator.push(context, MaterialPageRoute(builder: (context) {
+              //   return const SpeakerChatView(
+              //     userType: "2",
+              //   );
+              // }));
               // GoRouter.of(context).push("/speakerChatView");
             },
             iconPath: AssetData.whiteChat,

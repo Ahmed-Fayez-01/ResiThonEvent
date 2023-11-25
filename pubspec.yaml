@@ -65,7 +65,7 @@ dependencies:
   firebase_core: ^2.22.0
   cloud_firestore: ^4.13.2
   flutter_html:
-  pusher_client: 2.0.0
+#  pusher_client: 2.0.0
   overlay_tooltip: ^0.2.3
   timer_count_down: ^2.2.2
   video_player: ^2.8.1
