@@ -25,76 +25,87 @@ class NotificationsViews extends StatefulWidget {
 class _NotificationsViewsState extends State<NotificationsViews> {
   @override
   Widget build(BuildContext context) {
-    return   BlocProvider(
-      create: (context) => NotificationsCubit(getIt.get<NotificationsRepoImple>())..getNotificationsData(),
-      child: BlocConsumer<NotificationsCubit , NotificationsStates>(
-        listener: (context,state){
-          if(state is DeleteAllNotificationsSuccessState){
+    return BlocProvider(
+      create: (context) =>
+          NotificationsCubit(getIt.get<NotificationsRepoImple>())
+            ..getNotificationsData(),
+      child: BlocConsumer<NotificationsCubit, NotificationsStates>(
+        listener: (context, state) {
+          if (state is DeleteAllNotificationsSuccessState) {
             Navigator.pop(context);
             NotificationsCubit.get(context).getNotificationsData();
           }
         },
-        builder: (context,state){
+        builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.white,
               centerTitle: true,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios,
-                  size: MediaQuery.of(context).size.height*.016,
-                  color: Colors.black,),
-                onPressed: (){
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  size: MediaQuery.of(context).size.height * .016,
+                  color: Colors.black,
+                ),
+                onPressed: () {
                   setState(() {
                     NotificationsCubit.l = 0;
                   });
-               //   CacheHelper.removeData(key: "NotificationsListLengthInCash");
-                  GoRouter.of(context).pushReplacement("/speakerHomeView");
-        },
+                  //   CacheHelper.removeData(key: "NotificationsListLengthInCash");
+                  // GoRouter.of(context).pushReplacement("/speakerHomeView");
+                  Navigator.pop(context);
+                },
               ),
               actions: [
-                if(state is GetAllNotificationsDataSuccessState && state.model.data!.isNotEmpty)
+                if (state is GetAllNotificationsDataSuccessState &&
+                    state.model.data!.isNotEmpty)
                   IconButton(
-                    onPressed: (){
+                    onPressed: () {
                       customPopUpDialog(
                         context: context,
                         button: DefaultButton(
                           onPress: () {
-                            context.read<NotificationsCubit>().deleteAllNotifications();
+                            context
+                                .read<NotificationsCubit>()
+                                .deleteAllNotifications();
                           },
                           text: "Delete",
                           borderRadius: AppConstants.sp10(context),
-                          backgroundColor:
-                          const Color(0xff323232),
+                          backgroundColor: const Color(0xff323232),
                         ),
                         icon: AssetData.cancel,
                         mainTitle: "cancelMessage".tr(),
                       );
                     },
-                    icon: Icon(Icons.delete_forever,
-                      color: AppColors.primaryColor,),
+                    icon: Icon(
+                      Icons.delete_forever,
+                      color: AppColors.primaryColor,
+                    ),
                   )
               ],
               elevation: 0,
-              systemOverlayStyle:  const SystemUiOverlayStyle(
+              systemOverlayStyle: const SystemUiOverlayStyle(
                 statusBarColor: Colors.white, // <-- SEE HERE
-                statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
-                systemNavigationBarColor:Colors.white,
-                statusBarBrightness: Brightness.light, //<-- For iOS SEE HERE (dark icons)
+                statusBarIconBrightness:
+                    Brightness.dark, //<-- For Android SEE HERE (dark icons)
+                systemNavigationBarColor: Colors.white,
+                statusBarBrightness:
+                    Brightness.light, //<-- For iOS SEE HERE (dark icons)
               ),
-              title: Text("notification".tr(),
+              title: Text(
+                "notification".tr(),
                 style: TextStyle(
                     fontFamily: "Poppins",
-                    fontSize: MediaQuery.of(context).size.height*.018,
+                    fontSize: MediaQuery.of(context).size.height * .018,
                     fontWeight: FontWeight.w400,
-                    color: const Color(0xff323232)
-                ),),
+                    color: const Color(0xff323232)),
+              ),
             ),
             resizeToAvoidBottomInset: false,
             extendBody: true,
             body: const NotificationsViewsBody(),
           );
         },
-
       ),
     );
   }
