@@ -1,13 +1,71 @@
 {
   "project_info": {
     "project_number": "912233290096",
+    "firebase_url": "https://resithon-d6e40-default-rtdb.firebaseio.com",
     "project_id": "resithon-d6e40",
     "storage_bucket": "resithon-d6e40.appspot.com"
   },
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:912233290096:android:7b0a2e8fc296ca8d71d7b5",
+        "android_client_info": {
+          "package_name": "com.example.resi_thon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeAvtNV7K7-Mmc2zXX1unNR0v3SiEXheE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912233290096:android:6d168591ad43757871d7b5",
+        "android_client_info": {
+          "package_name": "com.example.test_resi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeAvtNV7K7-Mmc2zXX1unNR0v3SiEXheE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:912233290096:android:0e8fb47db9ea494471d7b5",
+        "android_client_info": {
+          "package_name": "com.resithonevent.resithon_event"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeAvtNV7K7-Mmc2zXX1unNR0v3SiEXheE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912233290096:android:04580c39088dfcab71d7b5",
         "android_client_info": {
           "package_name": "com.yahalaaevent.yahalaa"
         }
