@@ -33,7 +33,7 @@ class _UserSideMenuState extends State<UserSideMenu> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * .1,
+              height: MediaQuery.of(context).size.height * .05,
             ),
             UserDrawerHeader(press: (){
               GoRouter.of(context).push("/profileView");
@@ -102,7 +102,7 @@ class _UserSideMenuState extends State<UserSideMenu> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * .08,
+              height: MediaQuery.of(context).size.height * .03,
             )
           ],
         ),

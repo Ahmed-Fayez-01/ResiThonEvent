@@ -18,7 +18,7 @@ class _SplashSecondaryBodyState extends State<SplashSecondaryBody> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 2), () {
       if (CacheKeysManger.onBoardingStatus()) {
         if (CacheKeysManger.getUserCodeFromCache() != "") {
           if (CacheHelper.getData(key: "role") == "1") {
@@ -45,11 +45,20 @@ class _SplashSecondaryBodyState extends State<SplashSecondaryBody> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              AssetData.logo,
-              fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width * .5,
-            ),
+           Row(children: [
+             Text("Resi",style: TextStyle(
+               fontSize: MediaQuery.of(context).size.height*.048,
+               fontWeight: FontWeight.w500,
+               fontFamily: "Poppins",
+               color: AppColors.secondaryColor,
+             ),),
+             Text("Thon",style: TextStyle(
+               fontSize: MediaQuery.of(context).size.height*.048,
+               fontWeight: FontWeight.w500,
+               fontFamily: "Poppins",
+               color: AppColors.primarySwatchColor,
+             ),)
+           ],)
           ],
         )
       ],

@@ -72,7 +72,7 @@ class _ProjectsListState extends State<ProjectsList> {
         ),
         AppConstants.foundedProjects.isNotEmpty
             ? SizedBox(
-          height: MediaQuery.of(context).size.height * .75,
+          height: MediaQuery.of(context).size.height * .7,
               child: ListView.separated(
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),

@@ -33,7 +33,7 @@ class _SpeakerSideMenuState extends State<SpeakerSideMenu> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * .1,
+              height: MediaQuery.of(context).size.height * .05,
             ),
             UserDrawerHeader(press: (){
               GoRouter.of(context).push("/profileView");
@@ -97,7 +97,7 @@ class _SpeakerSideMenuState extends State<SpeakerSideMenu> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * .15,
+              height: MediaQuery.of(context).size.height * .05,
             )
           ],
         ),

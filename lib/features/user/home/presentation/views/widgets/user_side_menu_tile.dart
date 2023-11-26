@@ -30,7 +30,7 @@ class UserSideMenuTile extends StatelessWidget {
                 duration: const Duration(milliseconds: 400),
                 curve: Curves.fastOutSlowIn,
                 // Much better
-                height: MediaQuery.of(context).size.height*.065,
+                height: MediaQuery.of(context).size.height*.06,
                 width: isActive ? MediaQuery.of(context).size.width*.59 : 0,
                 left: CacheKeysManger.getUserLanguageFromCache()=="ar"?null: 0,
                 right: CacheKeysManger.getUserLanguageFromCache()=="ar"?0: null,
