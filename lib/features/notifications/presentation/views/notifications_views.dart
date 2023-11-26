@@ -48,7 +48,7 @@ class _NotificationsViewsState extends State<NotificationsViews> {
                     NotificationsCubit.l = 0;
                   });
                //   CacheHelper.removeData(key: "NotificationsListLengthInCash");
-                  GoRouter.of(context).pushReplacement("/speakerHomeView");
+                 Navigator.pop(context);
         },
               ),
               actions: [
