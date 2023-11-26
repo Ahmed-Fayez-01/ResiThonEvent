@@ -51,7 +51,7 @@ class _SpeakerSideMenuState extends State<SpeakerSideMenu> {
                   Future.delayed(const Duration(milliseconds: 350), () {
                     Scaffold.of(context).closeDrawer();
                     if (selectedMenu["title"] == "Home"||selectedMenu["title"] == "ارئيسية") {
-                      Navigator.pop(context);
+                      Scaffold.of(context).closeDrawer();
                     } else if (selectedMenu["title"] == "My Schedule"||selectedMenu["title"] == "جدولي") {
                       GoRouter.of(context).push("/scheduleView");
                     } else if (selectedMenu["title"] == "Agenda"||selectedMenu["title"] == "الاجنده") {

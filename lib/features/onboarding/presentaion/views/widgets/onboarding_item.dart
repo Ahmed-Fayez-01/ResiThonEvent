@@ -96,7 +96,7 @@ class OnBoardingItem extends StatelessWidget {
                     child: CircleAvatar(
                       radius: MediaQuery.of(context).size.width * .07,
                       backgroundColor: const Color(0xffDCDCDC),
-                      child: SvgPicture.asset(AssetData.arrowLeft),
+                      child: SvgPicture.asset(AssetData.arrowLeft,width: MediaQuery.of(context).size.width * .06,),
                     ),
                   )),
             ),
@@ -121,7 +121,7 @@ class OnBoardingItem extends StatelessWidget {
                   center: CircleAvatar(
                     radius: MediaQuery.of(context).size.width * .065,
                     backgroundColor: AppColors.primarySwatchColor,
-                    child: SvgPicture.asset(AssetData.arrowRight),
+                    child: SvgPicture.asset(AssetData.arrowRight,width: MediaQuery.of(context).size.width * .06,),
                   ),
                   progressColor: AppColors.primarySwatchColor,
                   backgroundColor: Colors.white,
