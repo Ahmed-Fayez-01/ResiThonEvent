@@ -25,7 +25,7 @@ class _SessionBWidgetState extends State<SessionBWidget> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
       child: Container(
-        height: MediaQuery.of(context).size.height * .24,
+        height: MediaQuery.of(context).size.height * .26,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
           color: Colors.white,
@@ -52,7 +52,7 @@ class _SessionBWidgetState extends State<SessionBWidget> {
                               Radius.circular(AppConstants.sp10(context))),
                       child: CachedNetworkImage(
                         imageUrl: widget.instance!.image!,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                         width: double.infinity,
                         placeholder: (context, url) => const Center(
                             child: CircularProgressIndicator(
@@ -160,12 +160,13 @@ class _SessionBWidgetState extends State<SessionBWidget> {
                   name: widget.instance!.speaker!),
             ),
             SizedBox(
-              height: AppConstants.height15(context),
+              height: AppConstants.height10(context),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: AppConstants.height20(context)),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: DescriptionPoint(

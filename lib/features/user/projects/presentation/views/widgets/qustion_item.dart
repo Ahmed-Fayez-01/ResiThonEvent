@@ -163,7 +163,7 @@ class _QuestionItemState extends State<QuestionItem> {
           height: AppConstants.height5(context),
         ),
         CustomTextFormField(
-          maxLines: 3,
+          maxLines: 2,
           onChange: (value){
             if(AppConstants.evaluationSubmit.isNotEmpty)
             {

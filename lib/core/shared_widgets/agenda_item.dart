@@ -68,7 +68,7 @@ class AgendaItem extends StatelessWidget {
                 color: Colors.grey,
                 child: CachedNetworkImage(
                   imageUrl: instance.image!,
-                  fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   width: MediaQuery.of(context).size.width * .22,
                   height: MediaQuery.of(context).size.height * .1,
                   placeholder: (context, url) => const Center(

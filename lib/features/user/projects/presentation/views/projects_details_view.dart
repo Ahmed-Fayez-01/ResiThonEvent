@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:resithon_event/features/user/projects/presentation/views/projects_view.dart';
 import 'package:resithon_event/features/user/projects/presentation/views/widgets/projects_details_view_body.dart';
 
 import '../../../../../core/utils/colors/colors.dart';

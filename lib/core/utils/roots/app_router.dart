@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resithon_event/features/about_app/presentation/views/about_app_view.dart';
 import 'package:resithon_event/features/auth/presentation/views/login_view.dart';
-
 import 'package:resithon_event/features/onboarding/presentaion/views/onboarding_screen.dart';
 import 'package:resithon_event/features/sessions/presentations/views/see_more_sessions_view.dart';
 import 'package:resithon_event/features/videos/presentation/views/videos_view.dart';

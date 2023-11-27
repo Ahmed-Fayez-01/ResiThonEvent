@@ -8,7 +8,7 @@ class CacheKeysManger {
   static bool firstLanguageSelectionStatus() =>
       CacheHelper.getData(key: 'languageSelected') ?? false;
   static String? getUserDeviceTokenFromCache() =>
-      CacheHelper.getData(key: 'device_token');
+      CacheHelper.getData(key: 'device_token')??"";
   static String? getUserCodeFromCache() =>
       CacheHelper.getData(key: 'code')??"";
   static String? getUserEmailFromCache() =>

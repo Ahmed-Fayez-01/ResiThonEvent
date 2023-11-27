@@ -741,7 +741,9 @@ class _UserSessionDetailsViewBodyState
             padding: EdgeInsets.all(AppConstants.sp20(context)),
             child: Column(
               children: [
-                const CustomBackButton(),
+                 CustomBackButton(onpress: () {
+                   Navigator.pop(context);
+                 },),
                 Expanded(
                   child: CustomErrorWidget(onTap: () {
                     context

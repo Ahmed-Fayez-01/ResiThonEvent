@@ -205,15 +205,12 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                                 message: SpeakerChatCubit.get(context).messageController.text,
                                receiverId: widget.reciverId,
                               );
-
-                              Future.delayed(const Duration(seconds: 2)).then((value) {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                scrollController.jumpTo(
-                                  scrollController.position.maxScrollExtent,
-                                  // duration:const Duration(seconds: 1),
-                                  // curve: Curves.fastOutSlowIn,
-                                );
-                              });
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              scrollController.jumpTo(
+                                scrollController.position.maxScrollExtent,
+                                // duration:const Duration(seconds: 1),
+                                // curve: Curves.fastOutSlowIn,
+                              );
                             },
                             child: const SendMsgButton()),
 

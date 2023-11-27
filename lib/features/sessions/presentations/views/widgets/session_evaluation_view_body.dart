@@ -30,6 +30,7 @@ final int sessionId;
                 children: [
                   Column(
                     children: [
+                      SizedBox(height: AppConstants.height20(context),),
                       SvgPicture.asset(
                         AssetData.sessionEvaluationBanner,
                         width: MediaQuery.of(context).size.width * .5,

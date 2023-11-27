@@ -12,6 +12,7 @@ import '../../../../../../core/shared_widgets/custom_back_button.dart';
 import '../../../../../../core/shared_widgets/more_details_widget.dart';
 import '../../../../../../core/utils/constants.dart';
 import '../../../data/models/project_model.dart';
+import '../projects_view.dart';
 
 class ProjectsDetailsViewBody extends StatelessWidget {
   const ProjectsDetailsViewBody({super.key, required this.instance});
@@ -53,7 +54,9 @@ class ProjectsDetailsViewBody extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.all(AppConstants.sp20(context)),
-                        child: const CustomBackButton(),
+                        child: CustomBackButton(onpress: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProjectsView()));
+                        },),
                       ),
                     ],
                   ),
@@ -94,6 +97,7 @@ class ProjectsDetailsViewBody extends StatelessWidget {
             ),
           ),
         ),
+
         if (CacheHelper.getData(key: "can_rate")==true)
           instance.has_rate!
               ? Container(
@@ -120,7 +124,7 @@ class ProjectsDetailsViewBody extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  EvaluationView(projectId: instance.id!)));
+                                  EvaluationView(instance: instance)));
                     }
                   },
                   text: aDate == today

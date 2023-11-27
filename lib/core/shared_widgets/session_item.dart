@@ -77,7 +77,7 @@ class SessionItem extends StatelessWidget {
                   color: Colors.grey,
                   child: CachedNetworkImage(
                     imageUrl: instance!.image!,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                     width: MediaQuery.of(context).size.width * .3,
                     height: MediaQuery.of(context).size.height * .15,
                     placeholder: (context, url) => const Center(

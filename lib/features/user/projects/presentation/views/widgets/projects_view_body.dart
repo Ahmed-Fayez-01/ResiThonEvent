@@ -7,6 +7,7 @@ import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/features/user/projects/presentation/views/widgets/projects_list.dart';
 
 import '../../../../../../core/shared_widgets/error_widget.dart';
+import '../../../../home/presentation/views/user_home_view.dart';
 import '../../view_models/projects_cubit/all_projects_cubit.dart';
 
 class ProjectsViewBody extends StatelessWidget {
@@ -27,7 +28,9 @@ class ProjectsViewBody extends StatelessWidget {
                   SizedBox(
                     height: AppConstants.height20(context),
                   ),
-                  const CustomBackButton(),
+                  CustomBackButton(onpress: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UserHomeView()));
+                  },),
                   SizedBox(
                     height: AppConstants.height20(context),
                   ),

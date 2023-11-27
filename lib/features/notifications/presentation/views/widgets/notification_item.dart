@@ -19,7 +19,7 @@ class NotificationItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
           ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Container(
               //   height: MediaQuery.of(context).size.height*.06,
@@ -38,7 +38,6 @@ class NotificationItem extends StatelessWidget {
               //   width: AppConstants.width10(context),
               // ),
               Expanded(
-                flex : 6 ,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -62,18 +61,16 @@ class NotificationItem extends StatelessWidget {
                   ],
                 ),
               ),
-              const Spacer(),
-             Expanded(
-               flex: 1,
-               child:  Text(
-               "${notificationsModel!.date}",
-               style: TextStyle(
-                 fontWeight: FontWeight.w400,
-                 fontSize: MediaQuery.of(context).size.height*.014,
-                 fontFamily: "Poppins",
-                 color: AppColors.greyColor,
-               ),
-             ),),
+
+             Text(
+             "${notificationsModel!.date}",
+             style: TextStyle(
+               fontWeight: FontWeight.w400,
+               fontSize: MediaQuery.of(context).size.height*.014,
+               fontFamily: "Poppins",
+               color: AppColors.greyColor,
+             ),
+                          ),
             ],
           ),
         ),

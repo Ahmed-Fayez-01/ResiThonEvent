@@ -14,10 +14,13 @@ class AboutAppViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(AppConstants.sp20(context)),
-      child: Column(
+      padding: EdgeInsets.symmetric(horizontal:AppConstants.sp20(context)),
+      child: ListView(
         children: [
-          const CustomBackButton(),
+          SizedBox(height: AppConstants.height20(context),),
+          CustomBackButton(onpress: () {
+            Navigator.pop(context);
+          },),
           LogoText(),
           SizedBox(
             height: AppConstants.height20(context),

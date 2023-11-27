@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -36,6 +35,7 @@ import 'features/sessions/presentations/view_models/all_sessions_cubit/all_sessi
 import 'features/sessions/presentations/view_models/subscribed_sessions_cubit/subscribed_sessions_cubit.dart';
 import 'features/sessions/presentations/view_models/toggle_cubit/toggle_cubit.dart';
 import 'features/user/home/data/repos/event_repo/event_repo_impl.dart';
+import 'features/user/projects/presentation/view_models/post_evaluation_cubit/post_project_evaluation_cubit.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -182,6 +182,10 @@ class ResiThon extends StatelessWidget {
             create: (context) => ProjectEvaluationCubit(
                   getIt.get<ProjectsRepoImpl>(),
                 )..projectEvaluationDetails()),
+        BlocProvider(
+            create: (context) => PostProjectEvaluationCubit(
+                  getIt.get<ProjectsRepoImpl>(),
+                )),
         BlocProvider(
             create: (context) => CancelSessionsCubit(
                   getIt.get<SessionsRepoImpl>(),

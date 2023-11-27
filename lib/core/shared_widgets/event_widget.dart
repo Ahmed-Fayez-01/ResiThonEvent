@@ -23,7 +23,7 @@ class EventWidget extends StatelessWidget {
             padding:
                 EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
             child: Container(
-              height: MediaQuery.of(context).size.height * .29,
+              height: MediaQuery.of(context).size.height * .26,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
                 color: Colors.white,
@@ -44,7 +44,7 @@ class EventWidget extends StatelessWidget {
                         topRight: Radius.circular(AppConstants.sp10(context))),
                     child: CachedNetworkImage(
                       imageUrl: state.model.data!.image!,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height * .14,
                       placeholder: (context, url) => const Center(

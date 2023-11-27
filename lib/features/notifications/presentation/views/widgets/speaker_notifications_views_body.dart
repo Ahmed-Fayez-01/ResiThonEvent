@@ -49,7 +49,7 @@ class NotificationsViewsBody extends StatelessWidget {
                               notifyId:  state.model.data![index].id!,
                             );
                           },
-                          backgroundColor: Colors.red,
+                          backgroundColor: AppColors.primarySwatchColor,
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
                           label: 'delete',

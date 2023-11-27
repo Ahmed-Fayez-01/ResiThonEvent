@@ -54,7 +54,9 @@ class _AgendaViewBodyState extends State<AgendaViewBody> {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
-          child: const CustomBackButton(),
+          child: CustomBackButton(onpress: () {
+            Navigator.pop(context);
+          },),
         ),
         SizedBox(
           height: AppConstants.height20(context),

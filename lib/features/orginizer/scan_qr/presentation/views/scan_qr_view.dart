@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:resithon_event/core/shared_widgets/custom_button.dart';
@@ -77,6 +78,32 @@ class _ScanQrPageState extends State<ScanQrPage> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios,
+            size: MediaQuery.of(context).size.height*.016,
+            color: Colors.black,),
+          onPressed: (){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const OrganizerHomeView()));
+          },
+        ),
+        elevation: 0,
+        systemOverlayStyle:  const SystemUiOverlayStyle(
+          statusBarColor: Colors.white, // <-- SEE HERE
+          statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
+          systemNavigationBarColor:Colors.white,
+          statusBarBrightness: Brightness.light, //<-- For iOS SEE HERE (dark icons)
+        ),
+        title: Text("Scanning Time",
+          style: TextStyle(
+              fontFamily: "Poppins",
+              fontSize: MediaQuery.of(context).size.height*.018,
+              fontWeight: FontWeight.w400,
+              color: const Color(0xff323232)
+          ),),
+      ),
         body: QRView(
           key: qrKey,
           onQRViewCreated: _onQRViewCreated,

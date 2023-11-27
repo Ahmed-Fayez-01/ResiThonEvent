@@ -9,17 +9,29 @@ final int sessionId;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(0.0), // here the desired height
-          child: AppBar(
-            elevation: 0,
-            systemOverlayStyle:  const SystemUiOverlayStyle(
-              statusBarColor: Colors.white, // <-- SEE HERE
-              statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
-              systemNavigationBarColor:Color(0xffEDC907),
-              statusBarBrightness: Brightness.light, //<-- For iOS SEE HERE (dark icons)
-            ),
-          )
+      appBar: AppBar(
+        elevation: 3,
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: Text(
+          "Evaluation Time",
+          style: TextStyle(
+              fontSize: MediaQuery.of(context).size.height * .018,
+              fontWeight: FontWeight.w500,
+              fontFamily: "Poppins"),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.white, // <-- SEE HERE
+          statusBarIconBrightness: Brightness.dark, //<-- For Android SEE HERE (dark icons)
+          systemNavigationBarColor: Color(0xffEDC907),
+          statusBarBrightness: Brightness.light, //<-- For iOS SEE HERE (dark icons)
+        ),
       ),
       body: SessionEvaluationViewBody(sessionId: sessionId,),
     );
