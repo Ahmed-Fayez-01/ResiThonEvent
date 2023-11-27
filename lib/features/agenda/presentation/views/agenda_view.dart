@@ -4,7 +4,7 @@ import 'package:resithon_event/features/agenda/presentation/views/widgets/agenda
 
 class AgendaView extends StatelessWidget {
   const AgendaView({super.key});
-
+//jj
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
