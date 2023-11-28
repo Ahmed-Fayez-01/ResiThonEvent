@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "912233290096",
-    "project_id": "resithon-d6e40",
-    "storage_bucket": "resithon-d6e40.appspot.com"
+    "project_number": "122916719132",
+    "project_id": "resithon-d9ce8",
+    "storage_bucket": "resithon-d9ce8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:912233290096:android:0e8fb47db9ea494471d7b5",
+        "mobilesdk_app_id": "1:122916719132:android:f4e137c4705ff1100b6dd9",
+        "android_client_info": {
+          "package_name": "com.yahalaa.yahalaa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx8E1SGfePx1-Yxf_F9cc0b4m2QgmQIhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122916719132:android:07c0bea391cff5f80b6dd9",
         "android_client_info": {
           "package_name": "com.yahalaaevent.yahalaa"
         }
@@ -15,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDeAvtNV7K7-Mmc2zXX1unNR0v3SiEXheE"
+          "current_key": "AIzaSyBx8E1SGfePx1-Yxf_F9cc0b4m2QgmQIhg"
         }
       ],
       "services": {

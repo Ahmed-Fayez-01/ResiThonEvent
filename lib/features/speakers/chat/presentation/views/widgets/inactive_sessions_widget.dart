@@ -57,6 +57,7 @@ class InactiveSessionsWidget extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            SizedBox(width: AppConstants.width10(context),),
                             Text(
                               sessionsModel!.data![index].chat_expire!
                                   ? "Expired"

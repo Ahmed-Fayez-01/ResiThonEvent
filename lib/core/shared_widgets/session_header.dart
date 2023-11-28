@@ -39,7 +39,7 @@ class SessionHeader extends StatelessWidget {
           Positioned.fill(
             child: CachedNetworkImage(
               imageUrl: imagPath,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               width: double.infinity,
               placeholder: (context, url) => const Center(
                   child: CircularProgressIndicator(

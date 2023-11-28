@@ -60,13 +60,15 @@ class SpeakerPublicChatView extends StatelessWidget {
               ),
             ),
             SizedBox(width: AppConstants.width10(context),),
-            Text(groupName,
-              style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: MediaQuery.of(context).size.height*.018,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff323232)
-              ),),
+            Expanded(
+              child: Text(groupName,
+                style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: MediaQuery.of(context).size.height*.018,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xff323232)
+                ),),
+            ),
           ],
         ),
       ),

@@ -34,37 +34,38 @@ class SpeakerHomeAppBar extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          BlocProvider(
-            create: (context) => NotificationsCubit.get(context)..getNotificationsData(),
-            child: BlocBuilder<NotificationsCubit , NotificationsStates>(
-              builder: (context , state){
-                 int lInCash = CacheHelper.getData(key: "NotificationsListLengthInCash") ?? 0 ;
-                 print(lInCash);
-                 print("mostafa lInCash");
-                 NotificationsCubit.l = ( NotificationsCubit.get(context).notificationsListLength  - lInCash);
-                 print(NotificationsCubit.l);
-                 print("5"*10);
-                 print("5"*10);
-                return
-                  state is !GetAllNotificationsDataLoadingState ?
-                  badges.Badge(
-                  badgeContent: Text(
-                    '${NotificationsCubit.l}',
-                    style: const TextStyle(color: Colors.white),
-                  ) ,
-                  child: AppBarIconWidget(
-                      press: () {
-                        GoRouter.of(context).push("/notificationsViews");
-                      },
-                      iconPath: AssetData.bell),
-                ) : const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primarySwatchColor,
-                    ),
-                  );
+          // BlocProvider(
+          //   create: (context) => NotificationsCubit.get(context)..getNotificationsData(),
+          //   child: BlocBuilder<NotificationsCubit , NotificationsStates>(
+          //     builder: (context , state){
+          //        int lInCash = CacheHelper.getData(key: "NotificationsListLengthInCash") ?? 0 ;
+          //        print(lInCash);
+          //        print("mostafa lInCash");
+          //        NotificationsCubit.l = ( NotificationsCubit.get(context).notificationsListLength  - lInCash);
+          //        print(NotificationsCubit.l);
+          //        print("5"*10);
+          //        print("5"*10);
+          //       return
+          //         state is !GetAllNotificationsDataLoadingState ?
+          //         badges.Badge(
+          //         badgeContent: Text(
+          //           '${NotificationsCubit.l}',
+          //           style: const TextStyle(color: Colors.white),
+          //         ) ,
+          //         child:
+          //       ) : const Center(
+          //           child: CircularProgressIndicator(
+          //             color: AppColors.primarySwatchColor,
+          //           ),
+          //         );
+          //     },
+          //   ),
+          // ),
+          AppBarIconWidget(
+              press: () {
+                GoRouter.of(context).push("/notificationsViews");
               },
-            ),
-          ),
+              iconPath: AssetData.bell),
           SizedBox(
             width: AppConstants.width10(context),
           ),

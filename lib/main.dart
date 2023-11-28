@@ -102,6 +102,16 @@ Future main() async {
     debugPrint('Notification title: ${message.notification!.title}');
     debugPrint('Notification body: ${message.notification!.body}');
   });
+  FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  await firebaseMessaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
   FirebaseMessaging.instance.getToken().then((value) {
     debugPrint(value.toString());
     CacheHelper.saveData(key: 'FCM_Token', value: value).then((value) {
@@ -115,6 +125,7 @@ Future main() async {
       }
     });
   });
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await CacheHelper.init();
   setup();

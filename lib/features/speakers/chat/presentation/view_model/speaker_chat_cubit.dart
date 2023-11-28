@@ -67,21 +67,21 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
     required int sessionId,
 }) async {
     PusherOptions options = PusherOptions(
-      host: "http://resithon_event.site/api/",
+      host: "http://resithon_event.com/api/",
       wsPort: 443,
       cluster: "ap1",
       encrypted: true,
       auth: PusherAuth(
-        'http://resithon_event.site/api/',
+        'http://resithon_event.com/api/',
         headers: {
-         'code': '76746',
+         'code': CacheHelper.getData(key: "code").toString(),
          "Accept": "application/json",
         },
       ),
     );
 
     pusher = PusherClient(
-      "70795afe6e45b4d29190",
+      "f00da6b385d2111b176b",
       options,
       autoConnect: true,
       enableLogging: true,

@@ -123,7 +123,7 @@ class ChatsPublicGroupBody extends StatelessWidget {
                       ),
                       SizedBox(height: AppConstants.height10(context),),
                       Text(
-                        data.isNotEmpty?"${data[1]["message"]}": "",
+                        data.isNotEmpty?"${data[1]["message"]??""}": "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -159,7 +159,7 @@ class ChatsPublicGroupBody extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          data.isNotEmpty?"${data[1]["unReadMessageNumber"]}": "",
+                          data.isNotEmpty?"${data[1]["unReadMessageNumber"]??""}": "",
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontFamily: "Poppins",

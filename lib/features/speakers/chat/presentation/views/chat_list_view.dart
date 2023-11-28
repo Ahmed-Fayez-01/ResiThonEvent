@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resithon_event/features/speakers/chat/presentation/views/widgets/chat_list_view_body.dart';
 
-import '../../../../../core/shared_widgets/no_internet_widget.dart';
-import '../../../../../core/utils/constants.dart';
 
 class ChatListView extends StatelessWidget {
   const ChatListView({Key? key, required this.name, required this.sessionId, required this.groupImage}) : super(key: key);

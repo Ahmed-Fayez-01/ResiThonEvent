@@ -22,10 +22,10 @@ class ChatNameItem extends StatelessWidget {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return
-                sessionsModel!.data![index].session_started! &&
-                      sessionsModel!.data![index].is_arrived! &&
-                      !sessionsModel!.data![index].chat_expire!
-                  ?
+                // sessionsModel!.data![index].session_started! &&
+                //       sessionsModel!.data![index].is_arrived! &&
+                //       !sessionsModel!.data![index].chat_expire!
+                //   ?
               InkWell(
                       onTap: () {
                         Navigator.push(context,
@@ -83,8 +83,8 @@ class ChatNameItem extends StatelessWidget {
                           ],
                         ),
                       ),
-                    )
-                  : const SizedBox.shrink();
+                    );
+                  // : const SizedBox.shrink();
             },
             separatorBuilder: (context, index) {
               return SizedBox(
