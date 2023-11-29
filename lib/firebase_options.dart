@@ -44,38 +44,42 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBQ3mlAxEYOotj0bQD46BP7J5jO8qSO5DI',
-    appId: '1:122916719132:web:589fa574b40048810b6dd9',
-    messagingSenderId: '122916719132',
-    projectId: 'resithon-d9ce8',
-    authDomain: 'resithon-d9ce8.firebaseapp.com',
-    storageBucket: 'resithon-d9ce8.appspot.com',
-    measurementId: 'G-R62FPQLXXL',
+    apiKey: 'AIzaSyCFjck8H8jL7XmZYQBciBk4I6Cf6TSd8Kk',
+    appId: '1:912233290096:web:d2d35b715becb58f71d7b5',
+    messagingSenderId: '912233290096',
+    projectId: 'resithon-d6e40',
+    authDomain: 'resithon-d6e40.firebaseapp.com',
+    databaseURL: 'https://resithon-d6e40-default-rtdb.firebaseio.com',
+    storageBucket: 'resithon-d6e40.appspot.com',
+    measurementId: 'G-HXG7Q0K8C9',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBx8E1SGfePx1-Yxf_F9cc0b4m2QgmQIhg',
-    appId: '1:122916719132:android:07c0bea391cff5f80b6dd9',
-    messagingSenderId: '122916719132',
-    projectId: 'resithon-d9ce8',
-    storageBucket: 'resithon-d9ce8.appspot.com',
+    apiKey: 'AIzaSyDeAvtNV7K7-Mmc2zXX1unNR0v3SiEXheE',
+    appId: '1:912233290096:android:a641c547fa88952471d7b5',
+    messagingSenderId: '912233290096',
+    projectId: 'resithon-d6e40',
+    databaseURL: 'https://resithon-d6e40-default-rtdb.firebaseio.com',
+    storageBucket: 'resithon-d6e40.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCiMLgeOWNsnOS-5HAQjMpuh-QilEgf364',
-    appId: '1:122916719132:ios:2b53b90abc250ae40b6dd9',
-    messagingSenderId: '122916719132',
-    projectId: 'resithon-d9ce8',
-    storageBucket: 'resithon-d9ce8.appspot.com',
+    apiKey: 'AIzaSyBwD1Gi1PbG6eLXSsZusBVVAHfi46yo-po',
+    appId: '1:912233290096:ios:f826bad98314cb6671d7b5',
+    messagingSenderId: '912233290096',
+    projectId: 'resithon-d6e40',
+    databaseURL: 'https://resithon-d6e40-default-rtdb.firebaseio.com',
+    storageBucket: 'resithon-d6e40.appspot.com',
     iosBundleId: 'com.Yahalaa.yahalaa',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCiMLgeOWNsnOS-5HAQjMpuh-QilEgf364',
-    appId: '1:122916719132:ios:c364237ce227a4530b6dd9',
-    messagingSenderId: '122916719132',
-    projectId: 'resithon-d9ce8',
-    storageBucket: 'resithon-d9ce8.appspot.com',
+    apiKey: 'AIzaSyBwD1Gi1PbG6eLXSsZusBVVAHfi46yo-po',
+    appId: '1:912233290096:ios:1f342cc80e7b6cab71d7b5',
+    messagingSenderId: '912233290096',
+    projectId: 'resithon-d6e40',
+    databaseURL: 'https://resithon-d6e40-default-rtdb.firebaseio.com',
+    storageBucket: 'resithon-d6e40.appspot.com',
     iosBundleId: 'com.resithonevent.resithonEvent.RunnerTests',
   );
 }

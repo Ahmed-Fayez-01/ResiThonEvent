@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../../core/utils/assets/assets.dart';
 import '../../../../../../core/utils/colors/colors.dart';
 import '../../../../../../core/utils/constants.dart';
- import '../../../../../sessions/data/models/sessions_model.dart';
+import '../../../../../sessions/data/models/sessions_model.dart';
 import '../chat_list_view.dart';
 
 class ChatNameItem extends StatelessWidget {
@@ -21,12 +21,10 @@ class ChatNameItem extends StatelessWidget {
             child: ListView.separated(
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              return
-                // sessionsModel!.data![index].session_started! &&
-                //       sessionsModel!.data![index].is_arrived! &&
-                //       !sessionsModel!.data![index].chat_expire!
-                //   ?
-              InkWell(
+              return sessionsModel!.data![index].session_started! &&
+                      sessionsModel!.data![index].is_arrived! &&
+                      !sessionsModel!.data![index].chat_expire!
+                  ? InkWell(
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
@@ -83,8 +81,8 @@ class ChatNameItem extends StatelessWidget {
                           ],
                         ),
                       ),
-                    );
-                  // : const SizedBox.shrink();
+                    )
+                  : const SizedBox.shrink();
             },
             separatorBuilder: (context, index) {
               return SizedBox(
