@@ -67,12 +67,12 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
     required int sessionId,
 }) async {
     PusherOptions options = PusherOptions(
-      host: "http://resithon_event.com/api/",
+      host: "https://resithon.com/api/",
       wsPort: 443,
-      cluster: "ap1",
+      cluster: "ap2",
       encrypted: true,
       auth: PusherAuth(
-        'http://resithon_event.com/api/',
+        'https://resithon.com/api/',
         headers: {
          'code': CacheHelper.getData(key: "code").toString(),
          "Accept": "application/json",
@@ -81,7 +81,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
     );
 
     pusher = PusherClient(
-      "f00da6b385d2111b176b",
+      "661fde578e27390425fd",
       options,
       autoConnect: true,
       enableLogging: true,
@@ -95,13 +95,12 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
          type: type,
          sessionId: sessionId, reciverId: '',
        );
-        print('Received event: ${event?.eventName}, data: ${event?.data}');
+
       });
      getNewMessages(
        type: type,
        sessionId: sessionId,
      );
-      print("2222222222222222222222");
       emit(ConnectSuccess());
       pusher?.onConnectionStateChange((state) {
         debugPrint(
@@ -112,7 +111,6 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
       debugPrint("error in chat ${error.toString()}");
       emit(ConnectError());
     });
-
   }
 
   void getNewMessages({
@@ -129,7 +127,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
        sessionId: sessionId, reciverId: '',
      );
       FocusManager.instance.primaryFocus?.unfocus();
-      // print('Received Pusher message: $message');
+      print('Received Pusher message: $message');
       print(event?.data.toString());
     }).onError((error, stackTrace) {
       debugPrint("------- getNewMessage error ${error.toString()}-------");
