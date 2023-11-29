@@ -69,7 +69,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
     PusherOptions options = PusherOptions(
       host: "https://resithon.com/api/",
       wsPort: 443,
-      cluster: "ap2",
+      cluster: "ap1",
       encrypted: true,
       auth: PusherAuth(
         'https://resithon.com/api/',
@@ -81,7 +81,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
     );
 
     pusher = PusherClient(
-      "661fde578e27390425fd",
+      "6375a7249af070909b88",
       options,
       autoConnect: true,
       enableLogging: true,
