@@ -53,9 +53,7 @@ class SessionHeader extends StatelessWidget {
             left: 0,
             child: Padding(
               padding: EdgeInsets.all(AppConstants.sp20(context)),
-              child: CustomBackButton(onpress: () {
-                Navigator.pop(context);
-              },),
+              child: CustomBackButton(),
             ),
           ),
           if(CacheHelper.getData(key: "role") != "1")

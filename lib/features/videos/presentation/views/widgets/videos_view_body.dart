@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resithon_event/core/shared_widgets/custom_back_button.dart';
 import 'package:resithon_event/core/shared_widgets/main_title_component.dart';
-import 'package:video_player/video_player.dart';
 import '../../../../../core/utils/constants.dart';
-import 'chewi_list_item.dart';
 import 'chewie_list_view.dart';
 
 class VideosViewBody extends StatelessWidget {
@@ -19,9 +17,7 @@ class VideosViewBody extends StatelessWidget {
           SizedBox(height: AppConstants.height20(context),),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
-            child: CustomBackButton(onpress: () {
-              Navigator.pop(context);
-            },),
+            child: CustomBackButton(),
           ),
           SizedBox(height: AppConstants.height20(context),),
           Padding(

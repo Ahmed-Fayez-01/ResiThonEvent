@@ -282,15 +282,15 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
         final messageSnapshot = await messagesCollection.doc("privateChats").get();
         if (messageSnapshot.exists) {
           await messagesCollection.doc("privateChats").update({
-            "${CacheHelper.getData(key: "id").toString()}${sendMessageToFirebaseModel.reciverId}": sendMessageToFirebaseModel.toMap(),
-            "${sendMessageToFirebaseModel.reciverId}${CacheHelper.getData(key: "id").toString()}": sendMessageToFirebaseModel.toMap(),
+            "${CacheHelper.getData(key: "id").toString()}${sendMessageToFirebaseModel.reciverId}${sendMessageToFirebaseModel.sessionId}": sendMessageToFirebaseModel.toMap(),
+            "${sendMessageToFirebaseModel.reciverId}${CacheHelper.getData(key: "id").toString()}${sendMessageToFirebaseModel.sessionId}": sendMessageToFirebaseModel.toMap(),
           });
           print('Message updated successfully');
           emit(SendMessageToFirebaseSuccessState());
         } else {
           await messagesCollection.doc("privateChats").set({
-            "${CacheHelper.getData(key: "id").toString()}${sendMessageToFirebaseModel.reciverId}": sendMessageToFirebaseModel.toMap(),
-            "${sendMessageToFirebaseModel.reciverId}${CacheHelper.getData(key: "id").toString()}": sendMessageToFirebaseModel.toMap(),
+            "${CacheHelper.getData(key: "id").toString()}${sendMessageToFirebaseModel.reciverId}${sendMessageToFirebaseModel.sessionId}": sendMessageToFirebaseModel.toMap(),
+            "${sendMessageToFirebaseModel.reciverId}${CacheHelper.getData(key: "id").toString()}${sendMessageToFirebaseModel.sessionId}": sendMessageToFirebaseModel.toMap(),
           });
           print('Message created successfully');
           emit(SendMessageToFirebaseSuccessState());
@@ -307,11 +307,11 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
       try {
         DocumentSnapshot messageSnapshot = await messagesCollection.doc("publicChat").get();
         if (messageSnapshot.exists) {
-          await messagesCollection.doc("publicChat").update(sendMessageToFirebaseModel.toMap());
+          await messagesCollection.doc("publicChat").update({"${sendMessageToFirebaseModel.sessionId}": sendMessageToFirebaseModel.toMap()});
           print('Message updated successfully');
           emit(SendMessageToFirebaseSuccessState());
         } else {
-          await messagesCollection.doc("publicChat").set(sendMessageToFirebaseModel.toMap());
+          await messagesCollection.doc("publicChat").set({"${sendMessageToFirebaseModel.sessionId}": sendMessageToFirebaseModel.toMap()});
           print('Message created successfully');
           emit(SendMessageToFirebaseSuccessState());
         }

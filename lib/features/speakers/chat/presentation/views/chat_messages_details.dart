@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:resithon_event/core/utils/colors/colors.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/features/speakers/chat/presentation/views/widgets/chat_messages_details_body.dart';
 
@@ -30,7 +31,7 @@ class ChatMessagesDetails extends StatelessWidget {
     return WillPopScope(
       onWillPop: ()async{
         FirebaseFirestore.instance.collection('chats').doc("privateChats").update({
-          "$id${CacheHelper.getData(key: "id")}.unReadMessageNumber":0
+          "$id${CacheHelper.getData(key: "id")}$sessionId.unReadMessageNumber":0
         });
         Navigator.pop(context);
         return true;
@@ -47,10 +48,9 @@ class ChatMessagesDetails extends StatelessWidget {
             ),
             onPressed: () {
               FirebaseFirestore.instance.collection('chats').doc("privateChats").update({
-                "$id${CacheHelper.getData(key: "id")}.unReadMessageNumber":0
+                "$id${CacheHelper.getData(key: "id")}$sessionId.unReadMessageNumber":0
               });
               Navigator.pop(context);
-              print("gggggggggggggg");
 
 
             },
@@ -71,6 +71,7 @@ class ChatMessagesDetails extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * .035,
                 width: MediaQuery.of(context).size.height * .035,
                 decoration: BoxDecoration(
+                  color: AppColors.greyColor.withOpacity(.2),
                   borderRadius: BorderRadius.circular(
                     MediaQuery.of(context).size.height * .0175,
                   ),
@@ -91,13 +92,15 @@ class ChatMessagesDetails extends StatelessWidget {
               SizedBox(
                 width: AppConstants.width10(context),
               ),
-              Text(
-                name,
-                style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontSize: MediaQuery.of(context).size.height * .018,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xff323232)),
+              Expanded(
+                child: Text(
+                  name,
+                  style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: MediaQuery.of(context).size.height * .018,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xff323232)),
+                ),
               ),
             ],
           ),

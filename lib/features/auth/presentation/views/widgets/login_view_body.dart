@@ -11,6 +11,7 @@ import 'package:resithon_event/core/shared_widgets/custom_dialog.dart';
 import 'package:resithon_event/core/shared_widgets/logo_text.dart';
 import 'package:resithon_event/core/utils/assets/assets.dart';
 import 'package:resithon_event/core/utils/constants.dart';
+import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/all_sessions_cubit/all_sessions_cubit.dart';
 import 'package:resithon_event/features/sessions/presentations/view_models/subscribed_sessions_cubit/subscribed_sessions_cubit.dart';
 import 'package:resithon_event/features/user/home/presentation/view_models/event_cubit/event_cubit.dart';
@@ -179,6 +180,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                       length: 5,
                       appContext: context,
                       obscureText: false,
+                      cursorColor: AppColors.secondaryColor,
                       animationType: AnimationType.fade,
                       keyboardType: TextInputType.number,
                       pinTheme: PinTheme(
@@ -250,9 +252,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         text: 'login'.tr(),
                         borderRadius: AppConstants.sp10(context));
                   },
-                  listener: (BuildContext context, state) {
+                  listener: (BuildContext context, state) async {
                     if (state is UserLoginSuccessState) {
                       context.read<AllSessionsCubit>().sessionsDetails();
+                     await context.read<NotificationsCubit>().getNotificationsData();
                       context.read<EventCubit>().eventDetails();
                       context
                           .read<SubscribedSessionsCubit>()

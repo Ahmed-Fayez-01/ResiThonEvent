@@ -67,10 +67,6 @@ class ChatsPublicGroupBody extends StatelessWidget {
 
               );
             }));
-            // GoRouter.of(context).push("/speakerPublicChatView" , extra: {
-            //   "groupImage": "image_url_here",
-            //   "groupName": "Group Name Here",
-            // } );
           },
           child: Container(
             padding: EdgeInsets.all(AppConstants.height5(context)),
@@ -88,6 +84,7 @@ class ChatsPublicGroupBody extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.greyColor.withOpacity(.2),
                     borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.06),
+                    border: Border.all(color: Colors.grey.shade500)
                   ),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.06),
@@ -122,8 +119,8 @@ class ChatsPublicGroupBody extends StatelessWidget {
                         // Border width around the images
                       ),
                       SizedBox(height: AppConstants.height10(context),),
-                      Text(
-                        data.isNotEmpty?"${data[1]["message"]??""}": "",
+                      if(data[1][sessionId.toString()]!=null)  Text(
+                        data.isNotEmpty?"${data[1][sessionId.toString()]["message"]??""}": "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -132,6 +129,7 @@ class ChatsPublicGroupBody extends StatelessWidget {
                             fontSize: AppConstants.sp10(context),
                             color: AppColors.primaryColor),
                       ),
+
                     ],
                   ),
                 ),
@@ -139,17 +137,9 @@ class ChatsPublicGroupBody extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Text(
-                    //   "5 m",
-                    //   style: TextStyle(
-                    //     fontWeight: FontWeight.w400,
-                    //     fontFamily: "Poppins",
-                    //     fontSize: AppConstants.sp10(context),
-                    //     color: AppColors.greyColor,
-                    //   ),
-                    // ),
                     SizedBox(height: AppConstants.height10(context),),
-                    if(data[1]["unReadMessageNumber"]!=0)
+                    if(data[1][sessionId.toString()]!=null)
+                    if(data[1][sessionId.toString()]["unReadMessageNumber"] != 0)
                     Container(
                       height: MediaQuery.of(context).size.height*.025,
                       width: MediaQuery.of(context).size.height*.025,
@@ -159,7 +149,7 @@ class ChatsPublicGroupBody extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          data.isNotEmpty?"${data[1]["unReadMessageNumber"]??""}": "",
+                          data.isNotEmpty?"${data[1][sessionId.toString()]["unReadMessageNumber"]??""}": "",
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontFamily: "Poppins",

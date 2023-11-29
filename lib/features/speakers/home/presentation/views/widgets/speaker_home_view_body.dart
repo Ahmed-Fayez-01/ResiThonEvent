@@ -11,9 +11,6 @@ import 'package:resithon_event/features/notifications/presentation/view_models/n
 import 'package:resithon_event/features/speakers/home/presentation/views/widgets/speaker_home_app_bar.dart';
 
 import '../../../../../../core/shared_widgets/event_time_line.dart';
-import '../../../../../../core/utils/services/local_services/cache_helper.dart';
-import '../../../../../agenda/presentation/view_models/dated_all_sessions_cubit/dated_all_sessions_cubit.dart';
-import '../../../../../my_schedule/presentation/view_models/dated_subscribed_sessions.cubit/dated_subscribed_sessions_cubit.dart';
 import '../../../../../sessions/presentations/view_models/all_sessions_cubit/all_sessions_cubit.dart';
 import '../../../../../sessions/presentations/view_models/subscribed_sessions_cubit/subscribed_sessions_cubit.dart';
 import '../../../../../sessions/presentations/view_models/toggle_cubit/toggle_cubit.dart';
@@ -33,11 +30,10 @@ class _SpeakerHomeViewBodyState extends State<SpeakerHomeViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    print(CacheHelper.getData(key: "NotificationsListLengthInCash"));
-    print("mostafa in SpeakerHomeViewBody");
-    print(NotificationsCubit.l);
+    context.read<NotificationsCubit>().getNotificationsData();
     return RefreshIndicator(
       onRefresh: () async{
+        context.read<NotificationsCubit>().getNotificationsData();
         context.read<EventCubit>().eventDetails();
         context.read<AllSessionsCubit>().sessionsDetails();
         context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();

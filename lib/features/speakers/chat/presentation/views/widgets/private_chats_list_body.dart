@@ -33,9 +33,6 @@ class PrivateChatsListBody extends StatelessWidget {
       final List<Map<String, dynamic>> data = snapshot.data!.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
-      print("ddddddddddddddddd");
-      //print(data[0]["message"]);
-      //print(data[0]["sessionId"]);
       return Expanded(
         child: ListView.separated(
           itemBuilder: (context, index) {
@@ -48,23 +45,22 @@ class PrivateChatsListBody extends StatelessWidget {
                       id:    allUsersListInChatModel.data![index].id!,
                       image: allUsersListInChatModel.data![index].image.toString(),
                       sessionId:sessionId,
-                      lastMsg:  data[0]["message"]!=null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["message"]}" : "",
-                      lastMsgNumber: data[0]["unReadMessageNumber"]!=null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["unReadMessageNumber"]}" : "0",
+                      lastMsg:  data[0]["message"]!=null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}$sessionId"]["message"]}" : "",
+                      lastMsgNumber: data[0]["unReadMessageNumber"]!=null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}$sessionId"]["unReadMessageNumber"]}" : "0",
 
                     );
                   }));
-                  // GoRouter.of(context).push("/chatMessagesDetails");
                 },
                 child:   ChatsListBodyItem(
                   name:  allUsersListInChatModel.data![index].name.toString(),
                   id:    allUsersListInChatModel.data![index].id!,
                   image: allUsersListInChatModel.data![index].image.toString(),
                   lastMessageFromFirebase:
-                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]!=null ?
-                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["message"] != null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["message"]}" : "" : "",
+                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}$sessionId"]!=null ?
+                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}$sessionId"]["message"] != null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}$sessionId"]["message"]}" : "" : "No Messages",
                   lastMessageNumberFromFirebase:
-                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]!=null ?
-                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["unReadMessageNumber"]!=null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}"]["unReadMessageNumber"]}" : "0": "0",
+                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}$sessionId"]!=null ?
+                  data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}$sessionId"]["unReadMessageNumber"]!=null? "${data[0]["${allUsersListInChatModel.data![index].id!}${CacheHelper.getData(key: "id")}$sessionId"]["unReadMessageNumber"]}" : "0": "0",
                   // time: data.isNotEmpty? "${data[0]["timeOfDay"]}" : "",
                 ));
           },

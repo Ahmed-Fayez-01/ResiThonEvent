@@ -11,6 +11,7 @@ import 'package:resithon_event/core/utils/assets/assets.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/core/shared_widgets/event_widget.dart';
 import 'package:resithon_event/core/utils/services/local_services/cache_helper.dart';
+import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
 import 'package:resithon_event/features/user/home/presentation/view_models/event_cubit/event_cubit.dart';
 import 'package:resithon_event/features/user/home/presentation/views/widgets/show_my_ticket.dart';
 import 'package:resithon_event/features/user/home/presentation/views/widgets/user_home_app_bar.dart';
@@ -27,8 +28,10 @@ class UserHomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<NotificationsCubit>().getNotificationsData();
     return RefreshIndicator(
       onRefresh: () async{
+        context.read<NotificationsCubit>().getNotificationsData();
         context.read<EventCubit>().eventDetails();
         context.read<AllSessionsCubit>().sessionsDetails();
         context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();

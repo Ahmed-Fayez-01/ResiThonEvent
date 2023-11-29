@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:resithon_event/features/notifications/presentation/view_models/notifications_cubit.dart';
 
 class CustomBackButton extends StatelessWidget {
-  CustomBackButton({super.key,required this.onpress});
+  CustomBackButton({super.key, this.onpress});
   Function ()? onpress;
 
   @override
@@ -9,7 +11,10 @@ class CustomBackButton extends StatelessWidget {
     return Row(
       children: [
         GestureDetector(
-          onTap: onpress,
+          onTap: onpress??(){
+            context.read<NotificationsCubit>().getNotificationsData();
+            Navigator.pop(context);
+          },
           child: Container(
             width: 35,
             height: 35,

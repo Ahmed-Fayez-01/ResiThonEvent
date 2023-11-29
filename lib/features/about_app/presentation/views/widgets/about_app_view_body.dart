@@ -18,9 +18,7 @@ class AboutAppViewBody extends StatelessWidget {
       child: ListView(
         children: [
           SizedBox(height: AppConstants.height20(context),),
-          CustomBackButton(onpress: () {
-            Navigator.pop(context);
-          },),
+          CustomBackButton(),
           LogoText(),
           SizedBox(
             height: AppConstants.height20(context),

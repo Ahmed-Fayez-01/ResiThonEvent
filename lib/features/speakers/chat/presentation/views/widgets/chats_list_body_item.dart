@@ -30,6 +30,7 @@ class ChatsListBodyItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.greyColor.withOpacity(.2),
               borderRadius: BorderRadius.circular( MediaQuery.of(context).size.height*.06,),
+              border: Border.all(color: Colors.grey.shade500)
             ),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular( MediaQuery.of(context).size.height*.06,),
@@ -53,7 +54,7 @@ class ChatsListBodyItem extends StatelessWidget {
                   fontSize: AppConstants.sp14(context),
                 ),
               ),
-              SizedBox(height: AppConstants.height10(context),),
+              SizedBox(height: AppConstants.height5(context),),
               Text(
                 lastMessageFromFirebase.toString(),
                 style: TextStyle(

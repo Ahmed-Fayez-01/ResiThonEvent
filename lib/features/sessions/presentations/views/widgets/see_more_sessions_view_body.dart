@@ -32,8 +32,8 @@ class SeeMoreSessionsViewBody extends StatelessWidget {
                     child: Row(
                       children: [
                         CustomToggleButton(
-                          title: "subScribed".tr(),
-                          iconPath: AssetData.done,
+                          title: "all".tr(),
+                          iconPath: AssetData.all,
                           onTap: () {
                             if (AppConstants.currentUserSessionIndex != 0) {
                               cubit.toggleButton();
@@ -47,8 +47,8 @@ class SeeMoreSessionsViewBody extends StatelessWidget {
                           width: AppConstants.width10(context),
                         ),
                         CustomToggleButton(
-                          title: "all".tr(),
-                          iconPath: AssetData.all,
+                          title: "subScribed".tr(),
+                          iconPath: AssetData.done,
                           onTap: () {
                             if (AppConstants.currentUserSessionIndex != 1) {
                               cubit.toggleButton();
@@ -65,36 +65,7 @@ class SeeMoreSessionsViewBody extends StatelessWidget {
                     height: AppConstants.height20(context),
                   ),
                   AppConstants.currentUserSessionIndex == 0
-                      ? BlocBuilder<SubscribedSessionsCubit,
-                      SubscribedSessionsState>(
-                    builder: (BuildContext context, state) {
-                      if (state is UserSubscribedSessionsSuccessState) {
-                        return SessionsBListView(
-                          instance: state.model,
-                        );
-                      } else if (state
-                      is UserSubscribedSessionsErrorState) {
-                        return  CustomErrorWidget(onTap: () {
-                          context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
-
-                        },);
-                      } else if (state
-                      is UserSubscribedSessionsLoadingState) {
-                        return SizedBox(
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height * .2,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
-                  )
-                      : BlocBuilder<AllSessionsCubit, AllSessionsState>(
+                      ?BlocBuilder<AllSessionsCubit, AllSessionsState>(
                     builder: (BuildContext context, state) {
                       if (state is UserAllSessionsSuccessState) {
                         return SessionsBListView(
@@ -124,7 +95,35 @@ class SeeMoreSessionsViewBody extends StatelessWidget {
                         return const SizedBox();
                       }
                     },
-                  ),
+                  ): BlocBuilder<SubscribedSessionsCubit,
+                      SubscribedSessionsState>(
+                    builder: (BuildContext context, state) {
+                      if (state is UserSubscribedSessionsSuccessState) {
+                        return SessionsBListView(
+                          instance: state.model,
+                        );
+                      } else if (state
+                      is UserSubscribedSessionsErrorState) {
+                        return  CustomErrorWidget(onTap: () {
+                          context.read<SubscribedSessionsCubit>().subscribedSessionsDetails();
+
+                        },);
+                      } else if (state
+                      is UserSubscribedSessionsLoadingState) {
+                        return SizedBox(
+                          height: MediaQuery
+                              .of(context)
+                              .size
+                              .height * .2,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  )
                 ],
               );
             },

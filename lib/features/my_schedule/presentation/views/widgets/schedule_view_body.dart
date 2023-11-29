@@ -54,9 +54,7 @@ class _ScheduleViewBodyState extends State<ScheduleViewBody> {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
-          child: CustomBackButton(onpress: () {
-            Navigator.pop(context);
-          },),
+          child: CustomBackButton(),
         ),
         SizedBox(
           height: AppConstants.height20(context),

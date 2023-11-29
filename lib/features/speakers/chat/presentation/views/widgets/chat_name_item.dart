@@ -24,7 +24,8 @@ class ChatNameItem extends StatelessWidget {
               return sessionsModel!.data![index].session_started! &&
                       sessionsModel!.data![index].is_arrived! &&
                       !sessionsModel!.data![index].chat_expire!
-                  ? InkWell(
+                  ?
+              InkWell(
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {

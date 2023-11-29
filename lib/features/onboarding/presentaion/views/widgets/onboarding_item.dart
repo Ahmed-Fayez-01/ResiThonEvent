@@ -107,6 +107,7 @@ class OnBoardingItem extends StatelessWidget {
                 onTap: () {
                   if(isLastScreen)
                     {
+                      CacheHelper.saveData(key: "oldNotificationLength", value: "0");
                       CacheHelper.saveData(key: "onBoarding", value: true);
                       GoRouter.of(context).go("/loginView");
                     }else{

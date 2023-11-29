@@ -22,9 +22,7 @@ class FoodViewBody extends StatelessWidget {
             padding: EdgeInsets.all(AppConstants.sp20(context)),
             child: Column(
               children: [
-                CustomBackButton(onpress: () {
-                  Navigator.pop(context);
-                },),
+                CustomBackButton(),
                 SizedBox(height: AppConstants.height20(context),),
                 const MainTitleComponent(title: "Food"),
                 SizedBox(height: AppConstants.height20(context),),

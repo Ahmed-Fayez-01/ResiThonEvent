@@ -69,7 +69,7 @@ class UserDrawerHeader extends StatelessWidget {
           height: MediaQuery.of(context).size.height * .005,
         ),
         Text(
-          type=="1"?"Organizer":type=="2"?"Speaker":type=="3"?"WorkShopper":type=="4"?"Hackathon":"VIP",
+          type=="1"?"Organizer":type=="2"?"Speaker":type=="3"?"Workshop Participant":type=="4"?"Hackathon Participant":"VIP Participant",
           style: TextStyle(
               fontSize: MediaQuery.of(context).size.height * .014,
               fontWeight: FontWeight.w400,
