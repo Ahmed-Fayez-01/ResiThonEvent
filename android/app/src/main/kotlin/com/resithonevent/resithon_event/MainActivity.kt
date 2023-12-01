@@ -1,4 +1,4 @@
-package com.resithonevent.resithon_event
+package com.yahalaa.yahlaa
 
 import io.flutter.embedding.android.FlutterActivity
 
