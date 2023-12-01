@@ -8,6 +8,7 @@ import 'package:resithon_event/core/utils/assets/assets.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/core/utils/services/local_services/cache_helper.dart';
 import 'package:resithon_event/features/orginizer/home/data/models/side_menu_data.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../../core/shared_widgets/user_drawer_header.dart';
 import 'user_side_menu_tile.dart';
 
@@ -24,13 +25,28 @@ class _UserSideMenuState extends State<UserSideMenu> {
 
   @override
   Widget build(BuildContext context) {
+    void launchTelegram() async{
+
+      String url =
+          "https://wa.me/%3C+966599003458%3E";
+      print("launchingUrl: $url");
+      if (await canLaunch(url)) {
+        var url = Uri.parse("https://wa.me/%3C+966599003458%3E");
+        await launchUrl(
+          url,
+          mode: LaunchMode.externalApplication,
+        );
+        // await launch(url,
+        //     mode: LaunchMode.externalApplication);
+      }
+
+    }
     return Container(
       width: MediaQuery.of(context).size.width * .7,
       height: double.infinity,
       color: const Color(0xFFF2F2F2),
       child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * .05,
@@ -61,8 +77,8 @@ class _UserSideMenuState extends State<UserSideMenu> {
                     }else if (selectedMenu["title"] == "Videos"||selectedMenu["title"] == "الفديوهات") {
                       GoRouter.of(context).push("/videosView");
                     }
-                    else if (selectedMenu["title"] == "WhatsApp"||selectedMenu["title"] == "واتساب") {
-
+                    else if (selectedMenu["title"] == "support -what’s app"||selectedMenu["title"] == "واتساب") {
+                      launchTelegram();
                     }else{
                       GoRouter.of(context).push("/aboutAppView");
                     }
@@ -72,7 +88,9 @@ class _UserSideMenuState extends State<UserSideMenu> {
                 title: menu["title"]!,
               ),
             ),
-            const Spacer(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .1,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width * .15),
@@ -89,7 +107,6 @@ class _UserSideMenuState extends State<UserSideMenu> {
                   CacheHelper.removeData(key: "event_end_day",);
                   CacheHelper.removeData(key: "take_attend_before",);
                   CacheHelper.removeData(key: "stop_take_attend_before",);
-
                   GoRouter.of(context).go("/loginView");
                 },
                 text: "signOut".tr(),

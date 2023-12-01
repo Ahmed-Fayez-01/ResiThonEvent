@@ -22,7 +22,8 @@ class ChatNameItem extends StatelessWidget {
             child: ListView.separated(
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              return sessionsModel!.data![index].session_started! &&
+              return
+                sessionsModel!.data![index].session_started! &&
                       sessionsModel!.data![index].is_arrived! &&
                       !sessionsModel!.data![index].chat_expire!
                   ?

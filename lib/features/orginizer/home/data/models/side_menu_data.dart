@@ -23,10 +23,10 @@ class SideMenuData{
       "icon": AssetData.videos,
       "title":"videos".tr(),
     },
-    // {
-    //   "icon": AssetData.whatsApp,
-    //   "title":"WhatsApp".tr(),
-    // },
+    {
+      "icon": AssetData.whatsApp,
+      "title":"WhatsApp".tr(),
+    },
     {
       "icon":AssetData.aboutApp,
       "title":"aboutApp".tr(),
