@@ -117,8 +117,7 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
     required int type,
     required int sessionId,
 }) {
-    channel?.bind("App\\Events\\chat-event", (PusherEvent? event) {
-      print(event?.data);
+    channel?.bind("chat-event", (PusherEvent? event) {
       var messageData = json.decode("${event?.data}");
       String message = messageData['message'];
 
@@ -200,17 +199,18 @@ class SpeakerChatCubit extends Cubit<SpeakerChatState> {
     emit(GetAllMessagesLoadingState());
     ApiService(Dio()).get(
         sendCode: true,
-     endPoint: "/get-messages?type=$type&session_id=$sessionId"
+     endPoint: "/get-messages?type=$type&session_id=$sessionId&receiver_id=$reciverId"
     ).then((value) {
       getMessageModel = GetMessageModel.fromJson(value.data);
       if(type==0)
         {
-          getMessageModel?.data?.forEach((element) {
-            if(element.senderId==CacheHelper.getData(key: "id").toString() || element.senderId == reciverId)
-            {
-              allChatMessages.add(element);
-            }
-          });
+          // getMessageModel?.data?.forEach((element) {
+            // if(element.senderId==CacheHelper.getData(key: "id").toString() || element.senderId == reciverId)
+            // {
+            //   allChatMessages.add(element);
+            // }
+            allChatMessages=getMessageModel?.data??[];
+          // });
         }else{
         allChatMessages = getMessageModel?.data ?? [];
       }

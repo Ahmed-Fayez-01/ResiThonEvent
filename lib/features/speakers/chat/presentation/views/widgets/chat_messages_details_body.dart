@@ -28,11 +28,12 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
 
   @override
   Widget build(BuildContext context) {
-
+print("zekaaaaaaaaaa : ${widget.reciverId}");
+print("zekaaaaaaaaaa : ${widget.sessionId}");
     return BlocProvider(
       create: (context)=> SpeakerChatCubit(getIt.get<SpeakersChatRepoImpl>(),)
         ..connectToServer(  type: widget.chatType ,
-            sessionId:  widget.sessionId)
+            sessionId:  widget.sessionId,)
         ..getNewMessages(
             type: widget.chatType ,
             sessionId:  widget.sessionId)
@@ -155,43 +156,37 @@ class _ChatMessagesDetailsBodyState extends State<ChatMessagesDetailsBody> {
                     child: Row(
                       children: [
                         Expanded(
-                          child: SizedBox(
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height * .06,
-                            child: TextField(
-                              controller: SpeakerChatCubit.get(context).messageController,
-                              decoration: InputDecoration(
-                                hintText: 'Your Message',
-                                hintStyle: TextStyle(
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height * .016,
-                                    color: const Color(0xffDCDCDC)
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(AppConstants
-                                        .sp10(context)),
-                                    borderSide: const BorderSide(color: Colors.white)
-                                ),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(AppConstants
-                                        .sp10(context)),
-                                    borderSide: const BorderSide(color: Colors.white)
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(AppConstants
-                                        .sp10(context)),
-                                    borderSide: const BorderSide(color: Colors.white)
-                                ),
-                                filled: true,
-                                fillColor: Colors.white,
-
+                          child: TextField(
+                            controller: SpeakerChatCubit.get(context).messageController,
+                            decoration: InputDecoration(
+                              hintText: 'Your Message',
+                              hintStyle: TextStyle(
+                                  fontFamily: "Poppins",
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height * .016,
+                                  color: const Color(0xffDCDCDC)
                               ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(AppConstants
+                                      .sp10(context)),
+                                  borderSide: const BorderSide(color: Colors.white)
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(AppConstants
+                                      .sp10(context)),
+                                  borderSide: const BorderSide(color: Colors.white)
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(AppConstants
+                                      .sp10(context)),
+                                  borderSide: const BorderSide(color: Colors.white)
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+
                             ),
                           ),
                         ),
