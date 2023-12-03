@@ -49,7 +49,7 @@ class SessionItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppConstants.width20(context)),
       child: Container(
-        height: MediaQuery.of(context).size.height * .15,
+        height: MediaQuery.of(context).size.height * .17,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppConstants.sp10(context)),
           color: Colors.white,
@@ -79,7 +79,7 @@ class SessionItem extends StatelessWidget {
                     imageUrl: instance!.image!,
                     fit: BoxFit.fill,
                     width: MediaQuery.of(context).size.width * .3,
-                    height: MediaQuery.of(context).size.height * .15,
+                    height: MediaQuery.of(context).size.height * .17,
                     placeholder: (context, url) => const Center(
                         child: CircularProgressIndicator(
                       color: AppColors.greyColor,
@@ -123,12 +123,26 @@ class SessionItem extends StatelessWidget {
                         ):const SizedBox()
                       ],
                     ),
-                    SizedBox(
-                      height: AppConstants.height10(context),
-                    ),
+                    // SizedBox(
+                    //   height: AppConstants.height10(context),
+                    // ),
                     UserImageAndName(
                       image: instance!.speaker_image!,
                       name: instance!.speaker!,
+                    ),
+                    SizedBox(
+                      height: AppConstants.height10(context),
+                    ),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DescriptionPoint(
+                            iconPath: AssetData.calender,
+                            description: instance!.date!,
+                          ),
+                        )
+                      ],
                     ),
                     SizedBox(
                       height: AppConstants.height10(context),
@@ -165,7 +179,8 @@ class SessionItem extends StatelessWidget {
                               ),
                             )
                             : const SizedBox(),
-                       SizedBox(width: AppConstants.width10(context),),
+                        instance!.participants!.isNotEmpty
+                            ? SizedBox(width: AppConstants.width10(context),) : const SizedBox(),
                         Expanded(
                           child: DescriptionPoint(
                             iconPath: AssetData.timer,
@@ -173,7 +188,7 @@ class SessionItem extends StatelessWidget {
                           ),
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),

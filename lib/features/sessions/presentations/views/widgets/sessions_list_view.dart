@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:resithon_event/core/shared_widgets/custom_button.dart';
+import 'package:resithon_event/core/utils/colors/colors.dart';
 import 'package:resithon_event/core/utils/constants.dart';
 import 'package:resithon_event/core/shared_widgets/session_item.dart';
 import 'package:resithon_event/features/sessions/data/models/sessions_model.dart';
@@ -40,7 +43,28 @@ class SessionsListView extends StatelessWidget {
                     )),
               ],
             )
-                : GestureDetector(
+                : index==2? Column(
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      AppConstants.evaluationSubmit.clear();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserSessionDetailsView(
+                                  id: instance.data![index].id!)));
+                    },
+                    child: SessionItem(
+                      instance: instance.data![index],
+                    )),
+                Padding(
+                  padding: EdgeInsets.all(AppConstants.sp20(context)),
+                  child: DefaultButton(onPress: (){
+                    GoRouter.of(context).push("/seeMoreSessionsView");
+                  },borderRadius: AppConstants.sp10(context), text: "View All Sessions",backgroundColor: AppColors.secondaryColor,),
+                ),
+              ],
+            ) :GestureDetector(
                 onTap: () {
                   AppConstants.evaluationSubmit.clear();
                   Navigator.push(
@@ -57,7 +81,7 @@ class SessionsListView extends StatelessWidget {
         }
 
       },
-      itemCount: instance.data!.length,
+      itemCount: instance.data!.length>3? 3 : instance.data!.length,
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(
           height: AppConstants.height10(context),
